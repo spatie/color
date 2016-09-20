@@ -19,6 +19,7 @@ echo $rgb->blue(); // 255
 echo $rgb; // rgb(55,155,255)
 
 $rgba = $rgb->toRgba(); // `Spatie\Color\Rgba`
+$rgba->alpha(); // 100
 echo $rgba; // rgba(55,155,255,1)
 
 $hex = $rgb->toHex(); // `Spatie\Color\Hex`
@@ -144,7 +145,7 @@ $hex->blue(); // 'cc'
 $hex->toRgb(); // `Spatue\Color\Rgb`
 
 $hex->toRgba(); // `Spatue\Color\Rgba`
-$hex->toRgba(50); // `Spatie\Color\Rgba` with `alpha` 50
+$hex->toRgba(50); // `Spatie\Color\Rgba` with alpha 50
 ```
 
 ## Changelog
