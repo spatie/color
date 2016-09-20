@@ -2,8 +2,6 @@
 
 namespace Spatie\Color;
 
-use Spatie\Color\Helpers\Validate;
-
 class Rgba
 {
     /** @var int */

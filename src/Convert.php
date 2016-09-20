@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Color\Helpers;
+namespace Spatie\Color;
 
 class Convert
 {

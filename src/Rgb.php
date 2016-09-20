@@ -2,9 +2,6 @@
 
 namespace Spatie\Color;
 
-use Spatie\Color\Helpers\Convert;
-use Spatie\Color\Helpers\Validate;
-
 class Rgb
 {
     /** @var int */
