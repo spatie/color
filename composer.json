@@ -1,11 +1,11 @@
 {
-    "name": "spatie/color-functions",
+    "name": "spatie/color",
     "description": ":package_description",
     "keywords": [
         "spatie",
-        "color-functions"
+        "color"
     ],
-    "homepage": "https://github.com/spatie/color-functions",
+    "homepage": "https://github.com/spatie/color",
     "license": "MIT",
     "authors": [
         {
