@@ -16,9 +16,13 @@ echo $rgb->red(); // 55
 echo $rgb->green(); // 155
 echo $rgb->blue(); // 255
 
-echo $rgb->__toString(); // rgb(55,155,255)
-echo $rgb->toRgba()->__toString(); // rgba(55,155,255,1)
-echo $rgb->toHex()->__toString(); // #379bff
+echo $rgb; // rgb(55,155,255)
+
+$rgba = $rgb->toRgba(); // `Spatie\Color\Rgba`
+echo $rgba; // rgba(55,155,255,1)
+
+$hex = $rgb->toHex(); // `Spatie\Color\Hex`
+echo $hex; // #379bff
 ```
 
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
