@@ -53,9 +53,9 @@ class Rgb
     public function toHex(): Hex
     {
         return new Hex(
-            Convert::rgbValueToHexValue($this->red),
-            Convert::rgbValueToHexValue($this->green),
-            Convert::rgbValueToHexValue($this->blue)
+            Convert::rgbChannelToHexChannel($this->red),
+            Convert::rgbChannelToHexChannel($this->green),
+            Convert::rgbChannelToHexChannel($this->blue)
         );
     }
 

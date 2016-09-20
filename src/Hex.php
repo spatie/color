@@ -45,9 +45,9 @@ class Hex
     public function toRgb(): Rgb
     {
         return new Rgb(
-            Convert::hexValueToRgbValue($this->red),
-            Convert::hexValueToRgbValue($this->green),
-            Convert::hexValueToRgbValue($this->blue)
+            Convert::hexChannelToRgbChannel($this->red),
+            Convert::hexChannelToRgbChannel($this->green),
+            Convert::hexChannelToRgbChannel($this->blue)
         );
     }
 
