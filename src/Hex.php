@@ -5,7 +5,9 @@ namespace Spatie\Color;
 class Hex
 {
     /** @var string */
-    protected $red, $green, $blue;
+    protected $red;
+    protected $green;
+    protected $blue;
 
     public function __construct(string $red, string $green, string $blue)
     {
