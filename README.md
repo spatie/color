@@ -1,4 +1,4 @@
-# A little library to deal with color conversions
+# A little library to handle color conversions
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/color.svg?style=flat-square)](https://packagist.org/packages/spatie/color)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -8,7 +8,7 @@
 [![StyleCI](https://styleci.io/repos/68709937/shield?branch=master)](https://styleci.io/repos/68709937)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/color.svg?style=flat-square)](https://packagist.org/packages/spatie/color)
 
-A little library to deal with color conversions. Currently supports rgb, rgba and hex formats.
+A little library to handle color conversions. Currently supports rgb, rgba and hex formats.
 
 ```php
 $rgb = Rgb::fromString('rgb(55,155,255)');
