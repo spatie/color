@@ -61,6 +61,6 @@ class Rgb
 
     public function __toString()
     {
-        return "rgb({$this->red},{$this->green},{$this->blue})";
+        return "rgb({$this->red},{$this->green},{$this->blue})";;
     }
 }
