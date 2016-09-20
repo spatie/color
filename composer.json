@@ -3,7 +3,9 @@
     "description": "A little library to deal with color conversions",
     "keywords": [
         "spatie",
-        "color"
+        "color",
+        "conversion",
+        "rgb"
     ],
     "homepage": "https://github.com/spatie/color",
     "license": "MIT",
