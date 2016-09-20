@@ -5,7 +5,10 @@ namespace Spatie\Color;
 class Rgba
 {
     /** @var int */
-    protected $red, $green, $blue, $alpha;
+    protected $red;
+    protected $green;
+    protected $blue;
+    protected $alpha;
 
     public function __construct(int $red, int $green, int $blue, int $alpha)
     {
