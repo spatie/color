@@ -1,4 +1,4 @@
-# Very short description of the package
+# A little library to deal with color conversions
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/color-functions.svg?style=flat-square)](https://packagist.org/packages/spatie/color-functions)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -7,7 +7,19 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/color-functions.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/color-functions)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/color-functions.svg?style=flat-square)](https://packagist.org/packages/spatie/color-functions)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+A little library to deal with color conversions. Currently supports rgb, rgba and hex formats.
+
+```php
+$rgb = Rgb::fromString('rgb(55,155,255)');
+
+echo $rgb->red(); // 55
+echo $rgb->green(); // 155
+echo $rgb->blue(); // 255
+
+echo $rgb->__toString(); // rgb(55,155,255)
+echo $rgb->toRgba()->__toString(); // rgba(55,155,255,1)
+echo $rgb->toHex()->__toString(); // #379bff
+```
 
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
@@ -21,24 +33,114 @@ The best postcards will get published on the open source page on our website.
 
 ## Installation
 
-**Note:** Remove this paragraph if you are building a public package  
-This package is custom built for [Spatie](https://spatie.be) projects and is therefore not registered on packagist. In order to install it via composer you must specify this extra repository in `composer.json`:
-
-```json
-"repositories": [ { "type": "composer", "url": "https://satis.spatie.be/" } ]
-```
-
 You can install the package via composer:
 
-``` bash
-composer require spatie/color-functions
+```bash
+composer require spatie/color
 ```
 
 ## Usage
 
-``` php
-$skeleton = new Spatie\Skeleton();
-echo $skeleton->echoPhrase('Hello, Spatie!');
+The `Color` package contains a seperate class per color format.
+
+### `Spatie\Color\Rgb`
+
+Can be instantiated with integer values:
+
+```php
+$rgb = new Rgb(55, 155, 255);
+```
+
+Or can be created from a string:
+
+```php
+$rgb = Rgb::fromString('rgb(55,155,255)');
+```
+
+#### Channel methods
+
+```php
+$rgb = new Rgb(55, 155, 255);
+
+$rgb->red(); // 55
+$rgb->green(); // 155
+$rgb->blue(); // 255
+```
+
+#### Conversion methods
+
+```php
+$rgb->toHex(); // `Spatie\Color\Hex`
+
+$rgb->toRgba(); // `Spatie\Color\Rgba`
+$rgb->toRgba(50); // `Spatie\Color\Rgba` with alpha 50
+```
+
+### `Spatie\Color\Rgba`
+
+Can be instantiated with integer values:
+
+```php
+$rgba = new Rgba(55, 155, 255, 50);
+```
+
+Or can be created from a string:
+
+```php
+$rgba = Rgba::fromString('rgba(55,155,255,0.5)');
+```
+
+#### Channel methods
+
+```php
+$rgba = new Rgba(55, 155, 255, 50);
+
+$rgba->red(); // 55
+$rgba->green(); // 155
+$rgba->blue(); // 255
+$rgba->alpha(); // 50
+```
+
+#### Conversion methods
+
+> When converting to a format that doesn't support alpha, the alpha channel will be ignored
+
+```php
+$rgba->toRgb(); // `Spatie\Color\Rgb`
+$rgba->toHex(); // `Spatie\Color\Hex`
+```
+
+### `Spatie\Color\Hex`
+
+Can be instantiated with string values:
+
+```php
+$hex = new Hex('aa', 'bb', 'cc');
+```
+
+Or can be created from a string:
+
+```php
+$hex = Hex::fromString('#aabbcc');
+```
+
+#### Channel methods
+
+```php
+$hex = new Hex('aa', 'bb', 'cc');
+
+$hex->red(); // 'aa'
+$hex->green(); // 'bb'
+$hex->blue(); // 'cc'
+```
+
+#### Conversion methods
+
+```php
+$hex->toRgb(); // `Spatue\Color\Rgb`
+
+$hex->toRgba(); // `Spatue\Color\Rgba`
+$hex->toRgba(50); // `Spatie\Color\Rgba` with `alpha` 50
 ```
 
 ## Changelog
