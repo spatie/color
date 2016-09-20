@@ -1,6 +1,6 @@
 {
     "name": "spatie/color",
-    "description": ":package_description",
+    "description": "A little library to deal with color conversions",
     "keywords": [
         "spatie",
         "color"
