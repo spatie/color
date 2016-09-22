@@ -65,12 +65,12 @@ class RgbTest extends \PHPUnit_Framework_TestCase
     public function it_can_be_converted_to_rgba_with_a_specific_alpha_value()
     {
         $rgb = new Rgb(55, 155, 255);
-        $rgba = $rgb->toRgba(50);
+        $rgba = $rgb->toRgba(0.5);
 
         $this->assertEquals(55, $rgba->red());
         $this->assertEquals(155, $rgba->green());
         $this->assertEquals(255, $rgba->blue());
-        $this->assertEquals(50, $rgba->alpha());
+        $this->assertEquals(0.5, $rgba->alpha());
     }
 
     /** @test */

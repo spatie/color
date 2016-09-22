@@ -51,7 +51,7 @@ class Hex
         );
     }
 
-    public function toRgba(int $alpha = 100): Rgba
+    public function toRgba(float $alpha = 1): Rgba
     {
         return $this->toRgb()->toRgba($alpha);
     }

@@ -92,11 +92,11 @@ class HexTest extends \PHPUnit_Framework_TestCase
     public function it_can_be_converted_to_rgba()
     {
         $hex = new Hex('aa', 'bb', 'cc');
-        $rgba = $hex->toRgba();
+        $rgba = $hex->toRgba(0.5);
 
         $this->assertEquals(170, $rgba->red());
         $this->assertEquals(187, $rgba->green());
         $this->assertEquals(204, $rgba->blue());
-        $this->assertEquals(100, $rgba->alpha());
+        $this->assertEquals(0.5, $rgba->alpha());
     }
 }

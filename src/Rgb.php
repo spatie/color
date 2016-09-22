@@ -45,7 +45,7 @@ class Rgb
         return $this->blue;
     }
 
-    public function toRgba(int $alpha = 100): Rgba
+    public function toRgba(float $alpha = 1): Rgba
     {
         return new Rgba($this->red, $this->green, $this->blue, $alpha);
     }

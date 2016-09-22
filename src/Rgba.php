@@ -5,9 +5,12 @@ namespace Spatie\Color;
 class Rgba
 {
     /** @var int */
-    protected $red, $green, $blue, $alpha;
+    protected $red, $green, $blue;
 
-    public function __construct(int $red, int $green, int $blue, int $alpha)
+    /** @var float */
+    protected $alpha;
+
+    public function __construct(int $red, int $green, int $blue, float $alpha)
     {
         Validate::rgbChannelValue($red, 'red');
         Validate::rgbChannelValue($green, 'green');
@@ -28,7 +31,6 @@ class Rgba
         preg_match('/rgba\((\d{1,3},\d{1,3},\d{1,3},[0-1](\.\d{1,2})?)\)/i', $string, $matches);
 
         list($red, $green, $blue, $alpha) = explode(',', $matches[1]);
-        $alpha = ((float) $alpha) * 100;
 
         return new static($red, $green, $blue, $alpha);
     }
@@ -48,7 +50,7 @@ class Rgba
         return $this->blue;
     }
 
-    public function alpha(): int
+    public function alpha(): float
     {
         return $this->alpha;
     }
@@ -65,7 +67,7 @@ class Rgba
 
     public function __toString()
     {
-        $alpha = number_format($this->alpha / 100, 2);
+        $alpha = number_format($this->alpha, 2);
 
         return "rgba({$this->red},{$this->green},{$this->blue},{$alpha})";
     }

@@ -13,9 +13,9 @@ class Validate
         }
     }
 
-    public static function alphaChannelValue(int $value)
+    public static function alphaChannelValue(float $value)
     {
-        if ($value < 0 || $value > 100) {
+        if ($value < 0 || $value > 1) {
             throw InvalidColorValue::alphaChannelValueNotInRange($value);
         }
     }

@@ -8,12 +8,12 @@ class InvalidColorValue extends Exception
 {
     public static function rgbChannelValueNotInRange(int $value, string $channel): self
     {
-        return new static("Rgb values must be between 0 and 255, `{$value}` provided for channel {$channel}.");
+        return new static("An rgb values must be an integer between 0 and 255, `{$value}` provided for channel {$channel}.");
     }
 
     public static function alphaChannelValueNotInRange(int $value): self
     {
-        return new static("Alpha values must be between 0 and 100, `{$value}` provided.");
+        return new static("An alpha values must be a float between 0 and 1, `{$value}` provided.");
     }
 
     public static function hexChannelValueHasInvalidLength(string $value): self

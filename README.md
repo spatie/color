@@ -20,7 +20,7 @@ echo $rgb->blue(); // 255
 echo $rgb; // rgb(55,155,255)
 
 $rgba = $rgb->toRgba(); // `Spatie\Color\Rgba`
-$rgba->alpha(); // 100
+$rgba->alpha(); // 1
 echo $rgba; // rgba(55,155,255,1)
 
 $hex = $rgb->toHex(); // `Spatie\Color\Hex`
@@ -79,15 +79,15 @@ $rgb->blue(); // 255
 $rgb->toHex(); // `Spatie\Color\Hex`
 
 $rgb->toRgba(); // `Spatie\Color\Rgba`
-$rgb->toRgba(50); // `Spatie\Color\Rgba` with alpha 50
+$rgb->toRgba(0.5); // `Spatie\Color\Rgba` with alpha 0.5
 ```
 
 ### `Spatie\Color\Rgba`
 
-Can be instantiated with integer values:
+Can be instantiated with integer and float values:
 
 ```php
-$rgba = new Rgba(55, 155, 255, 50);
+$rgba = new Rgba(55, 155, 255, 0.5);
 ```
 
 Or can be created from a string:
@@ -99,12 +99,12 @@ $rgba = Rgba::fromString('rgba(55,155,255,0.5)');
 #### Channel methods
 
 ```php
-$rgba = new Rgba(55, 155, 255, 50);
+$rgba = new Rgba(55, 155, 255, 0.5);
 
 $rgba->red(); // 55
 $rgba->green(); // 155
 $rgba->blue(); // 255
-$rgba->alpha(); // 50
+$rgba->alpha(); // 0.5
 ```
 
 #### Conversion methods
@@ -146,7 +146,7 @@ $hex->blue(); // 'cc'
 $hex->toRgb(); // `Spatie\Color\Rgb`
 
 $hex->toRgba(); // `Spatie\Color\Rgba`
-$hex->toRgba(50); // `Spatie\Color\Rgba` with alpha 50
+$hex->toRgba(0.5); // `Spatie\Color\Rgba` with alpha 0.5
 ```
 
 ## Changelog
