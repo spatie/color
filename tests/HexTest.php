@@ -2,8 +2,8 @@
 
 namespace Spatie\Color\Test;
 
-use Spatie\Color\Exceptions\InvalidColorValue;
 use Spatie\Color\Hex;
+use Spatie\Color\Exceptions\InvalidColorValue;
 
 class HexTest extends \PHPUnit_Framework_TestCase
 {
