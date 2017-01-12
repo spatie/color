@@ -78,6 +78,18 @@ class HexTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_hex()
+    {
+        $hex = new Hex('aa', 'bb', 'cc');
+        $newHex = $hex->toHex();
+
+        $this->assertEquals($hex->red(), $newHex->red());
+        $this->assertEquals($hex->green(), $newHex->green());
+        $this->assertEquals($hex->blue(), $newHex->blue());
+        $this->assertNotSame($hex, $newHex);
+    }
+
+    /** @test */
     public function it_can_be_converted_to_rgb()
     {
         $hex = new Hex('aa', 'bb', 'cc');

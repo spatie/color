@@ -46,11 +46,6 @@ class Rgb implements Color
         return $this->blue;
     }
 
-    public function toRgba(float $alpha = 1): Rgba
-    {
-        return new Rgba($this->red, $this->green, $this->blue, $alpha);
-    }
-
     public function toHex(): Hex
     {
         return new Hex(
@@ -58,6 +53,16 @@ class Rgb implements Color
             Convert::rgbChannelToHexChannel($this->green),
             Convert::rgbChannelToHexChannel($this->blue)
         );
+    }
+
+    public function toRgb(): Rgb
+    {
+        return new self($this->red, $this->green, $this->blue);
+    }
+
+    public function toRgba(float $alpha = 1): Rgba
+    {
+        return new Rgba($this->red, $this->green, $this->blue, $alpha);
     }
 
     public function __toString(): string

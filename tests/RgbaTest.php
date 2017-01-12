@@ -92,6 +92,19 @@ class RgbaTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_rgba_with_with_a_specific_alpha_value()
+    {
+        $rgba = new Rgba(55, 155, 255, 0.5);
+        $newRgba = $rgba->toRgba(0.7);
+
+        $this->assertEquals(55, $newRgba->red());
+        $this->assertEquals(155, $newRgba->green());
+        $this->assertEquals(255, $newRgba->blue());
+        $this->assertEquals(0.7, $newRgba->alpha());
+        $this->assertNotSame($rgba, $newRgba);
+    }
+
+    /** @test */
     public function it_can_be_converted_to_rgb_without_an_alpha_value()
     {
         $rgba = new Rgba(55, 155, 255, 0.5);
