@@ -55,14 +55,19 @@ class Rgba implements Color
         return $this->alpha;
     }
 
+    public function toHex(): Hex
+    {
+        return $this->toRgb()->toHex();
+    }
+
     public function toRgb(): Rgb
     {
         return new Rgb($this->red, $this->green, $this->blue);
     }
 
-    public function toHex(): Hex
+    public function toRgba(float $alpha = 1): Rgba
     {
-        return $this->toRgb()->toHex();
+        return new self($this->red, $this->green, $this->blue, $alpha);
     }
 
     public function __toString(): string

@@ -12,5 +12,11 @@ interface Color
 
     public function blue();
 
+    public function toHex(): Hex;
+
+    public function toRgb(): Rgb;
+
+    public function toRgba(float $alpha = 1): Rgba;
+
     public function __toString(): string;
 }
