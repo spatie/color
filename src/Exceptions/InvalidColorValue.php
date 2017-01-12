@@ -42,4 +42,9 @@ class InvalidColorValue extends Exception
     {
         return new static("Rgba color string `{$string}` is malformed. An rgba color contains 3 comma separated values between 0 and 255 with an alpha value between 0 and 1, wrapped in `rgba()`, e.g. `rgb(0,0,255,0.5)`.");
     }
+
+    public static function malformedColorString(string $string): self
+    {
+        return new static("Color string `{$string}` doesn't match any of the available colors.");
+    }
 }
