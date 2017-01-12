@@ -23,9 +23,10 @@ class Rgb implements Color
         Validate::rgbColorString($string);
 
         $matches = null;
-        preg_match('/rgb\((\d{1,3},\d{1,3},\d{1,3})\)/i', $string, $matches);
+        preg_match('/rgb\( *(\d{1,3} *, *\d{1,3} *, *\d{1,3}) *\)/i', $string, $matches);
 
-        list($red, $green, $blue) = explode(',', $matches[1]);
+        $channels = explode(',', $matches[1]);
+        list($red, $green, $blue) = array_map('trim', $channels);
 
         return new static($red, $green, $blue);
     }

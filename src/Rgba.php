@@ -28,9 +28,10 @@ class Rgba implements Color
         Validate::rgbaColorString($string);
 
         $matches = null;
-        preg_match('/rgba\((\d{1,3},\d{1,3},\d{1,3},[0-1](\.\d{1,2})?)\)/i', $string, $matches);
+        preg_match('/rgba\( *(\d{1,3} *, *\d{1,3} *, *\d{1,3} *, *[0-1](\.\d{1,2})?) *\)/i', $string, $matches);
 
-        list($red, $green, $blue, $alpha) = explode(',', $matches[1]);
+        $channels = explode(',', $matches[1]);
+        list($red, $green, $blue, $alpha) = array_map('trim', $channels);
 
         return new static($red, $green, $blue, $alpha);
     }
