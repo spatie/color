@@ -2,7 +2,6 @@
 
 namespace Spatie\Color;
 
-use ReflectionClass;
 use Spatie\Color\Exceptions\InvalidColorValue;
 
 class Factory
