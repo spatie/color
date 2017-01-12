@@ -2,7 +2,7 @@
 
 namespace Spatie\Color;
 
-class Rgb
+class Rgb implements Color
 {
     /** @var int */
     protected $red, $green, $blue;
@@ -59,7 +59,7 @@ class Rgb
         );
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return "rgb({$this->red},{$this->green},{$this->blue})";
     }
