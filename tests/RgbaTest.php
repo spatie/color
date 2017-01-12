@@ -2,8 +2,8 @@
 
 namespace Spatie\Color\Test;
 
-use Spatie\Color\Exceptions\InvalidColorValue;
 use Spatie\Color\Rgba;
+use Spatie\Color\Exceptions\InvalidColorValue;
 
 class RgbaTest extends \PHPUnit_Framework_TestCase
 {
