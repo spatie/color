@@ -64,6 +64,18 @@ class RgbaTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function it_can_be_created_from_a_string_with_spaces()
+    {
+        $rgba = Rgba::fromString('  rgba(  55  ,  155  ,  255  ,  0.5  )  ');
+
+        $this->assertInstanceOf(Rgba::class, $rgba);
+        $this->assertEquals(55, $rgba->red());
+        $this->assertEquals(155, $rgba->green());
+        $this->assertEquals(255, $rgba->blue());
+        $this->assertEquals(0.5, $rgba->alpha());
+    }
+
+    /** @test */
     public function it_cant_be_created_from_malformed_string()
     {
         $this->expectException(InvalidColorValue::class);

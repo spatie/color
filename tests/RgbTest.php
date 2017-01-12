@@ -46,6 +46,17 @@ class RgbTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function it_can_be_created_from_a_string_with_spaces()
+    {
+        $rgb = Rgb::fromString('  rgb(  55  ,  155  ,  255  )  ');
+
+        $this->assertInstanceOf(Rgb::class, $rgb);
+        $this->assertEquals(55, $rgb->red());
+        $this->assertEquals(155, $rgb->green());
+        $this->assertEquals(255, $rgb->blue());
+    }
+
+    /** @test */
     public function it_cant_be_created_from_malformed_string()
     {
         $this->expectException(InvalidColorValue::class);
