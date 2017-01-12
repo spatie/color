@@ -2,7 +2,7 @@
 
 namespace Spatie\Color;
 
-class Hex
+class Hex implements Color
 {
     /** @var string */
     protected $red, $green, $blue;
@@ -56,7 +56,7 @@ class Hex
         return $this->toRgb()->toRgba($alpha);
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return "#{$this->red}{$this->green}{$this->blue}";
     }

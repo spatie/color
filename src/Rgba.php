@@ -2,7 +2,7 @@
 
 namespace Spatie\Color;
 
-class Rgba
+class Rgba implements Color
 {
     /** @var int */
     protected $red, $green, $blue;
@@ -65,7 +65,7 @@ class Rgba
         return $this->toRgb()->toHex();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         $alpha = number_format($this->alpha, 2);
 
