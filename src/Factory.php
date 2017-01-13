@@ -6,15 +6,13 @@ use Spatie\Color\Exceptions\InvalidColorValue;
 
 class Factory
 {
-    const EXCLUDED_FILES = ['.', '..'];
-
     public static function fromString(string $string): Color
     {
-        $colorClasses = self::getColorClasses();
+        $colorClasses = static::getColorClasses();
 
         foreach ($colorClasses as $colorClass) {
             try {
-                return call_user_func("$colorClass::fromString", $string);
+                return $colorClass::fromString($string);
             } catch (InvalidColorValue $e) {
                 // Catch the exception but never throw it.
             }

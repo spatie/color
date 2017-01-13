@@ -5,7 +5,7 @@ namespace Spatie\Color;
 interface Color
 {
     public static function fromString(string $string);
-
+    
     public function red();
 
     public function green();
