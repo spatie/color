@@ -2,6 +2,12 @@
 
 All Notable changes to `color` will be documented in this file
 
+## 1.1.0 - 2017-01-13
+
+- All color formats now implement a `Color` interface
+- Added a `Factory` class with a `fromString` static method to guess a format
+- `rgb` and `rgba` values can now contain spaces (e.g. `rgb(255, 255, 255)`)
+
 ## 1.0.2 - 2016-10-17
 
 - `rgbChannelToHexChannel` now also accepts single single-digit hex values
