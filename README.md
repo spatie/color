@@ -47,106 +47,116 @@ composer require spatie/color
 
 ## Usage
 
-The `Color` package contains a seperate class per color format.
+The `Color` package contains a seperate class per color format, which each implement a `Color` interface.
 
-### `Spatie\Color\Rgb`
+### `interface Spatie\Color\Color`
 
-Can be instantiated with integer values:
+#### `fromString(): Color`
+
+Parses a color string and returns a `Color` implementation, depending on the format of the input string.
 
 ```php
-$rgb = new Rgb(55, 155, 255);
+Hex::fromString('#000000');
+Rgba::fromString('rgba(255, 255, 255, 1)');
 ```
 
-Or can be created from a string:
+Throws an `InvalidColorValue` exception if the string can't be parsed.
+
+> `Rgb` and `Rgba` strings are allowed to have spaces. `rgb(0,0,0)` is just as valid as `rgb(0, 0, 0)`.
+
+#### `red(): int|string`
+
+Return the value of the `red` color channel.
 
 ```php
-$rgb = Rgb::fromString('rgb(55,155,255)');
+Hex::fromString('#ff0000')->red(); // 'ff'
+Rgb::fromString('rgb(255, 0, 0)')->red(); // 255
 ```
 
-#### Channel methods
+#### `green(): int|string`
+
+Return the value of the `green` color channel.
 
 ```php
-$rgb = new Rgb(55, 155, 255);
-
-$rgb->red(); // 55
-$rgb->green(); // 155
-$rgb->blue(); // 255
+Hex::fromString('#00ff00')->green(); // 'ff'
+Rgb::fromString('rgb(0, 255, 0)')->green(); // 255
 ```
 
-#### Conversion methods
+#### `blue(): int|string`
+
+Return the value of the `blue` color channel.
 
 ```php
-$rgb->toHex(); // `Spatie\Color\Hex`
-
-$rgb->toRgba(); // `Spatie\Color\Rgba`
-$rgb->toRgba(0.5); // `Spatie\Color\Rgba` with alpha 0.5
+Hex::fromString('#0000ff')->blue(); // 'ff'
+Rgb::fromString('rgb(0, 0, 255)')->blue(); // 255
 ```
 
-### `Spatie\Color\Rgba`
+#### `toHex(): Hex`
 
-Can be instantiated with integer and float values:
+Convert a color to a `Hex` color.
 
 ```php
-$rgba = new Rgba(55, 155, 255, 0.5);
+Rgb::fromString('rgb(0, 0, 255)')->toHex();
+// `Hex` instance; '#0000ff'
 ```
 
-Or can be created from a string:
+When coming from a color format that supports opacity, the opacity will simply be omitted.
 
 ```php
-$rgba = Rgba::fromString('rgba(55,155,255,0.5)');
+Rgba::fromString('rgba(0, 0, 255, .5)')->toHex();
+// `Hex` instance; '#0000ff'
 ```
 
-#### Channel methods
+#### `toRgb(): Rgb`
+
+Convert a color to an `Rgb` color.
 
 ```php
-$rgba = new Rgba(55, 155, 255, 0.5);
-
-$rgba->red(); // 55
-$rgba->green(); // 155
-$rgba->blue(); // 255
-$rgba->alpha(); // 0.5
+Hex::fromString('#0000ff')->toRgb();
+// `Rgb` instance; 'rgb(0, 0, 255)'
 ```
 
-#### Conversion methods
-
-> When converting to a format that doesn't support alpha, the alpha channel will be ignored
+When coming from a color format that supports opacity, the opacity will simply be omitted.
 
 ```php
-$rgba->toRgb(); // `Spatie\Color\Rgb`
-$rgba->toHex(); // `Spatie\Color\Hex`
+Rgba::fromString('rgb(0, 0, 255, .5)')->toRgb();
+// `Rgb` instance; 'rgb(0, 0, 255)'
 ```
 
-### `Spatie\Color\Hex`
+#### `toRgba(float $alpha = 1): Rgba`
 
-Can be instantiated with string values:
+Convert a color to a `Rgba` color.
 
 ```php
-$hex = new Hex('aa', 'bb', 'cc');
+Rgb::fromString('rgb(0, 0, 255)')->toRgba();
+// `Rgba` instance; 'rgba(0, 0, 255, 1)'
 ```
 
-Or can be created from a string:
+When coming from a color format that doesn't support opacity, it can be added by passing it to the `$alpha` parameter.
 
 ```php
-$hex = Hex::fromString('#aabbcc');
+Rgba::fromString('rgb(0, 0, 255)')->toRgba(.5);
+// `Rgba` instance; 'rgba(0, 0, 255, .5)'
 ```
 
-#### Channel methods
+#### `__toString(): string`
+
+Cast the color to a string.
 
 ```php
-$hex = new Hex('aa', 'bb', 'cc');
-
-$hex->red(); // 'aa'
-$hex->green(); // 'bb'
-$hex->blue(); // 'cc'
+(string) Rgb::fromString('rgb(0, 0, 255)'); // 'rgb(0,0,255)'
+(string) Rgba::fromString('rgb(0, 0, 255, .5)'); // 'rgb(0,0,255,0.5)'
+(string) Hex::fromString('#0000ff'); // '#0000ff'
 ```
 
-#### Conversion methods
+### `Factory::fromString(): Color`
+
+With the `Factory` class, you can create a color instance from any string (it does an educated guess under the hood). If the string isn't a valid color string in any format, it throws an `InvalidColorValue` exception.
 
 ```php
-$hex->toRgb(); // `Spatie\Color\Rgb`
-
-$hex->toRgba(); // `Spatie\Color\Rgba`
-$hex->toRgba(0.5); // `Spatie\Color\Rgba` with alpha 0.5
+Factory::fromString('rgb(0, 0, 255)'); // `Rgb` instance
+Factory::fromString('#0000ff'); // `Hex` instance
+Factory::fromString('Hello world!'); // `InvalidColorValue` exception
 ```
 
 ## Changelog
