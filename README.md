@@ -49,6 +49,12 @@ composer require spatie/color
 
 The `Color` package contains a seperate class per color format, which each implement a `Color` interface.
 
+There are three classes which implement the `Color` interface:
+
+- `Hex`
+- `Rgb`
+- `Rgba`
+
 ### `interface Spatie\Color\Color`
 
 #### `fromString(): Color`
