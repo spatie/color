@@ -54,11 +54,19 @@ class HexTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function it_cant_be_created_from_a_string_with_an_invalid_length()
+    public function it_cant_be_created_from_a_string_with_a_length_too_short()
     {
         $this->expectException(InvalidColorValue::class);
 
         Hex::fromString('#abbcc');
+    }
+
+    /** @test */
+    public function it_cant_be_created_from_a_string_with_a_length_too_long()
+    {
+        $this->expectException(InvalidColorValue::class);
+
+        Hex::fromString('#aabbccddee');
     }
 
     /** @test */
