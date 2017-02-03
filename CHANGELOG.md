@@ -2,6 +2,9 @@
 
 All Notable changes to `color` will be documented in this file
 
+## 1.1.1 - 2017-02-03
+- Fixed validation when a color contained redundant characters at the beginning or end of the string
+
 ## 1.1.0 - 2017-01-13
 
 - All color formats now implement a `Color` interface
