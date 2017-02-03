@@ -33,14 +33,14 @@ class Validate
 
     public static function rgbColorString($string)
     {
-        if (! preg_match('/^rgb\( *\d{1,3} *, *\d{1,3} *, *\d{1,3} *\)$/i', $string)) {
+        if (! preg_match('/^ *rgb\( *\d{1,3} *, *\d{1,3} *, *\d{1,3} *\) *$/i', $string)) {
             throw InvalidColorValue::malformedRgbColorString($string);
         }
     }
 
     public static function rgbaColorString($string)
     {
-        if (! preg_match('/^rgba\( *\d{1,3} *, *\d{1,3} *, *\d{1,3} *, *[0-1](\.\d{1,2})? *\)$/i', $string)) {
+        if (! preg_match('/^ *rgba\( *\d{1,3} *, *\d{1,3} *, *\d{1,3} *, *[0-1](\.\d{1,2})? *\) *$/i', $string)) {
             throw InvalidColorValue::malformedRgbaColorString($string);
         }
     }
