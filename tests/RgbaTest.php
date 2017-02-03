@@ -84,6 +84,14 @@ class RgbaTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function it_cant_be_created_from_a_string_with_text_around()
+    {
+        $this->expectException(InvalidColorValue::class);
+
+        Rgba::fromString('abc rgba(55,155,255,0.5) abc');
+    }
+
+    /** @test */
     public function it_can_be_casted_to_a_string()
     {
         $rgba = new Rgba(55, 155, 255, 0.5);
