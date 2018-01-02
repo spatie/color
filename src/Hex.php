@@ -42,7 +42,7 @@ class Hex implements Color
         return $this->blue;
     }
 
-    public function toHex(): Hex
+    public function toHex(): self
     {
         return new self($this->red, $this->green, $this->blue);
     }
