@@ -66,7 +66,7 @@ class Rgba implements Color
         return new Rgb($this->red, $this->green, $this->blue);
     }
 
-    public function toRgba(float $alpha = 1): Rgba
+    public function toRgba(float $alpha = 1): self
     {
         return new self($this->red, $this->green, $this->blue, $alpha);
     }

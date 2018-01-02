@@ -55,7 +55,7 @@ class Rgb implements Color
         );
     }
 
-    public function toRgb(): Rgb
+    public function toRgb(): self
     {
         return new self($this->red, $this->green, $this->blue);
     }
