@@ -3,9 +3,10 @@
 namespace Spatie\Color\Test;
 
 use Spatie\Color\Hex;
+use PHPUnit\Framework\TestCase;
 use Spatie\Color\Exceptions\InvalidColorValue;
 
-class HexTest extends \PHPUnit_Framework_TestCase
+class HexTest extends TestCase
 {
     /** @test */
     public function it_is_initializable()

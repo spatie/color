@@ -3,9 +3,10 @@
 namespace Spatie\Color\Test;
 
 use Spatie\Color\Rgb;
+use PHPUnit\Framework\TestCase;
 use Spatie\Color\Exceptions\InvalidColorValue;
 
-class RgbTest extends \PHPUnit_Framework_TestCase
+class RgbTest extends TestCase
 {
     /** @test */
     public function it_is_initializable()
