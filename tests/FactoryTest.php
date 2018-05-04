@@ -6,9 +6,10 @@ use Spatie\Color\Hex;
 use Spatie\Color\Rgb;
 use Spatie\Color\Rgba;
 use Spatie\Color\Factory;
+use PHPUnit\Framework\TestCase;
 use Spatie\Color\Exceptions\InvalidColorValue;
 
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class FactoryTest extends TestCase
 {
     /** @test */
     public function it_can_create_a_hex_color_from_a_string()
