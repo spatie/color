@@ -4,7 +4,7 @@ namespace Spatie\Color;
 
 interface Color
 {
-    public static function fromString(string $string);
+    public static function fromString(string $string): self;
 
     public function red();
 
@@ -16,7 +16,7 @@ interface Color
 
     public function toRgb(): Rgb;
 
-    public function toRgba(float $alpha = 1): Rgba;
+    public function toRgba(float $alpha = 1.0): Rgba;
 
     public function __toString(): string;
 }

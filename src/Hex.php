@@ -18,7 +18,7 @@ class Hex implements Color
         $this->blue = strtolower($blue);
     }
 
-    public static function fromString(string $string)
+    public static function fromString(string $string): Color
     {
         Validate::hexColorString($string);
 
@@ -42,7 +42,7 @@ class Hex implements Color
         return $this->blue;
     }
 
-    public function toHex(): Hex
+    public function toHex(): self
     {
         return new self($this->red, $this->green, $this->blue);
     }
@@ -56,7 +56,7 @@ class Hex implements Color
         );
     }
 
-    public function toRgba(float $alpha = 1): Rgba
+    public function toRgba(float $alpha = 1.0): Rgba
     {
         return $this->toRgb()->toRgba($alpha);
     }

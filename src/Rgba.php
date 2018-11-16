@@ -23,7 +23,7 @@ class Rgba implements Color
         $this->alpha = $alpha;
     }
 
-    public static function fromString(string $string)
+    public static function fromString(string $string): Color
     {
         Validate::rgbaColorString($string);
 
@@ -66,7 +66,7 @@ class Rgba implements Color
         return new Rgb($this->red, $this->green, $this->blue);
     }
 
-    public function toRgba(float $alpha = 1): Rgba
+    public function toRgba(float $alpha = 1.0): self
     {
         return new self($this->red, $this->green, $this->blue, $alpha);
     }
