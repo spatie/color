@@ -22,7 +22,7 @@ class Hex implements Color
     {
         Validate::hexColorString($string);
 
-        list($red, $green, $blue) = str_split(ltrim($string, '#'), 2);
+        [$red, $green, $blue] = str_split(ltrim($string, '#'), 2);
 
         return new static($red, $green, $blue);
     }
@@ -42,7 +42,7 @@ class Hex implements Color
         return $this->blue;
     }
 
-    public function toHex(): Hex
+    public function toHex(): self
     {
         return new self($this->red, $this->green, $this->blue);
     }

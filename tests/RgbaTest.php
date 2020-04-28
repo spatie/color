@@ -2,9 +2,9 @@
 
 namespace Spatie\Color\Test;
 
-use Spatie\Color\Rgba;
 use PHPUnit\Framework\TestCase;
 use Spatie\Color\Exceptions\InvalidColorValue;
+use Spatie\Color\Rgba;
 
 class RgbaTest extends TestCase
 {
