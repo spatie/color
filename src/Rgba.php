@@ -31,7 +31,7 @@ class Rgba implements Color
         preg_match('/rgba\( *(\d{1,3} *, *\d{1,3} *, *\d{1,3} *, *[0-1](\.\d{1,2})?) *\)/i', $string, $matches);
 
         $channels = explode(',', $matches[1]);
-        list($red, $green, $blue, $alpha) = array_map('trim', $channels);
+        [$red, $green, $blue, $alpha] = array_map('trim', $channels);
 
         return new static($red, $green, $blue, $alpha);
     }
@@ -66,7 +66,7 @@ class Rgba implements Color
         return new Rgb($this->red, $this->green, $this->blue);
     }
 
-    public function toRgba(float $alpha = 1): Rgba
+    public function toRgba(float $alpha = 1): self
     {
         return new self($this->red, $this->green, $this->blue, $alpha);
     }

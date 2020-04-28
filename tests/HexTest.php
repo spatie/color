@@ -2,9 +2,9 @@
 
 namespace Spatie\Color\Test;
 
-use Spatie\Color\Hex;
 use PHPUnit\Framework\TestCase;
 use Spatie\Color\Exceptions\InvalidColorValue;
+use Spatie\Color\Hex;
 
 class HexTest extends TestCase
 {

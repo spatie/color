@@ -26,7 +26,7 @@ class Rgb implements Color
         preg_match('/rgb\( *(\d{1,3} *, *\d{1,3} *, *\d{1,3}) *\)/i', $string, $matches);
 
         $channels = explode(',', $matches[1]);
-        list($red, $green, $blue) = array_map('trim', $channels);
+        [$red, $green, $blue] = array_map('trim', $channels);
 
         return new static($red, $green, $blue);
     }
@@ -55,7 +55,7 @@ class Rgb implements Color
         );
     }
 
-    public function toRgb(): Rgb
+    public function toRgb(): self
     {
         return new self($this->red, $this->green, $this->blue);
     }
