@@ -2,12 +2,12 @@
 
 namespace Spatie\Color\Test;
 
+use PHPUnit\Framework\TestCase;
+use Spatie\Color\Exceptions\InvalidColorValue;
+use Spatie\Color\Factory;
 use Spatie\Color\Hex;
 use Spatie\Color\Rgb;
 use Spatie\Color\Rgba;
-use Spatie\Color\Factory;
-use PHPUnit\Framework\TestCase;
-use Spatie\Color\Exceptions\InvalidColorValue;
 
 class FactoryTest extends TestCase
 {
