@@ -61,6 +61,28 @@ class Rgba implements Color
         return $this->toRgb()->toHex();
     }
 
+    public function toHsl(): Hsl
+    {
+        [$hue, $saturation, $lightness] = Convert::rgbValueToHsl(
+            $this->red,
+            $this->green,
+            $this->blue
+        );
+
+        return new Hsl($hue, $saturation, $lightness);
+    }
+
+    public function toHsla(float $alpha = 1): Hsla
+    {
+        [$hue, $saturation, $lightness] = Convert::rgbValueToHsl(
+            $this->red,
+            $this->green,
+            $this->blue
+        );
+
+        return new Hsla($hue, $saturation, $lightness, $alpha);
+    }
+
     public function toRgb(): Rgb
     {
         return new Rgb($this->red, $this->green, $this->blue);

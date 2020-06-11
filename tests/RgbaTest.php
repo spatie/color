@@ -134,4 +134,27 @@ class RgbaTest extends TestCase
         $this->assertEquals('9b', $hex->green());
         $this->assertEquals('ff', $hex->blue());
     }
+
+    /** @test */
+    public function it_can_be_converted_to_hsl_without_an_alpha_value()
+    {
+        $rgba = new Rgba(55, 155, 255, 0.5);
+        $hsl = $rgba->toHsl();
+
+        $this->assertEquals(55, $hsl->red());
+        $this->assertEquals(155, $hsl->green());
+        $this->assertEquals(255, $hsl->blue());
+    }
+
+    /** @test */
+    public function it_can_be_converted_to_hsla_with_a_specific_alpha_value()
+    {
+        $rgba = new Rgba(55, 155, 255, 0.5);
+        $hsla = $rgba->toHsla(0.75);
+
+        $this->assertEquals(55, $hsla->red());
+        $this->assertEquals(155, $hsla->green());
+        $this->assertEquals(255, $hsla->blue());
+        $this->assertEquals(0.75, $hsla->alpha());
+    }
 }

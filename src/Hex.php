@@ -47,6 +47,28 @@ class Hex implements Color
         return new self($this->red, $this->green, $this->blue);
     }
 
+    public function toHsl(): Hsl
+    {
+        [$hue, $saturation, $lightness] = Convert::rgbValueToHsl(
+            Convert::hexChannelToRgbChannel($this->red),
+            Convert::hexChannelToRgbChannel($this->green),
+            Convert::hexChannelToRgbChannel($this->blue)
+        );
+
+        return new Hsl($hue, $saturation, $lightness);
+    }
+
+    public function toHsla(float $alpha = 1): Hsla
+    {
+        [$hue, $saturation, $lightness] = Convert::rgbValueToHsl(
+            Convert::hexChannelToRgbChannel($this->red),
+            Convert::hexChannelToRgbChannel($this->green),
+            Convert::hexChannelToRgbChannel($this->blue)
+        );
+
+        return new Hsla($hue, $saturation, $lightness, $alpha);
+    }
+
     public function toRgb(): Rgb
     {
         return new Rgb(

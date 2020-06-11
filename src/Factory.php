@@ -25,6 +25,8 @@ class Factory
     {
         return [
             Hex::class,
+            Hsl::class,
+            Hsla::class,
             Rgb::class,
             Rgba::class,
         ];

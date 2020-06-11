@@ -115,4 +115,27 @@ class RgbTest extends TestCase
         $this->assertEquals('9b', $hex->green());
         $this->assertEquals('ff', $hex->blue());
     }
+
+    /** @test */
+    public function it_can_be_converted_to_hsl()
+    {
+        $rgb = new Rgb(55, 155, 255);
+        $hsl = $rgb->toHsl();
+
+        $this->assertEquals(55, $hsl->red());
+        $this->assertEquals(155, $hsl->green());
+        $this->assertEquals(255, $hsl->blue());
+    }
+
+    /** @test */
+    public function it_can_be_converted_to_hsla_with_a_specific_alpha_value()
+    {
+        $rgb = new Rgb(55, 155, 255);
+        $hsla = $rgb->toHsla(0.5);
+
+        $this->assertEquals(55, $hsla->red());
+        $this->assertEquals(155, $hsla->green());
+        $this->assertEquals(255, $hsla->blue());
+        $this->assertEquals(0.5, $hsla->alpha());
+    }
 }

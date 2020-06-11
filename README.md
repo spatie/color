@@ -7,7 +7,7 @@
 [![StyleCI](https://styleci.io/repos/68709937/shield?branch=master)](https://styleci.io/repos/68709937)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/color.svg?style=flat-square)](https://packagist.org/packages/spatie/color)
 
-A little library to handle color conversions. Currently supports rgb, rgba and hex formats.
+A little library to handle color conversions. Currently supports rgb, rgba, hex, hsl and hsla formats.
 
 ```php
 $rgb = Rgb::fromString('rgb(55,155,255)');
@@ -24,6 +24,9 @@ echo $rgba; // rgba(55,155,255,1)
 
 $hex = $rgb->toHex(); // `Spatie\Color\Hex`
 echo $hex; // #379bff
+
+$hsl = $rgb->toHsl();
+echo $hsl; // hsl(210,100%,100%)
 ```
 
 ## Support us
@@ -46,11 +49,13 @@ composer require spatie/color
 
 ## Usage
 
-The `Color` package contains a seperate class per color format, which each implement a `Color` interface.
+The `Color` package contains a separate class per color format, which each implement a `Color` interface.
 
-There are three classes which implement the `Color` interface:
+There are five classes which implement the `Color` interface:
 
 - `Hex`
+- `Hsl`
+- `Hsla`
 - `Rgb`
 - `Rgba`
 
@@ -63,11 +68,12 @@ Parses a color string and returns a `Color` implementation, depending on the for
 ```php
 Hex::fromString('#000000');
 Rgba::fromString('rgba(255, 255, 255, 1)');
+Hsla::fromString('hsla(360, 100%, 100%, 1)');
 ```
 
 Throws an `InvalidColorValue` exception if the string can't be parsed.
 
-> `Rgb` and `Rgba` strings are allowed to have spaces. `rgb(0,0,0)` is just as valid as `rgb(0, 0, 0)`.
+> `Rgb`, `Rgba`, `Hsl` and `Hsla` strings are allowed to have spaces. `rgb(0,0,0)` is just as valid as `rgb(0, 0, 0)`.
 
 #### `red(): int|string`
 
@@ -107,9 +113,36 @@ Rgb::fromString('rgb(0, 0, 255)')->toHex();
 
 When coming from a color format that supports opacity, the opacity will simply be omitted.
 
+#### `toHsl(): Hsl`
+
+Convert a color to a `Hsl` color.
+
 ```php
-Rgba::fromString('rgba(0, 0, 255, .5)')->toHex();
-// `Hex` instance; '#0000ff'
+Rgb::fromString('rgb(0, 0, 255)')->toHsl();
+// `Hsl` instance; 'hsl(240, 100%, 50%)'
+```
+
+When coming from a color format that supports opacity, the opacity will simply be omitted.
+
+```php
+Rgba::fromString('rgba(0, 0, 255, .5)')->toHsl();
+// `Hsl` instance; 'hsl(240, 100%, 50%)'
+```
+
+#### `toHsla(float $alpha = 1): Hsla`
+
+Convert a color to a `Hsla` color.
+
+```php
+Rgb::fromString('rgb(0, 0, 255)')->toHsla();
+// `Hsla` instance; 'hsla(240, 100%, 50%, 1.0)'
+```
+
+When coming from a color format that doesn't support opacity, it can be added by passing it to the `$alpha` parameter.
+
+```php
+Rgb::fromString('rgb(0, 0, 255)')->toHsla(.5);
+// `Hsla` instance; 'hsla(240, 100%, 50%, 0.5)'
 ```
 
 #### `toRgb(): Rgb`
@@ -152,6 +185,8 @@ Cast the color to a string.
 (string) Rgb::fromString('rgb(0, 0, 255)'); // 'rgb(0,0,255)'
 (string) Rgba::fromString('rgb(0, 0, 255, .5)'); // 'rgb(0,0,255,0.5)'
 (string) Hex::fromString('#0000ff'); // '#0000ff'
+(string) Hsla::fromString('hsl(240, 100%, 50%)'); // 'hsl(240, 100%, 50%)'
+(string) Hsla::fromString('hsla(240, 100%, 50%, 1.0)'); // 'hsla(240, 100%, 50%, 1.0)'
 ```
 
 ### `Factory::fromString(): Color`
@@ -161,6 +196,7 @@ With the `Factory` class, you can create a color instance from any string (it do
 ```php
 Factory::fromString('rgb(0, 0, 255)'); // `Rgb` instance
 Factory::fromString('#0000ff'); // `Hex` instance
+Factory::fromString('hsl(240, 100%, 50%)'); // `Hsl` instance
 Factory::fromString('Hello world!'); // `InvalidColorValue` exception
 ```
 
