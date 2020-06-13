@@ -57,7 +57,6 @@ class Convert
         $cmin = min($r, $g, $b);
         $delta = $cmax - $cmin;
 
-
         $hue = 0;
         if ($delta !== 0) {
             if ($r === $cmax) {
