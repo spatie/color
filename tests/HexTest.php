@@ -99,6 +99,29 @@ class HexTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_hsl()
+    {
+        $hex = new Hex('aa', 'bb', 'cc');
+        $hsl = $hex->toHsl();
+
+        $this->assertEquals(170, $hsl->red());
+        $this->assertEquals(187, $hsl->green());
+        $this->assertEquals(204, $hsl->blue());
+    }
+
+    /** @test */
+    public function it_can_be_converted_to_hsla_with_a_specific_alpha_value()
+    {
+        $hex = new Hex('aa', 'bb', 'cc');
+        $hsla = $hex->toHsla(0.75);
+
+        $this->assertEquals(170, $hsla->red());
+        $this->assertEquals(187, $hsla->green());
+        $this->assertEquals(204, $hsla->blue());
+        $this->assertEquals(0.75, $hsla->alpha());
+    }
+
+    /** @test */
     public function it_can_be_converted_to_rgb()
     {
         $hex = new Hex('aa', 'bb', 'cc');

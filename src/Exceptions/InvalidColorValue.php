@@ -28,9 +28,24 @@ class InvalidColorValue extends Exception
         return new static("Hex values can only contain numbers or letters from A-F, `{$value}` contains invalid characters.");
     }
 
+    public static function hslValueNotInRange(float $value, string $name): self
+    {
+        return new static("Hsl value `{$name}` must be a number between 0 and 100");
+    }
+
     public static function malformedHexColorString(string $string): self
     {
         return new static("Hex color string `{$string}` is malformed. A hex color string starts with a `#` and contains exactly six characters, e.g. `#aabbcc`.");
+    }
+
+    public static function malformedHslColorString(string $string): self
+    {
+        return new static("Hsl color string `{$string}` is malformed. An hsl color contains hue, saturation, and lightness values, wrapped in `hsl()`, e.g. `hsl(300,10%,50%)`.");
+    }
+
+    public static function malformedHslaColorString(string $string): self
+    {
+        return new static("Hsla color string `{$string}` is malformed. An hsla color contains hue, saturation, lightness and alpha values, wrapped in `hsl()`, e.g. `hsl(300,10%,50%,0.25)`.");
     }
 
     public static function malformedRgbColorString(string $string): self

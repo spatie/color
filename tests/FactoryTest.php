@@ -6,6 +6,8 @@ use PHPUnit\Framework\TestCase;
 use Spatie\Color\Exceptions\InvalidColorValue;
 use Spatie\Color\Factory;
 use Spatie\Color\Hex;
+use Spatie\Color\Hsl;
+use Spatie\Color\Hsla;
 use Spatie\Color\Rgb;
 use Spatie\Color\Rgba;
 
@@ -17,6 +19,22 @@ class FactoryTest extends TestCase
         $hex = Factory::fromString('#aabbcc');
 
         $this->assertInstanceOf(Hex::class, $hex);
+    }
+
+    /** @test */
+    public function it_can_create_a_hsl_color_from_a_string()
+    {
+        $hsl = Factory::fromString('hsl(127, 45%, 71%)');
+
+        $this->assertInstanceOf(Hsl::class, $hsl);
+    }
+
+    /** @test */
+    public function it_can_create_a_hsla_color_from_a_string()
+    {
+        $hsla = Factory::fromString('hsla(127, 45%, 71%, 0.33)');
+
+        $this->assertInstanceOf(Hsla::class, $hsla);
     }
 
     /** @test */
