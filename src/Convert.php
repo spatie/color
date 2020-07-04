@@ -16,11 +16,11 @@ class Convert
 
     public static function hslValueToRgb(float $hue, float $saturation, float $lightness): array
     {
-        $c = (1 - abs(2 * ($lightness / 100) - 1)) * ($saturation / 100);
-        $x = $c * (1 - abs(fmod($hue / 60, 2) - 1));
-        $m = ($lightness / 100) - ($c / 2);
-
         $h = (360 + ($hue % 360)) % 360;  // hue values can be less than 0 and greater than 360. This normalises them into the range 0-360.
+
+        $c = (1 - abs(2 * ($lightness / 100) - 1)) * ($saturation / 100);
+        $x = $c * (1 - abs(fmod($h / 60, 2) - 1));
+        $m = ($lightness / 100) - ($c / 2);
 
         if ($h >= 0 && $h <= 60) {
             return [round(($c + $m) * 255), round(($x + $m) * 255), round($m * 255)];

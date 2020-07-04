@@ -22,7 +22,7 @@ class Hsl implements Color
         Validate::hslColorString($string);
 
         $matches = null;
-        preg_match('/hsl\( *(\d{1,3}) *, *(\d{1,3})%? *, *(\d{1,3})%? *\)/i', $string, $matches);
+        preg_match('/hsl\( *(-?\d{1,3}) *, *(\d{1,3})%? *, *(\d{1,3})%? *\)/i', $string, $matches);
 
         return new static($matches[1], $matches[2], $matches[3]);
     }

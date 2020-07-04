@@ -61,7 +61,7 @@ class Validate
 
     public static function hslColorString($string)
     {
-        if (! preg_match('/^ *hsl\( *\d{1,3} *, *\d{1,3}%? *, *\d{1,3}%? *\) *$/i', $string)) {
+        if (! preg_match('/^ *hsl\( *-?\d{1,3} *, *\d{1,3}%? *, *\d{1,3}%? *\) *$/i', $string)) {
             throw InvalidColorValue::malformedHslColorString($string);
         }
     }
