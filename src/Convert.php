@@ -22,7 +22,7 @@ class Convert
 
         $h = (360 + ($hue % 360)) % 360;  // hue values can be less than 0 and greater than 360. This normalises them into the range 0-360.
 
-        if ($h > 0 && $h <= 60) {
+        if ($h >= 0 && $h <= 60) {
             return [round(($c + $m) * 255), round(($x + $m) * 255), round($m * 255)];
         }
 
