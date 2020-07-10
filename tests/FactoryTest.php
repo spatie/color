@@ -24,7 +24,7 @@ class FactoryTest extends TestCase
     /** @test */
     public function it_can_create_a_hex_color_calculating_a_string_hash()
     {
-        $hex = Factory::stringToColor("Hello world!");
+        $hex = Factory::stringToColor('Hello world!');
 
         $this->assertInstanceOf(Hex::class, $hex);
     }
