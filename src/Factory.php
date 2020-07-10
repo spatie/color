@@ -21,6 +21,11 @@ class Factory
         throw InvalidColorValue::malformedColorString($string);
     }
 
+    public static function stringToColor(string $string): Color
+    {
+        return static::fromString('#'. substr(dechex(crc32($string)), 0, 6));
+    }
+
     protected static function getColorClasses(): array
     {
         return [

@@ -22,6 +22,14 @@ class FactoryTest extends TestCase
     }
 
     /** @test */
+    public function it_can_create_a_hex_color_calculating_a_string_hash()
+    {
+        $hex = Factory::stringToColor("Hello world!");
+
+        $this->assertInstanceOf(Hex::class, $hex);
+    }
+
+    /** @test */
     public function it_can_create_a_hsl_color_from_a_string()
     {
         $hsl = Factory::fromString('hsl(127, 45%, 71%)');
