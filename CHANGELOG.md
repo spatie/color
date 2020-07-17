@@ -2,6 +2,9 @@
 
 All Notable changes to `color` will be documented in this file
 
+## 1.2.1 - 2020-07-17
+- HSL to RGB fixes
+
 ## 1.2.0 - 2020-06-22
 - Added HSL & HSLA support
 
