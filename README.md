@@ -31,7 +31,7 @@ echo $hsl; // hsl(210,100%,100%)
 
 ## Support us
 
-[![Image](https://github-ads.s3.eu-central-1.amazonaws.com/color.jpg)](https://spatie.be/github-ad-click/color)
+[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/color.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/color)
 
 We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
 
