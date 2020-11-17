@@ -58,7 +58,7 @@ class Convert
         $delta = $cmax - $cmin;
 
         $hue = 0;
-        if ($delta !== 0) {
+        if ($delta != 0) {
             if ($r === $cmax) {
                 $hue = 60 * fmod(($g - $b) / $delta, 6);
             }
