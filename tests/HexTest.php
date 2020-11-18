@@ -110,6 +110,17 @@ class HexTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_hsl_with_same_intensity()
+    {
+        $hex = new Hex('a8', 'a8', 'a8');
+        $hsl = $hex->toHsl();
+
+        $this->assertEquals(168, $hsl->red());
+        $this->assertEquals(168, $hsl->green());
+        $this->assertEquals(168, $hsl->blue());
+    }
+
+    /** @test */
     public function it_can_be_converted_to_hsla_with_a_specific_alpha_value()
     {
         $hex = new Hex('aa', 'bb', 'cc');
