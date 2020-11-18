@@ -1,6 +1,9 @@
 # Changelog
 
-All Notable changes to `color` will be documented in this file
+All notable changes to `color` will be documented in this file
+
+## 1.2.2 - 2020-11-18
+- Fix transform RGB value to HSL : division by zero (#38)
 
 ## 1.2.1 - 2020-07-17
 - HSL to RGB fixes
