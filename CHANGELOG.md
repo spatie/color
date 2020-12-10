@@ -2,6 +2,9 @@
 
 All notable changes to `color` will be documented in this file
 
+## 1.2.3 - 2020-12-10
+- Added support for PHP 8
+
 ## 1.2.2 - 2020-11-18
 - Fix transform RGB value to HSL : division by zero (#38)
 
