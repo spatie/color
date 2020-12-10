@@ -5,7 +5,10 @@ namespace Spatie\Color;
 class Hsla implements Color
 {
     /** @var float */
-    protected $hue, $saturation, $lightness, $alpha;
+    protected $hue;
+    protected $saturation;
+    protected $lightness;
+    protected $alpha;
 
     public function __construct(float $hue, float $saturation, float $lightness, float $alpha = 1.0)
     {

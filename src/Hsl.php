@@ -5,7 +5,9 @@ namespace Spatie\Color;
 class Hsl implements Color
 {
     /** @var float */
-    protected $hue, $saturation, $lightness;
+    protected $hue;
+    protected $saturation;
+    protected $lightness;
 
     public function __construct(float $hue, float $saturation, float $lightness)
     {
