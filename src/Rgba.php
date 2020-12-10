@@ -5,7 +5,9 @@ namespace Spatie\Color;
 class Rgba implements Color
 {
     /** @var int */
-    protected $red, $green, $blue;
+    protected $red;
+    protected $green;
+    protected $blue;
 
     /** @var float */
     protected $alpha;
