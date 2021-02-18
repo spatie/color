@@ -76,7 +76,7 @@ class Convert
 
         $saturation = 0;
 
-        if( $lightness > 0 && $lightness < 1) {
+        if ($lightness > 0 && $lightness < 1) {
             $saturation = $delta / (1 - abs((2 * $lightness) - 1));
         }
 

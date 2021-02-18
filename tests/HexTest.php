@@ -125,9 +125,9 @@ class HexTest extends TestCase
     {
         $hsl = Hex::fromString('#ffffff')->toHsl();
 
-        $this->assertEquals(255, $hsl->red());
-        $this->assertEquals(255, $hsl->green());
-        $this->assertEquals(255, $hsl->blue());
+        $this->assertSame(255, $hsl->red());
+        $this->assertSame(255, $hsl->green());
+        $this->assertSame(255, $hsl->blue());
     }
 
     /** @test */
@@ -135,9 +135,9 @@ class HexTest extends TestCase
     {
         $hsl = Hex::fromString('#000000')->toHsl();
 
-        $this->assertEquals(0, $hsl->red());
-        $this->assertEquals(0, $hsl->green());
-        $this->assertEquals(0, $hsl->blue());
+        $this->assertSame(0, $hsl->red());
+        $this->assertSame(0, $hsl->green());
+        $this->assertSame(0, $hsl->blue());
     }
 
     /** @test */
