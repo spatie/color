@@ -14,10 +14,10 @@ class RgbaTest extends TestCase
         $rgba = new Rgba(55, 155, 255, 0.5);
 
         $this->assertInstanceOf(Rgba::class, $rgba);
-        $this->assertEquals(55, $rgba->red());
-        $this->assertEquals(155, $rgba->green());
-        $this->assertEquals(255, $rgba->blue());
-        $this->assertEquals(0.5, $rgba->alpha());
+        $this->assertSame(55, $rgba->red());
+        $this->assertSame(155, $rgba->green());
+        $this->assertSame(255, $rgba->blue());
+        $this->assertSame(0.5, $rgba->alpha());
     }
 
     /** @test */
@@ -58,10 +58,10 @@ class RgbaTest extends TestCase
         $rgba = Rgba::fromString('rgba(55,155,255,0.5)');
 
         $this->assertInstanceOf(Rgba::class, $rgba);
-        $this->assertEquals(55, $rgba->red());
-        $this->assertEquals(155, $rgba->green());
-        $this->assertEquals(255, $rgba->blue());
-        $this->assertEquals(0.5, $rgba->alpha());
+        $this->assertSame(55, $rgba->red());
+        $this->assertSame(155, $rgba->green());
+        $this->assertSame(255, $rgba->blue());
+        $this->assertSame(0.5, $rgba->alpha());
     }
 
     /** @test */
@@ -70,10 +70,10 @@ class RgbaTest extends TestCase
         $rgba = Rgba::fromString('  rgba(  55  ,  155  ,  255  ,  0.5  )  ');
 
         $this->assertInstanceOf(Rgba::class, $rgba);
-        $this->assertEquals(55, $rgba->red());
-        $this->assertEquals(155, $rgba->green());
-        $this->assertEquals(255, $rgba->blue());
-        $this->assertEquals(0.5, $rgba->alpha());
+        $this->assertSame(55, $rgba->red());
+        $this->assertSame(155, $rgba->green());
+        $this->assertSame(255, $rgba->blue());
+        $this->assertSame(0.5, $rgba->alpha());
     }
 
     /** @test */
@@ -97,7 +97,7 @@ class RgbaTest extends TestCase
     {
         $rgba = new Rgba(55, 155, 255, 0.5);
 
-        $this->assertEquals('rgba(55,155,255,0.50)', (string) $rgba);
+        $this->assertSame('rgba(55,155,255,0.50)', (string) $rgba);
     }
 
     /** @test */
@@ -106,10 +106,10 @@ class RgbaTest extends TestCase
         $rgba = new Rgba(55, 155, 255, 0.5);
         $newRgba = $rgba->toRgba(0.7);
 
-        $this->assertEquals(55, $newRgba->red());
-        $this->assertEquals(155, $newRgba->green());
-        $this->assertEquals(255, $newRgba->blue());
-        $this->assertEquals(0.7, $newRgba->alpha());
+        $this->assertSame(55, $newRgba->red());
+        $this->assertSame(155, $newRgba->green());
+        $this->assertSame(255, $newRgba->blue());
+        $this->assertSame(0.7, $newRgba->alpha());
         $this->assertNotSame($rgba, $newRgba);
     }
 
@@ -119,9 +119,9 @@ class RgbaTest extends TestCase
         $rgba = new Rgba(55, 155, 255, 0.5);
         $rgb = $rgba->toRgb();
 
-        $this->assertEquals(55, $rgb->red());
-        $this->assertEquals(155, $rgb->green());
-        $this->assertEquals(255, $rgb->blue());
+        $this->assertSame(55, $rgb->red());
+        $this->assertSame(155, $rgb->green());
+        $this->assertSame(255, $rgb->blue());
     }
 
     /** @test */
@@ -130,9 +130,9 @@ class RgbaTest extends TestCase
         $rgba = new Rgba(55, 155, 255, 0.5);
         $hex = $rgba->toHex();
 
-        $this->assertEquals('37', $hex->red());
-        $this->assertEquals('9b', $hex->green());
-        $this->assertEquals('ff', $hex->blue());
+        $this->assertSame('37', $hex->red());
+        $this->assertSame('9b', $hex->green());
+        $this->assertSame('ff', $hex->blue());
     }
 
     /** @test */
@@ -141,9 +141,9 @@ class RgbaTest extends TestCase
         $rgba = new Rgba(55, 155, 255, 0.5);
         $hsl = $rgba->toHsl();
 
-        $this->assertEquals(55, $hsl->red());
-        $this->assertEquals(155, $hsl->green());
-        $this->assertEquals(255, $hsl->blue());
+        $this->assertSame(55, $hsl->red());
+        $this->assertSame(155, $hsl->green());
+        $this->assertSame(255, $hsl->blue());
     }
 
     /** @test */
@@ -152,9 +152,9 @@ class RgbaTest extends TestCase
         $rgba = new Rgba(55, 155, 255, 0.5);
         $hsla = $rgba->toHsla(0.75);
 
-        $this->assertEquals(55, $hsla->red());
-        $this->assertEquals(155, $hsla->green());
-        $this->assertEquals(255, $hsla->blue());
-        $this->assertEquals(0.75, $hsla->alpha());
+        $this->assertSame(55, $hsla->red());
+        $this->assertSame(155, $hsla->green());
+        $this->assertSame(255, $hsla->blue());
+        $this->assertSame(0.75, $hsla->alpha());
     }
 }

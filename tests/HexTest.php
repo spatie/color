@@ -14,9 +14,9 @@ class HexTest extends TestCase
         $hex = new Hex('aa', 'bb', 'cc');
 
         $this->assertInstanceOf(Hex::class, $hex);
-        $this->assertEquals('aa', $hex->red());
-        $this->assertEquals('bb', $hex->green());
-        $this->assertEquals('cc', $hex->blue());
+        $this->assertSame('aa', $hex->red());
+        $this->assertSame('bb', $hex->green());
+        $this->assertSame('cc', $hex->blue());
     }
 
     /** @test */
@@ -41,9 +41,9 @@ class HexTest extends TestCase
         $hex = Hex::fromString('#aabbcc');
 
         $this->assertInstanceOf(Hex::class, $hex);
-        $this->assertEquals('aa', $hex->red());
-        $this->assertEquals('bb', $hex->green());
-        $this->assertEquals('cc', $hex->blue());
+        $this->assertSame('aa', $hex->red());
+        $this->assertSame('bb', $hex->green());
+        $this->assertSame('cc', $hex->blue());
     }
 
     /** @test */
@@ -83,7 +83,7 @@ class HexTest extends TestCase
     {
         $hex = new Hex('aa', 'bb', 'cc');
 
-        $this->assertEquals('#aabbcc', (string) $hex);
+        $this->assertSame('#aabbcc', (string) $hex);
     }
 
     /** @test */
@@ -92,9 +92,9 @@ class HexTest extends TestCase
         $hex = new Hex('aa', 'bb', 'cc');
         $newHex = $hex->toHex();
 
-        $this->assertEquals($hex->red(), $newHex->red());
-        $this->assertEquals($hex->green(), $newHex->green());
-        $this->assertEquals($hex->blue(), $newHex->blue());
+        $this->assertSame($hex->red(), $newHex->red());
+        $this->assertSame($hex->green(), $newHex->green());
+        $this->assertSame($hex->blue(), $newHex->blue());
         $this->assertNotSame($hex, $newHex);
     }
 
@@ -104,9 +104,9 @@ class HexTest extends TestCase
         $hex = new Hex('aa', 'bb', 'cc');
         $hsl = $hex->toHsl();
 
-        $this->assertEquals(170, $hsl->red());
-        $this->assertEquals(187, $hsl->green());
-        $this->assertEquals(204, $hsl->blue());
+        $this->assertSame(170, $hsl->red());
+        $this->assertSame(187, $hsl->green());
+        $this->assertSame(204, $hsl->blue());
     }
 
     /** @test */
@@ -115,9 +115,9 @@ class HexTest extends TestCase
         $hex = new Hex('a8', 'a8', 'a8');
         $hsl = $hex->toHsl();
 
-        $this->assertEquals(168, $hsl->red());
-        $this->assertEquals(168, $hsl->green());
-        $this->assertEquals(168, $hsl->blue());
+        $this->assertSame(168, $hsl->red());
+        $this->assertSame(168, $hsl->green());
+        $this->assertSame(168, $hsl->blue());
     }
 
     /** @test */
@@ -126,10 +126,10 @@ class HexTest extends TestCase
         $hex = new Hex('aa', 'bb', 'cc');
         $hsla = $hex->toHsla(0.75);
 
-        $this->assertEquals(170, $hsla->red());
-        $this->assertEquals(187, $hsla->green());
-        $this->assertEquals(204, $hsla->blue());
-        $this->assertEquals(0.75, $hsla->alpha());
+        $this->assertSame(170, $hsla->red());
+        $this->assertSame(187, $hsla->green());
+        $this->assertSame(204, $hsla->blue());
+        $this->assertSame(0.75, $hsla->alpha());
     }
 
     /** @test */
@@ -138,9 +138,9 @@ class HexTest extends TestCase
         $hex = new Hex('aa', 'bb', 'cc');
         $rgb = $hex->toRgb();
 
-        $this->assertEquals(170, $rgb->red());
-        $this->assertEquals(187, $rgb->green());
-        $this->assertEquals(204, $rgb->blue());
+        $this->assertSame(170, $rgb->red());
+        $this->assertSame(187, $rgb->green());
+        $this->assertSame(204, $rgb->blue());
     }
 
     /** @test */
@@ -149,9 +149,9 @@ class HexTest extends TestCase
         $hex = new Hex('aa', 'bb', 'cc');
         $rgba = $hex->toRgba(0.5);
 
-        $this->assertEquals(170, $rgba->red());
-        $this->assertEquals(187, $rgba->green());
-        $this->assertEquals(204, $rgba->blue());
-        $this->assertEquals(0.5, $rgba->alpha());
+        $this->assertSame(170, $rgba->red());
+        $this->assertSame(187, $rgba->green());
+        $this->assertSame(204, $rgba->blue());
+        $this->assertSame(0.5, $rgba->alpha());
     }
 }
