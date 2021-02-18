@@ -5,6 +5,7 @@
 [![Build Status](https://img.shields.io/travis/spatie/color/master.svg?style=flat-square)](https://travis-ci.org/spatie/color)
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/color.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/color)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/color.svg?style=flat-square)](https://packagist.org/packages/spatie/color)
+![Tests](https://github.com/spatie/color/workflows/Tests/badge.svg)
 
 A little library to handle color conversions. Currently supports rgb, rgba, hex, hsl and hsla formats.
 
