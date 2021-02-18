@@ -14,10 +14,10 @@ class HslaTest extends TestCase
         $hsla = new Hsla(55, 55, 67, 0.5);
 
         $this->assertInstanceOf(Hsla::class, $hsla);
-        $this->assertEquals(55, $hsla->hue());
-        $this->assertEquals(55, $hsla->saturation());
-        $this->assertEquals(67, $hsla->lightness());
-        $this->assertEquals(0.5, $hsla->alpha());
+        $this->assertSame(55.0, $hsla->hue());
+        $this->assertSame(55.0, $hsla->saturation());
+        $this->assertSame(67.0, $hsla->lightness());
+        $this->assertSame(0.5, $hsla->alpha());
     }
 
     /** @test */
@@ -74,10 +74,10 @@ class HslaTest extends TestCase
         $hsla = Hsla::fromString('hsla(205,35%,17%,0.78)');
 
         $this->assertInstanceOf(Hsla::class, $hsla);
-        $this->assertEquals(205, $hsla->hue());
-        $this->assertEquals(35, $hsla->saturation());
-        $this->assertEquals(17, $hsla->lightness());
-        $this->assertEquals(0.78, $hsla->alpha());
+        $this->assertSame(205.0, $hsla->hue());
+        $this->assertSame(35.0, $hsla->saturation());
+        $this->assertSame(17.0, $hsla->lightness());
+        $this->assertSame(0.78, $hsla->alpha());
     }
 
     /** @test */
@@ -86,10 +86,10 @@ class HslaTest extends TestCase
         $hsla = Hsla::fromString('hsla(205,35,17,0.78)');
 
         $this->assertInstanceOf(Hsla::class, $hsla);
-        $this->assertEquals(205, $hsla->hue());
-        $this->assertEquals(35, $hsla->saturation());
-        $this->assertEquals(17, $hsla->lightness());
-        $this->assertEquals(0.78, $hsla->alpha());
+        $this->assertSame(205.0, $hsla->hue());
+        $this->assertSame(35.0, $hsla->saturation());
+        $this->assertSame(17.0, $hsla->lightness());
+        $this->assertSame(0.78, $hsla->alpha());
     }
 
     /** @test */
@@ -98,10 +98,10 @@ class HslaTest extends TestCase
         $hsla = Hsla::fromString('  hsla(  205  ,  35%  ,  17%  ,  0.89  )  ');
 
         $this->assertInstanceOf(Hsla::class, $hsla);
-        $this->assertEquals(205, $hsla->hue());
-        $this->assertEquals(35, $hsla->saturation());
-        $this->assertEquals(17, $hsla->lightness());
-        $this->assertEquals(0.89, $hsla->alpha());
+        $this->assertSame(205.0, $hsla->hue());
+        $this->assertSame(35.0, $hsla->saturation());
+        $this->assertSame(17.0, $hsla->lightness());
+        $this->assertSame(0.89, $hsla->alpha());
     }
 
     /** @test */
@@ -125,7 +125,7 @@ class HslaTest extends TestCase
     {
         $hsla = new Hsla(55, 15, 25, 0.4);
 
-        $this->assertEquals('hsla(55,15%,25%,0.4)', (string) $hsla);
+        $this->assertSame('hsla(55,15%,25%,0.4)', (string) $hsla);
     }
 
     /** @test
@@ -135,9 +135,9 @@ class HslaTest extends TestCase
     {
         $hsla = Hsla::fromString($hslaString);
 
-        $this->assertEquals($red, $hsla->red());
-        $this->assertEquals($green, $hsla->green());
-        $this->assertEquals($blue, $hsla->blue());
+        $this->assertSame($red, $hsla->red());
+        $this->assertSame($green, $hsla->green());
+        $this->assertSame($blue, $hsla->blue());
     }
 
     /** @test */
@@ -146,10 +146,10 @@ class HslaTest extends TestCase
         $hsla = new Hsla(55, 55, 67, 0.33);
         $newHsla = $hsla->toHsla(0.5);
 
-        $this->assertEquals($hsla->hue(), $newHsla->hue());
-        $this->assertEquals($hsla->saturation(), $newHsla->saturation());
-        $this->assertEquals($hsla->lightness(), $newHsla->lightness());
-        $this->assertEquals(0.5, $newHsla->alpha());
+        $this->assertSame($hsla->hue(), $newHsla->hue());
+        $this->assertSame($hsla->saturation(), $newHsla->saturation());
+        $this->assertSame($hsla->lightness(), $newHsla->lightness());
+        $this->assertSame(0.5, $newHsla->alpha());
         $this->assertNotSame($hsla, $newHsla);
     }
 
@@ -159,9 +159,9 @@ class HslaTest extends TestCase
         $hsla = new Hsla(55, 55, 67);
         $hsl = $hsla->toHsl();
 
-        $this->assertEquals($hsla->hue(), $hsl->hue());
-        $this->assertEquals($hsla->saturation(), $hsl->saturation());
-        $this->assertEquals($hsla->lightness(), $hsl->lightness());
+        $this->assertSame($hsla->hue(), $hsl->hue());
+        $this->assertSame($hsla->saturation(), $hsl->saturation());
+        $this->assertSame($hsla->lightness(), $hsl->lightness());
     }
 
     /** @test */
@@ -170,9 +170,9 @@ class HslaTest extends TestCase
         $hsla = new Hsla(55, 55, 67);
         $rgb = $hsla->toRgb();
 
-        $this->assertEquals(217, $rgb->red());
-        $this->assertEquals(209, $rgb->green());
-        $this->assertEquals(125, $rgb->blue());
+        $this->assertSame(217, $rgb->red());
+        $this->assertSame(209, $rgb->green());
+        $this->assertSame(125, $rgb->blue());
     }
 
     /** @test */
@@ -181,10 +181,10 @@ class HslaTest extends TestCase
         $hsla = new Hsla(55, 55, 67);
         $rgba = $hsla->toRgba(0.5);
 
-        $this->assertEquals(217, $rgba->red());
-        $this->assertEquals(209, $rgba->green());
-        $this->assertEquals(125, $rgba->blue());
-        $this->assertEquals(0.5, $rgba->alpha());
+        $this->assertSame(217, $rgba->red());
+        $this->assertSame(209, $rgba->green());
+        $this->assertSame(125, $rgba->blue());
+        $this->assertSame(0.5, $rgba->alpha());
     }
 
     /** @test */
@@ -193,9 +193,9 @@ class HslaTest extends TestCase
         $hsla = new Hsla(55, 55, 67);
         $hex = $hsla->toHex();
 
-        $this->assertEquals('d9', $hex->red());
-        $this->assertEquals('d1', $hex->green());
-        $this->assertEquals('7d', $hex->blue());
+        $this->assertSame('d9', $hex->red());
+        $this->assertSame('d1', $hex->green());
+        $this->assertSame('7d', $hex->blue());
     }
 
     public function provides_hsl_string_and_rgb_values()
