@@ -121,6 +121,26 @@ class HexTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_hsl_with_a_black_value()
+    {
+        $hsl = Hex::fromString('#ffffff')->toHsl();
+
+        $this->assertEquals(255, $hsl->red());
+        $this->assertEquals(255, $hsl->green());
+        $this->assertEquals(255, $hsl->blue());
+    }
+
+    /** @test */
+    public function it_can_be_converted_to_hsl_with_a_white_value()
+    {
+        $hsl = Hex::fromString('#000000')->toHsl();
+
+        $this->assertEquals(0, $hsl->red());
+        $this->assertEquals(0, $hsl->green());
+        $this->assertEquals(0, $hsl->blue());
+    }
+
+    /** @test */
     public function it_can_be_converted_to_hsla_with_a_specific_alpha_value()
     {
         $hex = new Hex('aa', 'bb', 'cc');

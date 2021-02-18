@@ -74,7 +74,11 @@ class Convert
 
         $lightness = ($cmax + $cmin) / 2;
 
-        $saturation = $delta / (1 - abs((2 * $lightness) - 1));
+        $saturation = 0;
+
+        if( $lightness > 0 && $lightness < 1) {
+            $saturation = $delta / (1 - abs((2 * $lightness) - 1));
+        }
 
         return [$hue, min($saturation, 1) * 100, min($lightness, 1) * 100];
     }
