@@ -47,7 +47,7 @@ class Convert
         }
     }
 
-    public static function rgbValueToHsl($red, $green, $blue)
+    public static function rgbValueToHsl($red, $green, $blue): array
     {
         $r = $red / 255;
         $g = $green / 255;
