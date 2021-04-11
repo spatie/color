@@ -136,10 +136,14 @@ class Hsla implements Color
         ]
     ): array {
         $palette = [];
+        $hsl = $this->toHsl();
         foreach ($scale as $key => $luminance) {
-            $palette[$key] = new self(
-                Convert::hslValueFromLuminance($this->hue, $this->saturation, $luminance)
+            [$hue, $saturation, $lightness] = Convert::hslValueFromLuminance(
+                $hsl->hue(),
+                $hsl->saturation(),
+                $luminance
             );
+            $palette[$key] = new Hsla($hue, $saturation, $lightness);
         }
 
         return $palette;

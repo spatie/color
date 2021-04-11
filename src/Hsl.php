@@ -129,9 +129,12 @@ class Hsl implements Color
     ): array {
         $palette = [];
         foreach ($scale as $key => $luminance) {
-            $palette[$key] = new self(
-                Convert::hslValueFromLuminance($this->hue, $this->saturation, $luminance)
+            [$hue, $saturation, $lightness] = Convert::hslValueFromLuminance(
+                $hsl->hue(),
+                $hsl->saturation(),
+                $luminance
             );
+            $palette[$key] = new self($hue, $saturation, $lightness);
         }
 
         return $palette;
