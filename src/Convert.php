@@ -82,4 +82,54 @@ class Convert
 
         return [$hue, min($saturation, 1) * 100, min($lightness, 1) * 100];
     }
+
+    public static function hslValueToLuminance(
+        float $hue,
+        float $saturation,
+        float $lightness
+    ): float {
+        [$red, $green, $blue] = self::hslValueToRgb($hue, $saturation, $lightness);
+
+        $red /= 255;
+        $green /= 255;
+        $blue /= 255;
+
+        $red = $red < 0.03928 ? $red / 12.92 : pow(($red + 0.055) / 1.055, 2.4);
+        $green = $green < 0.03928 ? $green / 12.92 : pow(($green + 0.055) / 1.055, 2.4);
+        $blue = $blue < 0.03928 ? $blue / 12.92 : pow(($blue + 0.055) / 1.055, 2.4);
+
+        return 21.26 * $red + 71.52 * $green + 7.22 * $blue;
+    }
+
+    public static function hslValueFromLuminance(
+        float $hue,
+        float $saturation,
+        float $luminance,
+        float $precision = 0.01
+    ): array {
+        $closest = 100;
+        $lightness = 100;
+
+        for ($sampleLightness = 100; $sampleLightness >= 0; $sampleLightness--) {
+            $sampleLuminance = self::hslValueToLuminance($hue, $saturation, $sampleLightness);
+            $difference = abs($luminance - $sampleLuminance);
+            if ($difference < $closest) {
+                $lightness = $sampleLightness;
+                $closest = $difference;
+            }
+        }
+
+        $max = $closest + $precision * 100;
+        $min = $closest - $precision * 100;
+        for ($sampleLightness = $max; $sampleLightness >= $min; $sampleLightness -= $precision) {
+            $sampleLuminance = self::hslValueToLuminance($hue, $saturation, $sampleLightness);
+            $difference = abs($luminance - $sampleLuminance);
+            if ($difference < $closest) {
+                $lightness = $sampleLightness;
+                $closest = $difference;
+            }
+        }
+
+        return [$hue, $saturation, $lightness];
+    }
 }

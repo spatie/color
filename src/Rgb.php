@@ -89,6 +89,31 @@ class Rgb implements Color
         return new Rgba($this->red, $this->green, $this->blue, $alpha);
     }
 
+    public function toLuminanceScale(
+        array $scale = [
+            50 => 93.0,
+            100 => 86.0,
+            200 => 74.0,
+            300 => 59.0,
+            400 => 39.0,
+            500 => 24.0,
+            600 => 15.0,
+            700 => 11.5,
+            800 => 7.0,
+            900 => 3.0,
+        ]
+    ): array {
+        $palette = [];
+        foreach ($scale as $key => $luminance) {
+            $hsl = $this->toHsl();
+            $palette[$key] = new Hsl(
+                Convert::hslValueFromLuminance($hsl->hue, $hsl->saturation, $luminance)
+            )->toRgb();
+        }
+
+        return $palette;
+    }
+
     public function __toString(): string
     {
         return "rgb({$this->red},{$this->green},{$this->blue})";
