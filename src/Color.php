@@ -24,20 +24,5 @@ interface Color
 
     public function toRgba(float $alpha = 1): Rgba;
 
-    public function toLuminanceScale(
-        array $scale = [
-            50 => 93.0,
-            100 => 86.0,
-            200 => 74.0,
-            300 => 59.0,
-            400 => 39.0,
-            500 => 24.0,
-            600 => 15.0,
-            700 => 11.5,
-            800 => 7.0,
-            900 => 3.0,
-        ]
-    ): array;
-
     public function __toString(): string;
 }

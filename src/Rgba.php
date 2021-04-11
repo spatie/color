@@ -119,35 +119,6 @@ class Rgba implements Color
         return new self($this->red, $this->green, $this->blue, $alpha);
     }
 
-    public function toLuminanceScale(
-        array $scale = [
-            50 => 93.0,
-            100 => 86.0,
-            200 => 74.0,
-            300 => 59.0,
-            400 => 39.0,
-            500 => 24.0,
-            600 => 15.0,
-            700 => 11.5,
-            800 => 7.0,
-            900 => 3.0,
-        ]
-    ): array {
-        $palette = [];
-        $hsl = $this->toHsl();
-        foreach ($scale as $key => $luminance) {
-            [$hue, $saturation, $lightness] = Convert::hslValueFromLuminance(
-                $hsl->hue(),
-                $hsl->saturation(),
-                $luminance
-            );
-            $newHsl = new Hsl($hue, $saturation, $lightness);
-            $palette[$key] = $newHsl->toRgba();
-        }
-
-        return $palette;
-    }
-
     public function __toString(): string
     {
         $alpha = number_format($this->alpha, 2);
