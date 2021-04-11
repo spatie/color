@@ -44,6 +44,31 @@ class Hex implements Color
         return $this->blue;
     }
 
+    public function mix(self $mixColor, $weight = 0.5): self
+    {
+        $f = function ($x) use ($weight) {
+            return $weight * $x;
+        };
+
+        $g = function ($x) use ($weight) {
+            return (1 - $weight) * $x;
+        };
+
+        $h = function ($x, $y) {
+            return round($x + $y);
+        };
+
+        $rgb = new Rgb(
+            array_map(
+                $h,
+                array_map($f, [$this->red, $this->green, $this->blue]),
+                array_map($g, [$mixColor->red, $mixColor->green, $mixColor->blue])
+            )
+        );
+
+        return $rgb->toHex();
+    }
+
     public function toHex(): self
     {
         return new self($this->red, $this->green, $this->blue);
