@@ -73,13 +73,13 @@ class Hsl implements Color
             return round($x + $y);
         };
 
-        $rgb = new Rgb(
-            array_map(
-                $h,
-                array_map($f, [$this->red, $this->green, $this->blue]),
-                array_map($g, [$mixColor->red, $mixColor->green, $mixColor->blue])
-            )
+        [$red, $green, $blue] = array_map(
+            $h,
+            array_map($f, [$this->red, $this->green, $this->blue]),
+            array_map($g, [$mixColor->red, $mixColor->green, $mixColor->blue])
         );
+
+        $rgb = new Rgb($red, $green, $blue);
 
         return $rgb->toHsl();
     }

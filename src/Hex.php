@@ -58,13 +58,21 @@ class Hex implements Color
             return round($x + $y);
         };
 
-        $rgb = new Rgb(
-            array_map(
-                $h,
-                array_map($f, [$this->red, $this->green, $this->blue]),
-                array_map($g, [$mixColor->red, $mixColor->green, $mixColor->blue])
-            )
+        [$red, $green, $blue] = array_map(
+            $h,
+            array_map($f, [
+                Convert::hexChannelToRgbChannel($this->red),
+                Convert::hexChannelToRgbChannel($this->green),
+                Convert::hexChannelToRgbChannel($this->blue),
+            ]),
+            array_map($g, [
+                Convert::hexChannelToRgbChannel($mixColor->red),
+                Convert::hexChannelToRgbChannel($mixColor->green),
+                Convert::hexChannelToRgbChannel($mixColor->blue),
+            ])
         );
+
+        $rgb = new Rgb($red, $green, $blue);
 
         return $rgb->toHex();
     }

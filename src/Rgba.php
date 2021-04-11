@@ -30,7 +30,11 @@ class Rgba implements Color
         Validate::rgbaColorString($string);
 
         $matches = null;
-        preg_match('/rgba\( *(\d{1,3} *, *\d{1,3} *, *\d{1,3} *, *[0-1](\.\d{1,2})?) *\)/i', $string, $matches);
+        preg_match(
+            '/rgba\( *(\d{1,3} *, *\d{1,3} *, *\d{1,3} *, *[0-1](\.\d{1,2})?) *\)/i',
+            $string,
+            $matches
+        );
 
         $channels = explode(',', $matches[1]);
         [$red, $green, $blue, $alpha] = array_map('trim', $channels);
@@ -72,14 +76,13 @@ class Rgba implements Color
             return round($x + $y);
         };
 
-        return new self(
-            array_map(
-                $h,
-                array_map($f, [$this->red, $this->green, $this->blue]),
-                array_map($g, [$mixColor->red, $mixColor->green, $mixColor->blue])
-            ),
-            $this->alpha
+        [$red, $green, $blue] = array_map(
+            $h,
+            array_map($f, [$this->red, $this->green, $this->blue]),
+            array_map($g, [$mixColor->red, $mixColor->green, $mixColor->blue])
         );
+
+        return new self($red, $green, $blue);
     }
 
     public function toHex(): Hex

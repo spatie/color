@@ -62,13 +62,13 @@ class Rgb implements Color
             return round($x + $y);
         };
 
-        return new self(
-            array_map(
-                $h,
-                array_map($f, [$this->red, $this->green, $this->blue]),
-                array_map($g, [$mixColor->red, $mixColor->green, $mixColor->blue])
-            )
+        [$red, $green, $blue] = array_map(
+            $h,
+            array_map($f, [$this->red, $this->green, $this->blue]),
+            array_map($g, [$mixColor->red, $mixColor->green, $mixColor->blue])
         );
+
+        return new self($red, $green, $blue);
     }
 
     public function toHex(): Hex
