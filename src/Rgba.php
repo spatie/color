@@ -110,11 +110,12 @@ class Rgba implements Color
         ]
     ): array {
         $palette = [];
+        $hsl = $this->toHsl();
         foreach ($scale as $key => $luminance) {
-            $hsl = $this->toHsl();
-            $palette[$key] = new Hsl(
+            $newHsl = new Hsl(
                 Convert::hslValueFromLuminance($hsl->hue, $hsl->saturation, $luminance)
-            )->toRgba();
+            );
+            $palette[$key] = $newHsl->toRgba();
         }
 
         return $palette;

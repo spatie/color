@@ -104,11 +104,12 @@ class Rgb implements Color
         ]
     ): array {
         $palette = [];
+        $hsl = $this->toHsl();
         foreach ($scale as $key => $luminance) {
-            $hsl = $this->toHsl();
-            $palette[$key] = new Hsl(
+            $newHsl = new Hsl(
                 Convert::hslValueFromLuminance($hsl->hue, $hsl->saturation, $luminance)
-            )->toRgb();
+            );
+            $palette[$key] = $newHsl->toRgb();
         }
 
         return $palette;
