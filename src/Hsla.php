@@ -62,7 +62,7 @@ class Hsla implements Color
         return Convert::hslValueToRgb($this->hue, $this->saturation, $this->lightness)[2];
     }
 
-    public function mix(self $mixColor, $weight = 0.5): self
+    public function mix($mixColor, $weight = 0.5): self
     {
         $f = function ($x) use ($weight) {
             return $weight * $x;

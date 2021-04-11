@@ -58,7 +58,7 @@ class Rgba implements Color
         return $this->alpha;
     }
 
-    public function mix(self $mixColor, $weight = 0.5): self
+    public function mix($mixColor, $weight = 0.5): self
     {
         $f = function ($x) use ($weight) {
             return $weight * $x;
