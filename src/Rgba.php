@@ -58,30 +58,6 @@ class Rgba implements Color
         return $this->alpha;
     }
 
-    public function mix($mixColor, $weight = 0.5): self
-    {
-        $f = function ($x) use ($weight) {
-            return $weight * $x;
-        };
-
-        $g = function ($x) use ($weight) {
-            return (1 - $weight) * $x;
-        };
-
-        $h = function ($x, $y) {
-            return round($x + $y);
-        };
-
-        return new self(
-            array_map(
-                $h,
-                array_map($f, [$this->red, $this->green, $this->blue]),
-                array_map($g, [$mixColor->red, $mixColor->green, $mixColor->blue])
-            ),
-            $this->alpha
-        );
-    }
-
     public function toHex(): Hex
     {
         return $this->toRgb()->toHex();

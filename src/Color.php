@@ -12,8 +12,6 @@ interface Color
 
     public function blue();
 
-    public function mix($mixColor, $weight = 0.5);
-
     public function toHex(): Hex;
 
     public function toHsl(): Hsl;
