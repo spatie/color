@@ -1,6 +1,6 @@
 {
-    "name": "truefrontier/color",
-    "description": "A fork of spatie/colors: A little library to handle color conversions",
+    "name": "spatie/color",
+    "description": "A little library to handle color conversions",
     "keywords": [
         "spatie",
         "color",
@@ -15,16 +15,10 @@
             "email": "sebastian@spatie.be",
             "homepage": "https://spatie.be",
             "role": "Developer"
-        },
-        {
-            "name": "Kevin Kirchner",
-            "email": "kevnk@hey.com",
-            "homepage": "https://truefrontierapps.com",
-            "role": "Developer"
         }
     ],
     "require": {
-        "php": "^7.3|^8.0"
+        "php" : "^7.3|^8.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5||^9.0"
@@ -44,5 +38,5 @@
     },
     "config": {
         "sort-packages": true
-    }
+  }
 }
