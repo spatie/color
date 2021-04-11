@@ -1,6 +1,6 @@
 {
-    "name": "truefrontier/color",
-    "description": "A fork of spatie/colors: A little library to handle color conversions",
+    "name": "spatie/color",
+    "description": "A little library to handle color conversions",
     "keywords": [
         "spatie",
         "color",
@@ -14,12 +14,6 @@
             "name": "Sebastian De Deyne",
             "email": "sebastian@spatie.be",
             "homepage": "https://spatie.be",
-            "role": "Developer"
-        },
-        {
-            "name": "Kevin Kirchner",
-            "email": "kevnk@hey.com",
-            "homepage": "https://truefrontierapps.com",
             "role": "Developer"
         }
     ],
