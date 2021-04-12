@@ -73,6 +73,22 @@ class Hsla implements Color
         return Convert::rgbValueToLuminance($rgb->red(), $rgb->green(), $rgb->blue());
     }
 
+    public function contrastRatio(): float
+    {
+        $luminance = $this->luminance();
+        $black = new Rgb(0, 0, 0);
+        $blackLuminance = $black->luminance();
+
+        $contrastRatio = 0;
+        if ($luminance > $blackLuminance) {
+            $contrastRatio = (int) (($luminance + 0.05) / ($blackLuminance + 0.05));
+        } else {
+            $contrastRatio = (int) (($blackLuminance + 0.05) / ($luminance + 0.05));
+        }
+
+        return $contrastRatio;
+    }
+
     public function toHex(): Hex
     {
         return new Hex(

@@ -14,6 +14,8 @@ interface Color
 
     public function luminance(): float;
 
+    public function contrastRatio(): float;
+
     public function toHex(): Hex;
 
     public function toHsl(): Hsl;
