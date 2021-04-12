@@ -83,13 +83,8 @@ class Convert
         return [$hue, min($saturation, 1) * 100, min($lightness, 1) * 100];
     }
 
-    public static function hslValueToLuminance(
-        float $hue,
-        float $saturation,
-        float $lightness
-    ): float {
-        [$red, $green, $blue] = self::hslValueToRgb($hue, $saturation, $lightness);
-
+    public static function rgbValueToLuminance($red, $green, $blue): float
+    {
         $red /= 255;
         $green /= 255;
         $blue /= 255;
@@ -99,6 +94,16 @@ class Convert
         $blue = $blue < 0.03928 ? $blue / 12.92 : pow(($blue + 0.055) / 1.055, 2.4);
 
         return 21.26 * $red + 71.52 * $green + 7.22 * $blue;
+    }
+
+    public static function hslValueToLuminance(
+        float $hue,
+        float $saturation,
+        float $lightness
+    ): float {
+        [$red, $green, $blue] = self::hslValueToRgb($hue, $saturation, $lightness);
+
+        return self::rgbValueToLuminance($red, $green, $blue);
     }
 
     public static function hslValueFromLuminance(
