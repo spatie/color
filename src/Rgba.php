@@ -58,6 +58,11 @@ class Rgba implements Color
         return $this->alpha;
     }
 
+    public function luminance(): float
+    {
+        return Convert::rgbValueToLuminance($this->red, $this->green, $this->blue);
+    }
+
     public function toHex(): Hex
     {
         return $this->toRgb()->toHex();

@@ -12,6 +12,8 @@ interface Color
 
     public function blue();
 
+    public function luminance(): float;
+
     public function toHex(): Hex;
 
     public function toHsl(): Hsl;
