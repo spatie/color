@@ -52,9 +52,9 @@ class Hex implements Color
 
     public function contrastRatio(): float
     {
-        $luminance = $this->luminance();
+        $luminance = $this->luminance() / 100;
         $black = new Rgb(0, 0, 0);
-        $blackLuminance = $black->luminance();
+        $blackLuminance = $black->luminance() / 100;
 
         $contrastRatio = 0;
         if ($luminance > $blackLuminance) {
