@@ -85,6 +85,29 @@ class Hex implements Color
         return $this->toRgb()->toRgba($alpha);
     }
 
+    public function toColorWheel()
+    {
+        $palette = [];
+        $hsl = $this->toHsl();
+        for ($deg = 0; $deg < 360; $deg += 30) {
+            $newHue = $hsl->hue() + $deg;
+            if ($newHue > 360) {
+                $newHue -= 360;
+            }
+            $colorName = Convert::hueToColorName($newHue);
+            $wheelColor = new Hsl($newHue, $hsl->saturation(), $hsl->lightness());
+            $palette[$colorName] = $wheelColor->toHex();
+        }
+
+        return $palette;
+    }
+
+    public function toColorName()
+    {
+        $hsl = $this->toHsl();
+        return Convert::hueToColorName($hsl->hue());
+    }
+
     public function __toString(): string
     {
         return "#{$this->red}{$this->green}{$this->blue}";

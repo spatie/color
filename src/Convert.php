@@ -82,4 +82,33 @@ class Convert
 
         return [$hue, min($saturation, 1) * 100, min($lightness, 1) * 100];
     }
+
+    public function hueToColorName(float $hue): string
+    {
+        if ($hue >= 345 || $hue < 15) {
+            return 'red';
+        } elseif ($hue >= 15 || $hue < 45) {
+            return 'orange';
+        } elseif ($hue >= 45 || $hue < 75) {
+            return 'yellow';
+        } elseif ($hue >= 75 || $hue < 105) {
+            return 'lime';
+        } elseif ($hue >= 105 || $hue < 135) {
+            return 'green';
+        } elseif ($hue >= 135 || $hue < 165) {
+            return 'turquoise';
+        } elseif ($hue >= 165 || $hue < 195) {
+            return 'cyan';
+        } elseif ($hue >= 195 || $hue < 225) {
+            return 'cobalt';
+        } elseif ($hue >= 225 || $hue < 255) {
+            return 'blue';
+        } elseif ($hue >= 255 || $hue < 285) {
+            return 'violet';
+        } elseif ($hue >= 285 || $hue < 315) {
+            return 'magenta';
+        } elseif ($hue >= 315 || $hue < 345) {
+            return 'rose';
+        }
+    }
 }

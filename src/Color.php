@@ -22,5 +22,7 @@ interface Color
 
     public function toRgba(float $alpha = 1): Rgba;
 
+    public function toColorName(): string;
+
     public function __toString(): string;
 }
