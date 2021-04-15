@@ -88,7 +88,7 @@ class Hsl implements Color
         return new Rgba($this->red(), $this->green(), $this->blue(), $alpha);
     }
 
-    public function toColorWheel()
+    public function toColorWheel(): array
     {
         $palette = [];
         for ($deg = 0; $deg < 360; $deg += 30) {
@@ -103,7 +103,7 @@ class Hsl implements Color
         return $palette;
     }
 
-    public function toColorName()
+    public function toColorName(): string
     {
         return Convert::hueToColorName($this->hue);
     }

@@ -95,7 +95,7 @@ class Rgba implements Color
         return new self($this->red, $this->green, $this->blue, $alpha);
     }
 
-    public function toColorWheel()
+    public function toColorWheel(): array
     {
         $palette = [];
         $hsl = $this->toHsl();
@@ -112,7 +112,7 @@ class Rgba implements Color
         return $palette;
     }
 
-    public function toColorName()
+    public function toColorName(): string
     {
         $hsl = $this->toHsl();
         return Convert::hueToColorName($hsl->hue());
