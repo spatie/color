@@ -22,6 +22,8 @@ interface Color
 
     public function toRgba(float $alpha = 1): Rgba;
 
+    public function toColorWheel(): array;
+
     public function toColorName(): string;
 
     public function __toString(): string;
