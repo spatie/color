@@ -59,6 +59,11 @@ class Hsl implements Color
         return Convert::hslValueToRgb($this->hue, $this->saturation, $this->lightness)[2];
     }
 
+    public function contrast(): self
+    {
+        return Contrast::make($this->toHex())->toHsl();
+    }
+
     public function toHex(): Hex
     {
         return new Hex(

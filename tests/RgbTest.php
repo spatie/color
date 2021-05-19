@@ -138,4 +138,28 @@ class RgbTest extends TestCase
         $this->assertSame(255, $hsla->blue());
         $this->assertSame(0.5, $hsla->alpha());
     }
+
+    /** @test */
+    public function it_can_be_get_contrast_color()
+    {
+        $black = 'rgb(0, 0, 0)';
+        $white = 'rgb(255, 255, 255)';
+
+        $colors = [
+            [ $white, $black ],
+            [ $black, $white ],
+            [ 'rgb(185, 182, 182)', $black ],
+            [ 'rgb(237, 160, 44)', $black ],
+            [ 'rgb(73, 99, 121)', $white ],
+            [ 'rgb(73, 121, 109)', $white ],
+            [ 'rgb(74, 211, 150)', $black ],
+        ];
+
+        foreach ($colors as $color) {
+            $this->assertEquals(
+                Rgb::fromString($color[0])->contrast(),
+                Rgb::fromString($color[1])
+            );
+        }
+    }
 }

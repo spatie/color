@@ -58,6 +58,11 @@ class Rgba implements Color
         return $this->alpha;
     }
 
+    public function contrast(): self
+    {
+        return Contrast::make($this->toHex())->toRgba($this->alpha());
+    }
+
     public function toHex(): Hex
     {
         return $this->toRgb()->toHex();

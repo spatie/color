@@ -157,4 +157,28 @@ class RgbaTest extends TestCase
         $this->assertSame(255, $hsla->blue());
         $this->assertSame(0.75, $hsla->alpha());
     }
+
+    /** @test */
+    public function it_can_be_get_contrast_color()
+    {
+        $black = 'rgba(0, 0, 0, 0.5)';
+        $white = 'rgba(255, 255, 255, 0.5)';
+
+        $colors = [
+            [ $white, $black ],
+            [ $black, $white ],
+            [ 'rgba(185, 182, 182, 0.5)', $black ],
+            [ 'rgba(237, 160, 44, 0.5)', $black ],
+            [ 'rgba(73, 99, 121, 0.5)', $white ],
+            [ 'rgba(73, 121, 109, 0.5)', $white ],
+            [ 'rgba(74, 211, 150, 0.5)', $black ],
+        ];
+
+        foreach ($colors as $color) {
+            $this->assertEquals(
+                Rgba::fromString($color[0])->contrast(),
+                Rgba::fromString($color[1])
+            );
+        }
+    }
 }

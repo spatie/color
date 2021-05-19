@@ -178,6 +178,30 @@ class HslTest extends TestCase
         $this->assertSame('7d', $hex->blue());
     }
 
+    /** @test */
+    public function it_can_be_get_contrast_color()
+    {
+        $black = 'hsl(0, 0%, 0%)';
+        $white = 'hsl(0, 0%, 100%)';
+
+        $colors = [
+            [ $white, $black ],
+            [ $black, $white ],
+            [ 'hsl(0, 2%, 72%)', $black ],
+            [ 'hsl(36, 84%, 55%)', $black ],
+            [ 'hsl(207, 25%, 38%)', $white ],
+            [ 'hsl(165, 25%, 38%)', $white ],
+            [ 'hsl(153, 61%, 56%)', $black ],
+        ];
+
+        foreach ($colors as $color) {
+            $this->assertEquals(
+                Hsl::fromString($color[0])->contrast(),
+                Hsl::fromString($color[1])
+            );
+        }
+    }
+
     public function provides_hsl_string_and_rgb_values()
     {
         return [

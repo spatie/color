@@ -12,6 +12,8 @@ interface Color
 
     public function blue();
 
+    public function contrast();
+
     public function toHex(): Hex;
 
     public function toHsl(): Hsl;

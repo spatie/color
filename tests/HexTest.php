@@ -176,4 +176,25 @@ class HexTest extends TestCase
         $this->assertSame(204, $rgba->blue());
         $this->assertSame(0.5, $rgba->alpha());
     }
+
+    /** @test */
+    public function it_can_be_get_contrast_color()
+    {
+        $colors = [
+            [ '#ffffff', '#000000' ],
+            [ '#000000', '#ffffff' ],
+            [ '#b9b6b6', '#000000' ],
+            [ '#eda02a', '#000000' ],
+            [ '#496379', '#ffffff' ],
+            [ '#49796d', '#ffffff' ],
+            [ '#4bd396', '#000000' ],
+        ];
+
+        foreach ($colors as $color) {
+            $this->assertEquals(
+                Hex::fromString($color[0])->contrast(),
+                Hex::fromString($color[1])
+            );
+        }
+    }
 }

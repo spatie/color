@@ -198,6 +198,30 @@ class HslaTest extends TestCase
         $this->assertSame('7d', $hex->blue());
     }
 
+    /** @test */
+    public function it_can_be_get_contrast_color()
+    {
+        $black = 'hsla(0, 0%, 0%, 0.1)';
+        $white = 'hsla(0, 0%, 100%, 0.1)';
+
+        $colors = [
+            [ $white, $black ],
+            [ $black, $white ],
+            [ 'hsla(0, 2%, 72%, 0.1)', $black ],
+            [ 'hsla(36, 84%, 55%, 0.1)', $black ],
+            [ 'hsla(207, 25%, 38%, 0.1)', $white ],
+            [ 'hsla(165, 25%, 38%, 0.1)', $white ],
+            [ 'hsla(153, 61%, 56%, 0.1)', $black ],
+        ];
+
+        foreach ($colors as $color) {
+            $this->assertEquals(
+                Hsla::fromString($color[0])->contrast(),
+                Hsla::fromString($color[1])
+            );
+        }
+    }
+
     public function provides_hsl_string_and_rgb_values()
     {
         return [

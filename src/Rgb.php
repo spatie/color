@@ -48,6 +48,11 @@ class Rgb implements Color
         return $this->blue;
     }
 
+    public function contrast(): self
+    {
+        return Contrast::make($this->toHex())->toRgb();
+    }
+
     public function toHex(): Hex
     {
         return new Hex(

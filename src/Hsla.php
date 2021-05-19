@@ -67,6 +67,11 @@ class Hsla implements Color
         return $this->alpha;
     }
 
+    public function contrast(): self
+    {
+        return Contrast::make($this->toHex())->toHsla($this->alpha());
+    }
+
     public function toHex(): Hex
     {
         return new Hex(
