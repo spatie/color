@@ -1,6 +1,7 @@
 {
     "name": "spatie/color",
     "description": "A little library to handle color conversions",
+    "version": "v1.3.0",
     "keywords": [
         "spatie",
         "color",
