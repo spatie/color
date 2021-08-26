@@ -6,6 +6,11 @@ use Exception;
 
 class InvalidColorValue extends Exception
 {
+    public static function CIELabValueNotInRange(float $value, string $name, float $min, float $max): self
+    {
+        return new static("CIELab value `{$name}` must be a number between $min and $max");
+    }
+
     public static function rgbChannelValueNotInRange(int $value, string $channel): self
     {
         return new static("An rgb values must be an integer between 0 and 255, `{$value}` provided for channel {$channel}.");
@@ -21,6 +26,11 @@ class InvalidColorValue extends Exception
         $length = strlen($value);
 
         return new static("Hex values must contain exactly 2 characters, `{$value}` contains {$length} characters.");
+    }
+
+    public static function malformedCIELabColorString(string $string): self
+    {
+        return new static("CIELab color string `{$string}` is malformed. A CIELab color contains 3 comma separated values, wrapped in `CIELab()`, e.g. `CIELab(62.91,5.34,-57.73)`.");
     }
 
     public static function hexValueContainsInvalidCharacters(string $value): self
@@ -61,5 +71,15 @@ class InvalidColorValue extends Exception
     public static function malformedColorString(string $string): self
     {
         return new static("Color string `{$string}` doesn't match any of the available colors.");
+    }
+
+    public static function malformedXyzColorString(string $string): self
+    {
+        return new static("Xyz color string `{$string}` is malformed. An xyz color contains 3 comma separated values, wrapped in `xyz()`, e.g. `xyz(31.3469,31.4749,99.0308)`.");
+    }
+
+    public static function xyzValueNotInRange(float $value, string $name, float $min, float $max): self
+    {
+        return new static("Xyz value `{$name}` must be a number between $min and $max");
     }
 }

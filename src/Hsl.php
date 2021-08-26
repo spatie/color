@@ -59,6 +59,11 @@ class Hsl implements Color
         return Convert::hslValueToRgb($this->hue, $this->saturation, $this->lightness)[2];
     }
 
+    public function toCIELab(): CIELab
+    {
+        return $this->toRgb()->toCIELab();
+    }
+
     public function toHex(): Hex
     {
         return new Hex(
@@ -86,6 +91,11 @@ class Hsl implements Color
     public function toRgba(float $alpha = 1): Rgba
     {
         return new Rgba($this->red(), $this->green(), $this->blue(), $alpha);
+    }
+
+    public function toXyz(): Xyz
+    {
+        return $this->toRgb()->toXyz();
     }
 
     public function __toString(): string

@@ -82,6 +82,17 @@ class RgbTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_CIELab()
+    {
+        $rgb = new Rgb(55, 155, 255);
+        $lab = $rgb->toCIELab();
+
+        $this->assertSame(62.91, $lab->l());
+        $this->assertSame(5.34, $lab->a());
+        $this->assertSame(-57.73, $lab->b());
+    }
+
+    /** @test */
     public function it_can_be_converted_to_rgb()
     {
         $rgb = new Rgb(55, 155, 255);
@@ -137,5 +148,16 @@ class RgbTest extends TestCase
         $this->assertSame(155, $hsla->green());
         $this->assertSame(255, $hsla->blue());
         $this->assertSame(0.5, $hsla->alpha());
+    }
+
+    /** @test */
+    public function it_can_be_converted_to_xyz()
+    {
+        $rgb = new Rgb(55, 155, 255);
+        $xyz = $rgb->toXyz();
+
+        $this->assertSame(31.3469, $xyz->x());
+        $this->assertSame(31.4749, $xyz->y());
+        $this->assertSame(99.0308, $xyz->z());
     }
 }

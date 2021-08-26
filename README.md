@@ -7,7 +7,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/color.svg?style=flat-square)](https://packagist.org/packages/spatie/color)
 ![Tests](https://github.com/spatie/color/workflows/Tests/badge.svg)
 
-A little library to handle color conversions. Currently supports rgb, rgba, hex, hsl and hsla formats.
+A little library to handle color conversions. Currently supports rgb, rgba, hex, hsl, hsla, CIELab, and xyz formats.
 
 ```php
 $rgb = Rgb::fromString('rgb(55,155,255)');
@@ -27,6 +27,12 @@ echo $hex; // #379bff
 
 $hsl = $rgb->toHsl();
 echo $hsl; // hsl(210,100%,100%)
+
+$lab = $rgb->toCIELab();
+echo $lab; // CIELab(62.91,5.34,-57.73)
+
+$xyz = $rgb->toXyz();
+echo $xyz; // xyz(31.3469,31.4749,99.0308)
 ```
 
 ## Support us
@@ -49,13 +55,15 @@ composer require spatie/color
 
 The `Color` package contains a separate class per color format, which each implement a `Color` interface.
 
-There are five classes which implement the `Color` interface:
+There are seven classes which implement the `Color` interface:
 
+- `CIELab`
 - `Hex`
 - `Hsl`
 - `Hsla`
 - `Rgb`
 - `Rgba`
+- `Xyz`
 
 ### `interface Spatie\Color\Color`
 

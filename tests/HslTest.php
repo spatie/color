@@ -121,6 +121,17 @@ class HslTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_CIELab()
+    {
+        $hsl = new Hsl(55, 55, 67);
+        $lab = $hsl->toCIELab();
+
+        $this->assertSame(82.82, $lab->l());
+        $this->assertSame(-9.02, $lab->a());
+        $this->assertSame(42.55, $lab->b());
+    }
+
+    /** @test */
     public function it_can_be_converted_to_hsl()
     {
         $hsl = new Hsl(55, 55, 67);
@@ -176,6 +187,17 @@ class HslTest extends TestCase
         $this->assertSame('d9', $hex->red());
         $this->assertSame('d1', $hex->green());
         $this->assertSame('7d', $hex->blue());
+    }
+
+    /** @test */
+    public function it_can_be_converted_to_xyz()
+    {
+        $hsl = new Hsl(55, 55, 67);
+        $xyz = $hsl->toXyz();
+
+        $this->assertSame(55.1174, $xyz->x());
+        $this->assertSame(61.8333, $xyz->y());
+        $this->assertSame(28.4321, $xyz->z());
     }
 
     public function provides_hsl_string_and_rgb_values()
