@@ -92,9 +92,7 @@ class Xyz implements Color
 
     public function toHsla(float $alpha = 1): Hsla
     {
-        $hsl = $this->toHsl();
-
-        return new Hsla($hsl->hue(), $hsl->saturation(), $hsl->lightness(), $alpha);
+        return $this->toRgb()->toHsla($alpha);
     }
 
     public function toRgb(): Rgb
@@ -110,9 +108,7 @@ class Xyz implements Color
 
     public function toRgba(float $alpha = 1): Rgba
     {
-        $rgb = $this->toRgb();
-
-        return new Rgba($rgb->red(), $rgb->green(), $rgb->blue(), $alpha);
+        return $this->toRgb()->toRgba($alpha);
     }
 
     public function toXyz(): self
