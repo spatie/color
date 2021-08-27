@@ -4,3 +4,4 @@ docs
 vendor
 .php-cs-fixer.cache
 .phpunit.result.cache
+index.php
