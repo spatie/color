@@ -32,6 +32,10 @@ class Convert
         $y = round(100.000 * $y, 4);
         $z = round(108.883 * $z, 4);
 
+        if ($x > 95.047) $x = 95.047;
+        if ($y > 100) $y = $100;
+        if ($z > 108.883) $z = 108.883;
+
         return [$x, $y, $z];
     }
 
@@ -144,6 +148,10 @@ class Convert
         $x = round($red * 0.4124 + $green * 0.3576 + $blue * 0.1805, 4);
         $y = round($red * 0.2126 + $green * 0.7152 + $blue * 0.0722, 4);
         $z = round($red * 0.0193 + $green * 0.1192 + $blue * 0.9505, 4);
+
+        if ($x > 95.047) $x = 95.047;
+        if ($y > 100) $y = $100;
+        if ($z > 108.883) $z = 108.883;
 
         return [$x, $y, $z];
     }
