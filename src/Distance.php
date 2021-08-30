@@ -4,7 +4,7 @@ namespace Spatie\Color;
 
 class Distance
 {
-    public function CIE76($color1, $color2): float
+    public static function CIE76($color1, $color2): float
     {
         if (gettype($color1) === 'string') {
             $color1 = Factory::fromString($color1);
@@ -29,7 +29,7 @@ class Distance
         return max(min(sqrt($sum), 100), 0);
     }
 
-    public function CIE94($color1, $color2, $textiles = 0): float
+    public static function CIE94($color1, $color2, $textiles = 0): float
     {
         if (gettype($color1) === 'string') {
             $color1 = Factory::fromString($color1);
@@ -79,7 +79,7 @@ class Distance
         return $i < 0 ? 0 : sqrt($i);
     }
 
-    public function CIEDE2000($color1, $color2): float
+    public static function CIEDE2000($color1, $color2): float
     {
         if (gettype($color1) === 'string') {
             $color1 = Factory::fromString($color1);
