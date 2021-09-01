@@ -58,6 +58,11 @@ class Rgba implements Color
         return $this->alpha;
     }
 
+    public function toCIELab(): CIELab
+    {
+        return $this->toRgb()->toCIELab();
+    }
+
     public function toHex(): Hex
     {
         return $this->toRgb()->toHex();
@@ -93,6 +98,11 @@ class Rgba implements Color
     public function toRgba(float $alpha = 1): self
     {
         return new self($this->red, $this->green, $this->blue, $alpha);
+    }
+
+    public function toXyz(): Xyz
+    {
+        return $this->toRgb()->toXyz();
     }
 
     public function __toString(): string

@@ -87,6 +87,17 @@ class HexTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_CIELab()
+    {
+        $hex = new Hex('aa', 'bb', 'cc');
+        $lab = $hex->toCIELab();
+
+        $this->assertSame(75.11, $lab->l());
+        $this->assertSame(-2.29, $lab->a());
+        $this->assertSame(-10.54, $lab->b());
+    }
+
+    /** @test */
     public function it_can_be_converted_to_hex()
     {
         $hex = new Hex('aa', 'bb', 'cc');
@@ -175,5 +186,16 @@ class HexTest extends TestCase
         $this->assertSame(187, $rgba->green());
         $this->assertSame(204, $rgba->blue());
         $this->assertSame(0.5, $rgba->alpha());
+    }
+
+    /** @test */
+    public function it_can_be_converted_to_xyz()
+    {
+        $hex = new Hex('aa', 'bb', 'cc');
+        $xyz = $hex->toXyz();
+
+        $this->assertSame(45.2470, $xyz->x());
+        $this->assertSame(48.4463, $xyz->y());
+        $this->assertSame(64.0930, $xyz->z());
     }
 }
