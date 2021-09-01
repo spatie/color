@@ -3,8 +3,8 @@
 namespace Spatie\Color\Test;
 
 use PHPUnit\Framework\TestCase;
-use Spatie\Color\Exceptions\InvalidColorValue;
 use Spatie\Color\CIELab;
+use Spatie\Color\Exceptions\InvalidColorValue;
 
 class CIELabTest extends TestCase
 {

@@ -104,7 +104,7 @@ class Distance
         $c1 = sqrt(pow($a1, 2) + pow($b1, 2));
         $c2 = sqrt(pow($a2, 2) + pow($b2, 2));
         $avg_c = ($c1 + $c2) / 2;
-        $g = (1 - sqrt(pow($avg_c , 7) / (pow($avg_c, 7) + pow(25, 7)))) / 2;
+        $g = (1 - sqrt(pow($avg_c, 7) / (pow($avg_c, 7) + pow(25, 7)))) / 2;
         $a1p = $a1 * (1 + $g);
         $a2p = $a2 * (1 + $g);
         $c1p = sqrt(pow($a1p, 2) + pow($b1, 2));

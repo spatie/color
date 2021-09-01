@@ -86,7 +86,7 @@ class CIELab implements Color
 
     public function toHsla(float $alpha = 1): Hsla
     {
-      return $this->toRgb()->toHsla($alpha);
+        return $this->toRgb()->toHsla($alpha);
     }
 
     public function toRgb(): Rgb

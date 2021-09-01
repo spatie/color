@@ -3,9 +3,9 @@
 namespace Spatie\Color\Test;
 
 use PHPUnit\Framework\TestCase;
+use Spatie\Color\CIELab;
 use Spatie\Color\Exceptions\InvalidColorValue;
 use Spatie\Color\Factory;
-use Spatie\Color\CIELab;
 use Spatie\Color\Hex;
 use Spatie\Color\Hsl;
 use Spatie\Color\Hsla;
