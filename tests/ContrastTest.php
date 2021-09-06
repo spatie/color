@@ -3,13 +3,13 @@
 namespace Spatie\Color\Test;
 
 use PHPUnit\Framework\TestCase;
-use Spatie\Color\Contrast;
 use Spatie\Color\Color;
+use Spatie\Color\Contrast;
 use Spatie\Color\Hex;
 
 class ContrastTest extends TestCase
 {
-    /** 
+    /**
      * @test
      * @dataProvider provider
      */
@@ -18,7 +18,7 @@ class ContrastTest extends TestCase
         $this->assertSame($contrast, Contrast::ratio($a, $b));
     }
 
-    /** 
+    /**
      * @test
      * @dataProvider provider
      */
