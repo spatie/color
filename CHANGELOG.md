@@ -2,6 +2,9 @@
 
 All notable changes to `color` will be documented in this file
 
+## 1.4.0 - 2021-09-06
+- Added `Contrast` API
+
 ## 1.3.0 - 2021-09-01
 - Added CIELab and XYZ color formats and `Distance` API
 
