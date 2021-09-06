@@ -188,7 +188,6 @@ class HexTest extends TestCase
         $this->assertSame(0.5, $rgba->alpha());
     }
 
-    /** @test */
     public function it_can_be_converted_to_xyz()
     {
         $hex = new Hex('aa', 'bb', 'cc');

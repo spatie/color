@@ -189,7 +189,6 @@ class HslTest extends TestCase
         $this->assertSame('7d', $hex->blue());
     }
 
-    /** @test */
     public function it_can_be_converted_to_xyz()
     {
         $hsl = new Hsl(55, 55, 67);

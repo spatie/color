@@ -150,7 +150,6 @@ class RgbTest extends TestCase
         $this->assertSame(0.5, $hsla->alpha());
     }
 
-    /** @test */
     public function it_can_be_converted_to_xyz()
     {
         $rgb = new Rgb(55, 155, 255);
