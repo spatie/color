@@ -24,11 +24,13 @@ class Factory
     protected static function getColorClasses(): array
     {
         return [
+            CIELab::class,
             Hex::class,
             Hsl::class,
             Hsla::class,
             Rgb::class,
             Rgba::class,
+            Xyz::class,
         ];
     }
 }

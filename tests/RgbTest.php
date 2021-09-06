@@ -82,6 +82,17 @@ class RgbTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_CIELab()
+    {
+        $rgb = new Rgb(55, 155, 255);
+        $lab = $rgb->toCIELab();
+
+        $this->assertSame(62.91, $lab->l());
+        $this->assertSame(5.34, $lab->a());
+        $this->assertSame(-57.73, $lab->b());
+    }
+
+    /** @test */
     public function it_can_be_converted_to_rgb()
     {
         $rgb = new Rgb(55, 155, 255);
@@ -139,27 +150,13 @@ class RgbTest extends TestCase
         $this->assertSame(0.5, $hsla->alpha());
     }
 
-    /** @test */
-    public function it_can_be_get_contrast_color()
+    public function it_can_be_converted_to_xyz()
     {
-        $black = 'rgb(0, 0, 0)';
-        $white = 'rgb(255, 255, 255)';
+        $rgb = new Rgb(55, 155, 255);
+        $xyz = $rgb->toXyz();
 
-        $colors = [
-            [ $white, $black ],
-            [ $black, $white ],
-            [ 'rgb(185, 182, 182)', $black ],
-            [ 'rgb(237, 160, 44)', $black ],
-            [ 'rgb(73, 99, 121)', $white ],
-            [ 'rgb(73, 121, 109)', $white ],
-            [ 'rgb(74, 211, 150)', $black ],
-        ];
-
-        foreach ($colors as $color) {
-            $this->assertEquals(
-                Rgb::fromString($color[0])->contrast(),
-                Rgb::fromString($color[1])
-            );
-        }
+        $this->assertSame(31.3469, $xyz->x());
+        $this->assertSame(31.4749, $xyz->y());
+        $this->assertSame(99.0308, $xyz->z());
     }
 }

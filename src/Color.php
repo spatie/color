@@ -12,7 +12,7 @@ interface Color
 
     public function blue();
 
-    public function contrast();
+    public function toCIELab(): CIELab;
 
     public function toHex(): Hex;
 
@@ -23,6 +23,8 @@ interface Color
     public function toRgb(): Rgb;
 
     public function toRgba(float $alpha = 1): Rgba;
+
+    public function toXyz(): Xyz;
 
     public function __toString(): string;
 }

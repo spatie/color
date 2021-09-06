@@ -87,6 +87,17 @@ class HexTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_CIELab()
+    {
+        $hex = new Hex('aa', 'bb', 'cc');
+        $lab = $hex->toCIELab();
+
+        $this->assertSame(75.11, $lab->l());
+        $this->assertSame(-2.29, $lab->a());
+        $this->assertSame(-10.54, $lab->b());
+    }
+
+    /** @test */
     public function it_can_be_converted_to_hex()
     {
         $hex = new Hex('aa', 'bb', 'cc');
@@ -177,24 +188,13 @@ class HexTest extends TestCase
         $this->assertSame(0.5, $rgba->alpha());
     }
 
-    /** @test */
-    public function it_can_be_get_contrast_color()
+    public function it_can_be_converted_to_xyz()
     {
-        $colors = [
-            [ '#ffffff', '#000000' ],
-            [ '#000000', '#ffffff' ],
-            [ '#b9b6b6', '#000000' ],
-            [ '#eda02a', '#000000' ],
-            [ '#496379', '#ffffff' ],
-            [ '#49796d', '#ffffff' ],
-            [ '#4bd396', '#000000' ],
-        ];
+        $hex = new Hex('aa', 'bb', 'cc');
+        $xyz = $hex->toXyz();
 
-        foreach ($colors as $color) {
-            $this->assertEquals(
-                Hex::fromString($color[0])->contrast(),
-                Hex::fromString($color[1])
-            );
-        }
+        $this->assertSame(45.2470, $xyz->x());
+        $this->assertSame(48.4463, $xyz->y());
+        $this->assertSame(64.0930, $xyz->z());
     }
 }

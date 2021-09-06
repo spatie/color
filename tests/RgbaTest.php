@@ -101,6 +101,17 @@ class RgbaTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_CIELab()
+    {
+        $rgba = new Rgba(55, 155, 255, 0.5);
+        $lab = $rgba->toCIELab();
+
+        $this->assertSame(62.91, $lab->l());
+        $this->assertSame(5.34, $lab->a());
+        $this->assertSame(-57.73, $lab->b());
+    }
+
+    /** @test */
     public function it_can_be_converted_to_rgba_with_with_a_specific_alpha_value()
     {
         $rgba = new Rgba(55, 155, 255, 0.5);
@@ -159,26 +170,13 @@ class RgbaTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_get_contrast_color()
+    public function it_can_be_converted_to_xyz()
     {
-        $black = 'rgba(0, 0, 0, 0.5)';
-        $white = 'rgba(255, 255, 255, 0.5)';
+        $rgba = new Rgba(55, 155, 255, 0.5);
+        $xyz = $rgba->toXyz();
 
-        $colors = [
-            [ $white, $black ],
-            [ $black, $white ],
-            [ 'rgba(185, 182, 182, 0.5)', $black ],
-            [ 'rgba(237, 160, 44, 0.5)', $black ],
-            [ 'rgba(73, 99, 121, 0.5)', $white ],
-            [ 'rgba(73, 121, 109, 0.5)', $white ],
-            [ 'rgba(74, 211, 150, 0.5)', $black ],
-        ];
-
-        foreach ($colors as $color) {
-            $this->assertEquals(
-                Rgba::fromString($color[0])->contrast(),
-                Rgba::fromString($color[1])
-            );
-        }
+        $this->assertSame(31.3469, $xyz->x());
+        $this->assertSame(31.4749, $xyz->y());
+        $this->assertSame(99.0308, $xyz->z());
     }
 }

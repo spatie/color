@@ -141,9 +141,20 @@ class HslaTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_CIELab()
+    {
+        $hsla = new Hsla(55, 15, 25, 0.4);
+        $lab = $hsla->toCIELab();
+
+        $this->assertSame(30.20, $lab->l());
+        $this->assertSame(-3.07, $lab->a());
+        $this->assertSame(10.98, $lab->b());
+    }
+
+    /** @test */
     public function it_can_be_converted_to_hsla()
     {
-        $hsla = new Hsla(55, 55, 67, 0.33);
+        $hsla = new Hsla(55, 55, 67);
         $newHsla = $hsla->toHsla(0.5);
 
         $this->assertSame($hsla->hue(), $newHsla->hue());
@@ -198,28 +209,14 @@ class HslaTest extends TestCase
         $this->assertSame('7d', $hex->blue());
     }
 
-    /** @test */
-    public function it_can_be_get_contrast_color()
+    public function it_can_be_converted_to_xyz()
     {
-        $black = 'hsla(0, 0%, 0%, 0.1)';
-        $white = 'hsla(0, 0%, 100%, 0.1)';
+        $hsla = new Hsla(55, 55, 67);
+        $xyz = $hsla->toXyz();
 
-        $colors = [
-            [ $white, $black ],
-            [ $black, $white ],
-            [ 'hsla(0, 2%, 72%, 0.1)', $black ],
-            [ 'hsla(36, 84%, 55%, 0.1)', $black ],
-            [ 'hsla(207, 25%, 38%, 0.1)', $white ],
-            [ 'hsla(165, 25%, 38%, 0.1)', $white ],
-            [ 'hsla(153, 61%, 56%, 0.1)', $black ],
-        ];
-
-        foreach ($colors as $color) {
-            $this->assertEquals(
-                Hsla::fromString($color[0])->contrast(),
-                Hsla::fromString($color[1])
-            );
-        }
+        $this->assertSame(55.1174, $xyz->x());
+        $this->assertSame(61.8333, $xyz->y());
+        $this->assertSame(28.4321, $xyz->z());
     }
 
     public function provides_hsl_string_and_rgb_values()

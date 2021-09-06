@@ -48,9 +48,9 @@ class Rgb implements Color
         return $this->blue;
     }
 
-    public function contrast(): self
+    public function toCIELab(): CIELab
     {
-        return Contrast::make($this->toHex())->toRgb();
+        return $this->toXyz()->toCIELab();
     }
 
     public function toHex(): Hex
@@ -92,6 +92,17 @@ class Rgb implements Color
     public function toRgba(float $alpha = 1): Rgba
     {
         return new Rgba($this->red, $this->green, $this->blue, $alpha);
+    }
+
+    public function toXyz(): Xyz
+    {
+        [$x, $y, $z] = Convert::rgbValueToXyz(
+            $this->red,
+            $this->green,
+            $this->blue
+        );
+
+        return new Xyz($x, $y, $z);
     }
 
     public function __toString(): string

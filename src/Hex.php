@@ -44,9 +44,9 @@ class Hex implements Color
         return $this->blue;
     }
 
-    public function contrast(): self
+    public function toCIELab(): CIELab
     {
-        return Contrast::make($this);
+        return $this->toRgb()->toCIELab();
     }
 
     public function toHex(): self
@@ -88,6 +88,11 @@ class Hex implements Color
     public function toRgba(float $alpha = 1): Rgba
     {
         return $this->toRgb()->toRgba($alpha);
+    }
+
+    public function toXyz(): Xyz
+    {
+        return $this->toRgb()->toXyz();
     }
 
     public function __toString(): string

@@ -1,4 +1,4 @@
-# A little library to handle color conversions
+# A little library to handle color conversions and comparisons
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/color.svg?style=flat-square)](https://packagist.org/packages/spatie/color)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -7,7 +7,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/color.svg?style=flat-square)](https://packagist.org/packages/spatie/color)
 ![Tests](https://github.com/spatie/color/workflows/Tests/badge.svg)
 
-A little library to handle color conversions. Currently supports rgb, rgba, hex, hsl and hsla formats.
+A little library to handle color conversions and comparisons. Currently supports rgb, rgba, hex, hsl, hsla, CIELab, and xyz color formats as well as CIE76, CIE94, and CIEDE2000 color comparison algorithms.
 
 ```php
 $rgb = Rgb::fromString('rgb(55,155,255)');
@@ -27,6 +27,27 @@ echo $hex; // #379bff
 
 $hsl = $rgb->toHsl();
 echo $hsl; // hsl(210,100%,100%)
+
+$lab = $rgb->toCIELab();
+echo $lab; // CIELab(62.91,5.34,-57.73)
+
+$xyz = $rgb->toXyz();
+echo $xyz; // xyz(31.3469,31.4749,99.0308)
+
+$hex2 = Hex::fromString('#2d78c8');
+
+$cie76_distance = Distance::CIE76($rgb, $hex2);
+$cie76_distance = Distance::CIE76('rgba(55,155,255,1)', '#2d78c8'); // Outputs the same thing, Factory is built-in to all comparison functions
+echo $cie76_distance; // 55.894680426674
+
+$cie94_distance = Distance::CIE94($rgb, $hex2);
+echo $cie94_distance; // 13.490919427908
+
+$cie94_textiles_distance = Distance::CIE94($rgb, $hex2, 1); // Third parameter optionally sets the application type (0 = Graphic Arts [Default], 1 = Textiles)
+echo $cie94_textiles_distance; // 7.0926538068477
+
+$ciede2000_distance = Distance::CIEDE2000($rgb, $hex2);
+echo $ciede2000_distance; // 12.711957696301
 ```
 
 ## Support us
@@ -49,13 +70,15 @@ composer require spatie/color
 
 The `Color` package contains a separate class per color format, which each implement a `Color` interface.
 
-There are five classes which implement the `Color` interface:
+There are seven classes which implement the `Color` interface:
 
+- `CIELab`
 - `Hex`
 - `Hsl`
 - `Hsla`
 - `Rgb`
 - `Rgba`
+- `Xyz`
 
 ### `interface Spatie\Color\Color`
 

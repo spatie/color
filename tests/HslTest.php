@@ -121,6 +121,17 @@ class HslTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_CIELab()
+    {
+        $hsl = new Hsl(55, 55, 67);
+        $lab = $hsl->toCIELab();
+
+        $this->assertSame(82.82, $lab->l());
+        $this->assertSame(-9.02, $lab->a());
+        $this->assertSame(42.55, $lab->b());
+    }
+
+    /** @test */
     public function it_can_be_converted_to_hsl()
     {
         $hsl = new Hsl(55, 55, 67);
@@ -178,28 +189,14 @@ class HslTest extends TestCase
         $this->assertSame('7d', $hex->blue());
     }
 
-    /** @test */
-    public function it_can_be_get_contrast_color()
+    public function it_can_be_converted_to_xyz()
     {
-        $black = 'hsl(0, 0%, 0%)';
-        $white = 'hsl(0, 0%, 100%)';
+        $hsl = new Hsl(55, 55, 67);
+        $xyz = $hsl->toXyz();
 
-        $colors = [
-            [ $white, $black ],
-            [ $black, $white ],
-            [ 'hsl(0, 2%, 72%)', $black ],
-            [ 'hsl(36, 84%, 55%)', $black ],
-            [ 'hsl(207, 25%, 38%)', $white ],
-            [ 'hsl(165, 25%, 38%)', $white ],
-            [ 'hsl(153, 61%, 56%)', $black ],
-        ];
-
-        foreach ($colors as $color) {
-            $this->assertEquals(
-                Hsl::fromString($color[0])->contrast(),
-                Hsl::fromString($color[1])
-            );
-        }
+        $this->assertSame(55.1174, $xyz->x());
+        $this->assertSame(61.8333, $xyz->y());
+        $this->assertSame(28.4321, $xyz->z());
     }
 
     public function provides_hsl_string_and_rgb_values()

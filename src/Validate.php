@@ -6,6 +6,24 @@ use Spatie\Color\Exceptions\InvalidColorValue;
 
 class Validate
 {
+    public static function CIELabValue(float $value, string $name): void
+    {
+        if ($name === 'l' && ($value < 0 || $value > 100)) {
+            throw InvalidColorValue::CIELabValueNotInRange($value, $name, 0, 100);
+        }
+
+        if (($name === 'a' || $name === 'b') && ($value < -110 || $value > 110)) {
+            throw InvalidColorValue::CIELabValueNotInRange($value, $name, -110, 110);
+        }
+    }
+
+    public static function CIELabColorString($string): void
+    {
+        if (! preg_match('/^ *CIELab\( *\d{1,3}\.?\d+? *, *-?\d{1,3}\.?\d+? *, *-?\d{1,3}\.?\d+? *\) *$/i', $string)) {
+            throw InvalidColorValue::malformedCIELabColorString($string);
+        }
+    }
+
     public static function rgbChannelValue(int $value, string $channel): void
     {
         if ($value < 0 || $value > 255) {
@@ -70,6 +88,28 @@ class Validate
     {
         if (! preg_match('/^ *hsla\( *\d{1,3} *, *\d{1,3}%? *, *\d{1,3}%? *, *[0-1](\.\d{1,2})? *\) *$/i', $string)) {
             throw InvalidColorValue::malformedHslaColorString($string);
+        }
+    }
+
+    public static function xyzValue(float $value, string $name): void
+    {
+        if ($name === 'x' && ($value < 0 || $value > 95.047)) {
+            throw InvalidColorValue::xyzValueNotInRange($value, $name, 0, 95.047);
+        }
+
+        if ($name === 'y' && ($value < 0 || $value > 100)) {
+            throw InvalidColorValue::xyzValueNotInRange($value, $name, 0, 100);
+        }
+
+        if ($name === 'z' && ($value < 0 || $value > 108.883)) {
+            throw InvalidColorValue::xyzValueNotInRange($value, $name, 0, 108.883);
+        }
+    }
+
+    public static function xyzColorString($string): void
+    {
+        if (! preg_match('/^ *xyz\( *\d{1,2}\.?\d+? *, *\d{1,3}\.?\d+? *, *\d{1,3}\.?\d+? *\) *$/i', $string)) {
+            throw InvalidColorValue::malformedXyzColorString($string);
         }
     }
 }
