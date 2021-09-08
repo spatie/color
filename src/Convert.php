@@ -97,49 +97,53 @@ class Convert
         if ($saturation == 0) {
             $R = $G = $B = $brightness * 255;
         } else {
-            $var_H = $hue * 6;
-            $var_i = floor($var_H);
-            $var_1 = $brightness * (1 - $saturation);
-            $var_2 = $brightness * (1 - $saturation * ($var_H - $var_i));
-            $var_3 = $brightness * (1 - $saturation * (1 - ($var_H - $var_i)));
+            $hue = $hue * 6;
+            $i = floor($hue);
+            $j = $brightness * (1 - $saturation);
+            $k = $brightness * (1 - $saturation * ($hue - $i));
+            $l = $brightness * (1 - $saturation * (1 - ($hue - $i)));
 
-            if ($var_i == 0) {
-                $var_R = $brightness;
-                $var_G = $var_3;
-                $var_B = $var_1;
-            } else {
-                if ($var_i == 1) {
-                    $var_R = $var_2;
-                    $var_G = $brightness;
-                    $var_B = $var_1;
-                } else {
-                    if ($var_i == 2) {
-                        $var_R = $var_1;
-                        $var_G = $brightness;
-                        $var_B = $var_3;
-                    } else {
-                        if ($var_i == 3) {
-                            $var_R = $var_1;
-                            $var_G = $var_2;
-                            $var_B = $brightness;
-                        } else {
-                            if ($var_i == 4) {
-                                $var_R = $var_3;
-                                $var_G = $var_1;
-                                $var_B = $brightness;
-                            } else {
-                                $var_R = $brightness;
-                                $var_G = $var_1;
-                                $var_B = $var_2;
-                            }
-                        }
-                    }
-                }
+            switch($i) {
+                case 0:
+                    $red = $brightness;
+                    $green = $l;
+                    $blue = $j;
+                    break;
+
+                case 1:
+                    $red = $k;
+                    $green = $brightness;
+                    $blue = $j;
+                    break;
+
+                case 2:
+                    $red = $j;
+                    $green = $brightness;
+                    $blue = $l;
+                    break;
+
+                case 3:
+                    $red = $j;
+                    $green = $k;
+                    $blue = $brightness;
+                    break;
+
+                case 4:
+                    $red = $l;
+                    $green = $j;
+                    $blue = $brightness;
+                    break;
+
+                default:
+                    $red = $brightness;
+                    $green = $j;
+                    $blue = $k;
+                    break;
             }
 
-            $R = $var_R * 255;
-            $G = $var_G * 255;
-            $B = $var_B * 255;
+            $R = $red * 255;
+            $G = $green * 255;
+            $B = $blue * 255;
         }
 
         return [round($R), round($G), round($B)];

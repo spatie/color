@@ -107,6 +107,13 @@ class Validate
         }
     }
 
+    public static function hsbColorString($string): void
+    {
+        if (! preg_match('/^ *hs[vb]\( *-?\d{1,3} *, *\d{1,3}%? *, *\d{1,3}%? *\) *$/i', $string)) {
+            throw InvalidColorValue::malformedHslColorString($string);
+        }
+    }
+
     public static function hslColorString($string): void
     {
         if (! preg_match('/^ *hsl\( *-?\d{1,3} *, *\d{1,3}%? *, *\d{1,3}%? *\) *$/i', $string)) {
