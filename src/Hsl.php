@@ -64,6 +64,11 @@ class Hsl implements Color
         return $this->toRgb()->toCIELab();
     }
 
+    public function toCmyk(): Cmyk
+    {
+        return $this->toRgb()->toCmyk();
+    }
+
     public function toHex(): Hex
     {
         return new Hex(

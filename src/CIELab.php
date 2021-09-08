@@ -74,6 +74,11 @@ class CIELab implements Color
         return new self($this->l, $this->a, $this->b);
     }
 
+    public function toCmyk(): Cmyk
+    {
+        return $this->toRgb()->toCmyk();
+    }
+
     public function toHex(): Hex
     {
         return $this->toRgb()->toHex();

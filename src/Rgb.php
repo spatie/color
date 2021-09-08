@@ -53,6 +53,12 @@ class Rgb implements Color
         return $this->toXyz()->toCIELab();
     }
 
+    public function toCmyk(): Cmyk
+    {
+        list($cyan, $magenta, $yellow, $key) = Convert::rgbValueToCmyk($this->red, $this->green, $this->blue);
+        return new Cmyk($cyan, $magenta, $yellow, $key);
+    }
+
     public function toHex(): Hex
     {
         return new Hex(

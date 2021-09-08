@@ -125,6 +125,16 @@ class XyzTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_cmyk() {
+        $xyz = new Xyz(31.3469, 31.4749, 99.0308);
+        $cmyk = $xyz->toCmyk();
+
+        $this->assertSame($xyz->red(), $cmyk->red());
+        $this->assertSame($xyz->green(), $cmyk->green());
+        $this->assertSame($xyz->blue(), $cmyk->blue());
+    }
+
+    /** @test */
     public function it_can_be_converted_to_rgb()
     {
         $xyz = new Xyz(31.3469, 31.4749, 99.0308);

@@ -26,5 +26,7 @@ interface Color
 
     public function toXyz(): Xyz;
 
+    public function toCmyk(): Cmyk;
+
     public function __toString(): string;
 }

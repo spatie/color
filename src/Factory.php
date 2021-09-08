@@ -25,6 +25,7 @@ class Factory
     {
         return [
             CIELab::class,
+            Cmyk::class,
             Hex::class,
             Hsl::class,
             Hsla::class,

@@ -152,6 +152,16 @@ class HslaTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_cmyk() {
+        $hsla = new Hsla(55, 15, 25, 0.4);
+        $cmyk = $hsla->toCmyk();
+
+        $this->assertSame($hsla->red(), $cmyk->red());
+        $this->assertSame($hsla->green(), $cmyk->green());
+        $this->assertSame($hsla->blue(), $cmyk->blue());
+    }
+
+    /** @test */
     public function it_can_be_converted_to_hsla()
     {
         $hsla = new Hsla(55, 55, 67);

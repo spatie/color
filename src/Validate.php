@@ -24,6 +24,13 @@ class Validate
         }
     }
 
+    public static function cmykValue(float $value, string $name): void
+    {
+        if ($value < 0 || $value > 1) {
+            throw InvalidColorValue::cmykValueNotInRange($value, $name);
+        }
+    }
+
     public static function rgbChannelValue(int $value, string $channel): void
     {
         if ($value < 0 || $value > 255) {
@@ -53,6 +60,12 @@ class Validate
     {
         if ($value < 0 || $value > 100) {
             throw InvalidColorValue::hslValueNotInRange($value, $name);
+        }
+    }
+
+    public static function cmykColorString($string): void {
+        if (! preg_match('/^ *cmyk\( *(\d{1,3})%? *, *(\d{1,3})%? *, *(\d{1,3})%? *, *(\d{1,3})%? *\) *$/i', $string)) {
+            throw InvalidColorValue::malformedCmykColorString($string);
         }
     }
 

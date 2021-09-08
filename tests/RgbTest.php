@@ -93,6 +93,16 @@ class RgbTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_cmyk() {
+        $rgb = new Rgb(55, 155, 255);
+        $cmyk = $rgb->toCmyk();
+
+        $this->assertSame($rgb->red(), $cmyk->red());
+        $this->assertSame($rgb->green(), $cmyk->green());
+        $this->assertSame($rgb->blue(), $cmyk->blue());
+    }
+
+    /** @test */
     public function it_can_be_converted_to_rgb()
     {
         $rgb = new Rgb(55, 155, 255);

@@ -45,6 +45,32 @@ class Convert
         return [$x, $y, $z];
     }
 
+    public static function cmykValueToRgb(float $cyan, float $magenta, float $yellow, float $key): array
+    {
+        return [
+            255 * (1 - $cyan) * (1 - $key),
+            255 * (1 - $magenta) * (1 - $key),
+            255 * (1 - $yellow) * (1 - $key)
+        ];
+    }
+
+    public static function rgbValueToCmyk($red, $green, $blue): array
+    {
+        $red /= 255;
+        $green /= 255;
+        $blue /= 255;
+
+        $black = 1 - max($red, $green, $blue);
+        $keyNeg = (1 - $black);
+
+        return [
+            ($keyNeg - $red) / $keyNeg,
+            ($keyNeg - $green) / $keyNeg,
+            ($keyNeg - $blue) / $keyNeg,
+            $black
+        ];
+    }
+
     public static function hexChannelToRgbChannel(string $hexValue): int
     {
         return hexdec($hexValue);

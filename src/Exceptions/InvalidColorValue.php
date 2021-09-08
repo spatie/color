@@ -33,6 +33,11 @@ class InvalidColorValue extends Exception
         return new static("CIELab color string `{$string}` is malformed. A CIELab color contains 3 comma separated values, wrapped in `CIELab()`, e.g. `CIELab(62.91,5.34,-57.73)`.");
     }
 
+    public static function cmykValueNotInRange(float $value, string $name): self
+    {
+        return new static("Cmyk value `{$name}` must be a number between 0 and 1");
+    }
+
     public static function hexValueContainsInvalidCharacters(string $value): self
     {
         return new static("Hex values can only contain numbers or letters from A-F, `{$value}` contains invalid characters.");
@@ -41,6 +46,11 @@ class InvalidColorValue extends Exception
     public static function hslValueNotInRange(float $value, string $name): self
     {
         return new static("Hsl value `{$name}` must be a number between 0 and 100");
+    }
+
+    public static function malformedCmykColorString(string $string): self
+    {
+        return new static("Cmyk color string `{$string}` is malformed. A cmyk color contains cyan, magenta, yellow and key (black) values, wrapped in `cmyk()`, e.g. `cmyk(100%,100%,100%,100%)`.");
     }
 
     public static function malformedHexColorString(string $string): self

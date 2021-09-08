@@ -98,6 +98,16 @@ class HexTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_cmyk() {
+        $hex = new Hex('aa', 'bb', 'cc');
+        $cmyk = $hex->toCmyk();
+
+        $this->assertSame(170, $cmyk->red());
+        $this->assertSame(187, $cmyk->green());
+        $this->assertSame(204, $cmyk->blue());
+    }
+
+    /** @test */
     public function it_can_be_converted_to_hex()
     {
         $hex = new Hex('aa', 'bb', 'cc');
