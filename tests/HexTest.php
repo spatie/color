@@ -47,6 +47,17 @@ class HexTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_created_from_a_string_with_three_letters()
+    {
+        $hex = Hex::fromString('#abc');
+
+        $this->assertInstanceOf(Hex::class, $hex);
+        $this->assertSame('aa', $hex->red());
+        $this->assertSame('bb', $hex->green());
+        $this->assertSame('cc', $hex->blue());
+    }
+
+    /** @test */
     public function it_cant_be_created_from_a_string_without_a_hash_character()
     {
         $this->expectException(InvalidColorValue::class);

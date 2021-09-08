@@ -24,7 +24,16 @@ class Hex implements Color
     {
         Validate::hexColorString($string);
 
-        [$red, $green, $blue] = str_split(ltrim($string, '#'), 2);
+        $string = ltrim($string, '#');
+
+        if (strlen($string) === 3) {
+            [$red, $green, $blue] = str_split($string);
+            $red .= $red;
+            $green .= $green;
+            $blue .= $blue;
+        } else {
+            [$red, $green, $blue] = str_split($string, 2);
+        }
 
         return new static($red, $green, $blue);
     }

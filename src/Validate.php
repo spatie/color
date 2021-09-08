@@ -85,7 +85,7 @@ class Validate
 
     public static function hexColorString($string): void
     {
-        if (! preg_match('/^#[a-f0-9]{6}$/i', $string)) {
+        if (! preg_match('/^#(?:[a-f0-9]{3}|[a-f0-9]{6})$/i', $string)) {
             throw InvalidColorValue::malformedHexColorString($string);
         }
     }
