@@ -138,6 +138,17 @@ class RgbTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_hsb()
+    {
+        $rgb = new Rgb(128, 102, 102);
+        $hsb = $rgb->toHsb();
+
+        $this->assertSame(0.0, $hsb->hue());
+        $this->assertSame(20.0, $hsb->saturation());
+        $this->assertSame(50.0, $hsb->brightness());
+    }
+
+    /** @test */
     public function it_can_be_converted_to_hsl()
     {
         $rgb = new Rgb(55, 155, 255);

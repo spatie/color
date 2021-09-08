@@ -56,6 +56,23 @@ class Validate
         }
     }
 
+    public static function hsbValue(float $value, string $name): void
+    {
+        switch ($name) {
+            case 'hue':
+                if ($value < 0 || $value > 360) {
+                    throw InvalidColorValue::hsbValueNotInRange($value, $name);
+                }
+                break;
+
+            default:
+                if ($value < 0 || $value > 100) {
+                    throw InvalidColorValue::hsbValueNotInRange($value, $name);
+                }
+                break;
+        }
+    }
+
     public static function hslValue(float $value, string $name): void
     {
         if ($value < 0 || $value > 100) {

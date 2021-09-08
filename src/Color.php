@@ -16,6 +16,8 @@ interface Color
 
     public function toHex(string $alpha = 'ff'): Hex;
 
+    public function toHsb(): Hsb;
+
     public function toHsl(): Hsl;
 
     public function toHsla(float $alpha = 1): Hsla;

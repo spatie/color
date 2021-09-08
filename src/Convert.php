@@ -81,6 +81,70 @@ class Convert
         return str_pad(dechex($rgbValue), 2, '0', STR_PAD_LEFT);
     }
 
+    public static function hsbValueToRgb($hue, $saturation, $brightness)
+    {
+        while ($hue > 360) {
+            $hue -= 360.0;
+        }
+        while ($hue < 0) {
+            $hue += 360.0;
+        }
+
+        $hue /= 360;
+        $saturation /= 100;
+        $brightness /= 100;
+
+        if ($saturation == 0) {
+            $R = $G = $B = $brightness * 255;
+        } else {
+            $var_H = $hue * 6;
+            $var_i = floor($var_H);
+            $var_1 = $brightness * (1 - $saturation);
+            $var_2 = $brightness * (1 - $saturation * ($var_H - $var_i));
+            $var_3 = $brightness * (1 - $saturation * (1 - ($var_H - $var_i)));
+
+            if ($var_i == 0) {
+                $var_R = $brightness;
+                $var_G = $var_3;
+                $var_B = $var_1;
+            } else {
+                if ($var_i == 1) {
+                    $var_R = $var_2;
+                    $var_G = $brightness;
+                    $var_B = $var_1;
+                } else {
+                    if ($var_i == 2) {
+                        $var_R = $var_1;
+                        $var_G = $brightness;
+                        $var_B = $var_3;
+                    } else {
+                        if ($var_i == 3) {
+                            $var_R = $var_1;
+                            $var_G = $var_2;
+                            $var_B = $brightness;
+                        } else {
+                            if ($var_i == 4) {
+                                $var_R = $var_3;
+                                $var_G = $var_1;
+                                $var_B = $brightness;
+                            } else {
+                                $var_R = $brightness;
+                                $var_G = $var_1;
+                                $var_B = $var_2;
+                            }
+                        }
+                    }
+                }
+            }
+
+            $R = $var_R * 255;
+            $G = $var_G * 255;
+            $B = $var_B * 255;
+        }
+
+        return [round($R), round($G), round($B)];
+    }
+
     public static function hslValueToRgb(float $hue, float $saturation, float $lightness): array
     {
         $h = (360 + ($hue % 360)) % 360;  // hue values can be less than 0 and greater than 360. This normalises them into the range 0-360.
@@ -112,6 +176,52 @@ class Convert
         if ($h > 300 && $h <= 360) {
             return [round(($c + $m) * 255), round($m * 255), round(($x + $m) * 255)];
         }
+    }
+
+    public static function rgbValueToHsb($red, $green, $blue): array
+    {
+        $red /= 255;
+        $green /= 255;
+        $blue /= 255;
+
+        $min = min($red, $green, $blue);
+        $max = max($red, $green, $blue);
+        $delMax = $max - $min;
+
+        $brightness = $max;
+        $hue = 0;
+
+        if ($delMax == 0) {
+            $hue = 0;
+            $saturation = 0;
+        } else {
+            $saturation = $delMax / $max;
+
+            $delR = ((($max - $red) / 6) + ($delMax / 2)) / $delMax;
+            $delG = ((($max - $green) / 6) + ($delMax / 2)) / $delMax;
+            $delB = ((($max - $blue) / 6) + ($delMax / 2)) / $delMax;
+
+            if ($red == $max) {
+                $hue = $delB - $delG;
+            } else {
+                if ($green == $max) {
+                    $hue = (1 / 3) + $delR - $delB;
+                } else {
+                    if ($blue == $max) {
+                        $hue = (2 / 3) + $delG - $delR;
+                    }
+                }
+            }
+
+            if ($hue < 0) {
+                $hue++;
+            }
+            if ($hue > 1) {
+                $hue--;
+            }
+        }
+
+        return [round($hue,2) * 360, round($saturation,2) * 100, round($brightness,2) * 100];
     }
 
     public static function rgbValueToHsl($red, $green, $blue): array

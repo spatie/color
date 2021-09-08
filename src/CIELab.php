@@ -84,6 +84,11 @@ class CIELab implements Color
         return $this->toRgb()->toHex($alpha);
     }
 
+    public function toHsb(): Hsb
+    {
+        return $this->toRgb()->toHsb();
+    }
+
     public function toHsl(): Hsl
     {
         return $this->toRgb()->toHSL();

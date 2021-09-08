@@ -43,6 +43,11 @@ class InvalidColorValue extends Exception
         return new static("Hex values can only contain numbers or letters from A-F, `{$value}` contains invalid characters.");
     }
 
+    public static function hsbValueNotInRange(float $value, string $name): self
+    {
+        return new static("Hsb value `{$name}` must be a number between 0 and 100");
+    }
+
     public static function hslValueNotInRange(float $value, string $name): self
     {
         return new static("Hsl value `{$name}` must be a number between 0 and 100");

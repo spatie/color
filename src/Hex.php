@@ -95,6 +95,11 @@ class Hex implements Color
         return new self($this->red, $this->green, $this->blue, $alpha);
     }
 
+    public function toHsb(): Hsb
+    {
+        return $this->toRgb()->toHsb();
+    }
+
     public function toHsl(): Hsl
     {
         [$hue, $saturation, $lightness] = Convert::rgbValueToHsl(

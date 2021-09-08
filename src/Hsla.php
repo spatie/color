@@ -92,6 +92,11 @@ class Hsla implements Color
         );
     }
 
+    public function toHsb(): Hsb
+    {
+        return $this->toRgb()->toHsb();
+    }
+
     public function toHsla(float $alpha = 1): self
     {
         return new self($this->hue(), $this->saturation(), $this->lightness(), $alpha);

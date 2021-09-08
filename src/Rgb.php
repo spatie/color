@@ -69,6 +69,12 @@ class Rgb implements Color
         );
     }
 
+    public function toHsb(): Hsb
+    {
+        list($hue, $saturation, $brightness) = Convert::rgbValueToHsb($this->red, $this->green, $this->blue);
+        return new Hsb($hue, $saturation, $brightness);
+    }
+
     public function toHsl(): Hsl
     {
         [$hue, $saturation, $lightness] = Convert::rgbValueToHsl(

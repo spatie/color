@@ -27,6 +27,7 @@ class Factory
             CIELab::class,
             Cmyk::class,
             Hex::class,
+            Hsb::class,
             Hsl::class,
             Hsla::class,
             Rgb::class,
