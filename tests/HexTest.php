@@ -47,7 +47,7 @@ class HexTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_created_from_a_string_with_three_letters()
+    public function it_can_be_created_from_a_short_string()
     {
         $hex = Hex::fromString('#abc');
 
@@ -55,6 +55,30 @@ class HexTest extends TestCase
         $this->assertSame('aa', $hex->red());
         $this->assertSame('bb', $hex->green());
         $this->assertSame('cc', $hex->blue());
+    }
+
+    /** @test */
+    public function it_can_be_created_from_a_string_with_alpha()
+    {
+        $hex = Hex::fromString('#aabbccdd');
+
+        $this->assertInstanceOf(Hex::class, $hex);
+        $this->assertSame('aa', $hex->red());
+        $this->assertSame('bb', $hex->green());
+        $this->assertSame('cc', $hex->blue());
+        $this->assertSame('dd', $hex->alpha());
+    }
+
+    /** @test */
+    public function it_can_be_created_from_a_short_string_alpha()
+    {
+        $hex = Hex::fromString('#abcd');
+
+        $this->assertInstanceOf(Hex::class, $hex);
+        $this->assertSame('aa', $hex->red());
+        $this->assertSame('bb', $hex->green());
+        $this->assertSame('cc', $hex->blue());
+        $this->assertSame('dd', $hex->alpha());
     }
 
     /** @test */
@@ -95,6 +119,14 @@ class HexTest extends TestCase
         $hex = new Hex('aa', 'bb', 'cc');
 
         $this->assertSame('#aabbcc', (string) $hex);
+    }
+
+    /** @test */
+    public function it_can_be_casted_to_a_string_with_alpha()
+    {
+        $hex = new Hex('aa', 'bb', 'cc', 'dd');
+
+        $this->assertSame('#aabbccdd', (string) $hex);
     }
 
     /** @test */

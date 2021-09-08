@@ -79,9 +79,9 @@ class CIELab implements Color
         return $this->toRgb()->toCmyk();
     }
 
-    public function toHex(): Hex
+    public function toHex(string $alpha = 'ff'): Hex
     {
-        return $this->toRgb()->toHex();
+        return $this->toRgb()->toHex($alpha);
     }
 
     public function toHsl(): Hsl

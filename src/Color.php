@@ -14,7 +14,7 @@ interface Color
 
     public function toCIELab(): CIELab;
 
-    public function toHex(): Hex;
+    public function toHex(string $alpha = 'ff'): Hex;
 
     public function toHsl(): Hsl;
 

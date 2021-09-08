@@ -83,9 +83,9 @@ class Cmyk implements Color
         return $this->toRgb()->toCIELab();
     }
 
-    public function toHex(): Hex
+    public function toHex(string $alpha = 'ff'): Hex
     {
-        return $this->toRgb()->toHex();
+        return $this->toRgb()->toHex($alpha);
     }
 
     public function toHsl(): Hsl

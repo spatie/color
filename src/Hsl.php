@@ -69,12 +69,13 @@ class Hsl implements Color
         return $this->toRgb()->toCmyk();
     }
 
-    public function toHex(): Hex
+    public function toHex(string $alpha = 'ff'): Hex
     {
         return new Hex(
             Convert::rgbChannelToHexChannel($this->red()),
             Convert::rgbChannelToHexChannel($this->green()),
-            Convert::rgbChannelToHexChannel($this->blue())
+            Convert::rgbChannelToHexChannel($this->blue()),
+            $alpha
         );
     }
 

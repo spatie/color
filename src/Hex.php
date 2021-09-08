@@ -8,16 +8,19 @@ class Hex implements Color
     protected $red;
     protected $green;
     protected $blue;
+    protected $alpha = 'ff';
 
-    public function __construct(string $red, string $green, string $blue)
+    public function __construct(string $red, string $green, string $blue, string $alpha = 'ff')
     {
         Validate::hexChannelValue($red, 'red');
         Validate::hexChannelValue($green, 'green');
         Validate::hexChannelValue($blue, 'blue');
+        Validate::hexChannelValue($alpha, 'alpha');
 
         $this->red = strtolower($red);
         $this->green = strtolower($green);
         $this->blue = strtolower($blue);
+        $this->alpha = strtolower($alpha);
     }
 
     public static function fromString(string $string)
@@ -26,16 +29,35 @@ class Hex implements Color
 
         $string = ltrim($string, '#');
 
-        if (strlen($string) === 3) {
-            [$red, $green, $blue] = str_split($string);
-            $red .= $red;
-            $green .= $green;
-            $blue .= $blue;
-        } else {
-            [$red, $green, $blue] = str_split($string, 2);
+        switch (strlen($string)) {
+            case 3:
+                [$red, $green, $blue] = str_split($string);
+                $red .= $red;
+                $green .= $green;
+                $blue .= $blue;
+                $alpha = 'ff';
+                break;
+
+            case 4:
+                [$red, $green, $blue, $alpha] = str_split($string);
+                $red .= $red;
+                $green .= $green;
+                $blue .= $blue;
+                $alpha .= $alpha;
+                break;
+
+            default:
+            case 6:
+                [$red, $green, $blue] = str_split($string, 2);
+                $alpha = 'ff';
+                break;
+
+            case 8:
+                [$red, $green, $blue, $alpha] = str_split($string, 2);
+                break;
         }
 
-        return new static($red, $green, $blue);
+        return new static($red, $green, $blue, $alpha);
     }
 
     public function red(): string
@@ -53,6 +75,11 @@ class Hex implements Color
         return $this->blue;
     }
 
+    public function alpha(): string
+    {
+        return $this->alpha;
+    }
+
     public function toCIELab(): CIELab
     {
         return $this->toRgb()->toCIELab();
@@ -63,9 +90,9 @@ class Hex implements Color
         return $this->toRgb()->toCmyk();
     }
 
-    public function toHex(): self
+    public function toHex(string $alpha = 'ff'): self
     {
-        return new self($this->red, $this->green, $this->blue);
+        return new self($this->red, $this->green, $this->blue, $alpha);
     }
 
     public function toHsl(): Hsl
@@ -111,6 +138,6 @@ class Hex implements Color
 
     public function __toString(): string
     {
-        return "#{$this->red}{$this->green}{$this->blue}";
+        return "#{$this->red}{$this->green}{$this->blue}" . ($this->alpha !== 'ff' ? $this->alpha : '');
     }
 }
