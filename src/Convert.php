@@ -102,6 +102,7 @@ class Convert
         if ($delta != 0) {
             if ($r === $cmax) {
                 $hue = 60 * fmod(($g - $b) / $delta, 6);
+                $hue = $hue < 0 ? $hue + 360 : $hue ;
             }
 
             if ($g === $cmax) {
