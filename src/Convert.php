@@ -101,7 +101,8 @@ class Convert
         $hue = 0;
         if ($delta != 0) {
             if ($r === $cmax) {
-                $hue = 360 + 60 * fmod(($g - $b) / $delta, 6);
+                $hue = 60 * fmod(($g - $b) / $delta, 6);
+                $hue = $hue < 0 ? $hue + 360 : $hue ;
             }
 
             if ($g === $cmax) {
