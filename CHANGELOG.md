@@ -2,6 +2,10 @@
 
 All notable changes to `color` will be documented in this file
 
+## 1.3.1 - 2021-09-09
+
+- fix edge case (#56)
+
 ## 1.3.0 - 2021-09-06
 - Added CIELab and XYZ color formats and `Distance` API
 - Added `Contrast` API
