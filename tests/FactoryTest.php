@@ -79,7 +79,8 @@ class FactoryTest extends TestCase
         Factory::fromString('abcd');
     }
 
-    public function color_provider() {
+    public function color_provider()
+    {
         yield [
             '#ffc107', // HEX
             'rgb(255,193,7)', // RGB
@@ -157,17 +158,18 @@ class FactoryTest extends TestCase
      * @dataProvider color_provider
      * @test
      */
-    public function it_should_convert_edge_case( $hex, $rgb, $hsla ) {
+    public function it_should_convert_edge_case($hex, $rgb, $hsla)
+    {
         $sut = Factory::fromString($hex);
 
-        $this->assertStringMatchesFormat( $hex, (string) $sut->toHex(), '' );
-        $this->assertStringMatchesFormat( $rgb, (string) $sut->toRgb(), '' );
-        $this->assertStringMatchesFormat( $hsla, (string) $sut->toHsla(), '' );
+        $this->assertStringMatchesFormat($hex, (string) $sut->toHex(), '');
+        $this->assertStringMatchesFormat($rgb, (string) $sut->toRgb(), '');
+        $this->assertStringMatchesFormat($hsla, (string) $sut->toHsla(), '');
 
-        $this->assertStringMatchesFormat( $hex, (string) $sut->toRgb()->toHex(), '' );
-        $this->assertStringMatchesFormat( $hsla, (string) $sut->toRgb()->toHsla(), '' );
+        $this->assertStringMatchesFormat($hex, (string) $sut->toRgb()->toHex(), '');
+        $this->assertStringMatchesFormat($hsla, (string) $sut->toRgb()->toHsla(), '');
 
-        $this->assertStringMatchesFormat( $rgb, (string) $sut->toHex()->toRgb(), '' );
-        $this->assertStringMatchesFormat( $hsla, (string) $sut->toHex()->toHsla(), '' );
+        $this->assertStringMatchesFormat($rgb, (string) $sut->toHex()->toRgb(), '');
+        $this->assertStringMatchesFormat($hsla, (string) $sut->toHex()->toHsla(), '');
     }
 }
