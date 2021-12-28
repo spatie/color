@@ -16,7 +16,7 @@ class InvalidColorValue extends Exception
         return new static("An rgb values must be an integer between 0 and 255, `{$value}` provided for channel {$channel}.");
     }
 
-    public static function alphaChannelValueNotInRange(int $value): self
+    public static function alphaChannelValueNotInRange(float $value): self
     {
         return new static("An alpha values must be a float between 0 and 1, `{$value}` provided.");
     }
