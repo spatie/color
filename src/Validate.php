@@ -19,7 +19,7 @@ class Validate
 
     public static function CIELabColorString($string): void
     {
-        if (! preg_match('/^ *CIELab\( *\d{1,3}\.?\d+? *, *-?\d{1,3}\.?\d+? *, *-?\d{1,3}\.?\d+? *\) *$/i', $string)) {
+        if (! preg_match('/^ *CIELab\( *\d{1,3}\.?\d* *, *-?\d{1,3}\.?\d* *, *-?\d{1,3}\.?\d* *\) *$/i', $string)) {
             throw InvalidColorValue::malformedCIELabColorString($string);
         }
     }

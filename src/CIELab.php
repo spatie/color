@@ -25,7 +25,7 @@ class CIELab implements Color
         Validate::CIELabColorString($string);
 
         $matches = null;
-        preg_match('/CIELab\( *(\d{1,3}\.?\d+? *, *-?\d{1,3}\.?\d+? *, *-?\d{1,3}\.?\d+?) *\)/i', $string, $matches);
+        preg_match('/CIELab\( *(\d{1,3}\.?\d* *, *-?\d{1,3}\.?\d* *, *-?\d{1,3}\.?\d*) *\)/i', $string, $matches);
 
         $channels = explode(',', $matches[1]);
         [$l, $a, $b] = array_map('trim', $channels);
