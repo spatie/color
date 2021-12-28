@@ -36,6 +36,9 @@ echo $xyz; // xyz(31.3469,31.4749,99.0308)
 
 $hex2 = Hex::fromString('#2d78c8');
 
+$ratio = Contrast::ratio(Hex::fromString('#f0fff0'), Hex::fromString('#191970')); 
+echo $ratio; // 15.0
+
 $cie76_distance = Distance::CIE76($rgb, $hex2);
 $cie76_distance = Distance::CIE76('rgba(55,155,255,1)', '#2d78c8'); // Outputs the same thing, Factory is built-in to all comparison functions
 echo $cie76_distance; // 55.894680426674
