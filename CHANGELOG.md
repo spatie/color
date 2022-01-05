@@ -2,9 +2,15 @@
 
 All notable changes to `color` will be documented in this file
 
+## 1.4.0 - 2022-01-05
+
+- Add support for CMYK & HSB
+- Add support for HEX alpha channel
+- Add support for 3-digit HEX values
+
 ## 1.3.1 - 2021-09-09
 
-- fix edge case (#56)
+- Fix HEX/HSL conversion bug
 
 ## 1.3.0 - 2021-09-06
 - Added CIELab and XYZ color formats and `Distance` API
