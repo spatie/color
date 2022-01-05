@@ -50,7 +50,7 @@ class Convert
         return [
             255 * (1 - $cyan) * (1 - $key),
             255 * (1 - $magenta) * (1 - $key),
-            255 * (1 - $yellow) * (1 - $key)
+            255 * (1 - $yellow) * (1 - $key),
         ];
     }
 
@@ -67,7 +67,7 @@ class Convert
             ($keyNeg - $red) / $keyNeg,
             ($keyNeg - $green) / $keyNeg,
             ($keyNeg - $blue) / $keyNeg,
-            $black
+            $black,
         ];
     }
 
@@ -103,41 +103,47 @@ class Convert
             $k = $brightness * (1 - $saturation * ($hue - $i));
             $l = $brightness * (1 - $saturation * (1 - ($hue - $i)));
 
-            switch($i) {
+            switch ($i) {
                 case 0:
                     $red = $brightness;
                     $green = $l;
                     $blue = $j;
+
                     break;
 
                 case 1:
                     $red = $k;
                     $green = $brightness;
                     $blue = $j;
+
                     break;
 
                 case 2:
                     $red = $j;
                     $green = $brightness;
                     $blue = $l;
+
                     break;
 
                 case 3:
                     $red = $j;
                     $green = $k;
                     $blue = $brightness;
+
                     break;
 
                 case 4:
                     $red = $l;
                     $green = $j;
                     $blue = $brightness;
+
                     break;
 
                 default:
                     $red = $brightness;
                     $green = $j;
                     $blue = $k;
+
                     break;
             }
 
@@ -225,7 +231,7 @@ class Convert
             }
         }
 
-        return [round($hue,2) * 360, round($saturation,2) * 100, round($brightness,2) * 100];
+        return [round($hue, 2) * 360, round($saturation, 2) * 100, round($brightness, 2) * 100];
     }
 
     public static function rgbValueToHsl($red, $green, $blue): array

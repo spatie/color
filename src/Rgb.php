@@ -56,6 +56,7 @@ class Rgb implements Color
     public function toCmyk(): Cmyk
     {
         list($cyan, $magenta, $yellow, $key) = Convert::rgbValueToCmyk($this->red, $this->green, $this->blue);
+
         return new Cmyk($cyan, $magenta, $yellow, $key);
     }
 
@@ -72,6 +73,7 @@ class Rgb implements Color
     public function toHsb(): Hsb
     {
         list($hue, $saturation, $brightness) = Convert::rgbValueToHsb($this->red, $this->green, $this->blue);
+
         return new Hsb($hue, $saturation, $brightness);
     }
 

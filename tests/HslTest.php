@@ -132,7 +132,8 @@ class HslTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_converted_to_cmyk() {
+    public function it_can_be_converted_to_cmyk()
+    {
         $hsl = new Hsl(55, 55, 67);
         $cmyk = $hsl->toCmyk();
 

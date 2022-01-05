@@ -106,6 +106,7 @@ class Cmyk implements Color
     public function toRgb(): Rgb
     {
         list($red, $green, $blue) = Convert::cmykValueToRgb($this->cyan, $this->magenta, $this->yellow, $this->key);
+
         return new Rgb($red, $green, $blue);
     }
 

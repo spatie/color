@@ -63,12 +63,14 @@ class Validate
                 if ($value < 0 || $value > 360) {
                     throw InvalidColorValue::hsbValueNotInRange($value, $name);
                 }
+
                 break;
 
             default:
                 if ($value < 0 || $value > 100) {
                     throw InvalidColorValue::hsbValueNotInRange($value, $name);
                 }
+
                 break;
         }
     }
@@ -80,7 +82,8 @@ class Validate
         }
     }
 
-    public static function cmykColorString($string): void {
+    public static function cmykColorString($string): void
+    {
         if (! preg_match('/^ *cmyk\( *(\d{1,3})%? *, *(\d{1,3})%? *, *(\d{1,3})%? *, *(\d{1,3})%? *\) *$/i', $string)) {
             throw InvalidColorValue::malformedCmykColorString($string);
         }

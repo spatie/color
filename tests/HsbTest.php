@@ -3,7 +3,6 @@
 namespace Spatie\Color\Test;
 
 use PHPUnit\Framework\TestCase;
-use Spatie\Color\Convert;
 use Spatie\Color\Exceptions\InvalidColorValue;
 use Spatie\Color\Hsb;
 
@@ -112,7 +111,7 @@ class HsbTest extends TestCase
     /** @test */
     public function it_can_be_converted_to_CIELab()
     {
-        $hsb = new Hsb(50,50,50);
+        $hsb = new Hsb(50, 50, 50);
         $lab = $hsb->toCIELab();
 
         $this->assertSame(49.11, $lab->l());
@@ -121,7 +120,8 @@ class HsbTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_converted_to_cmyk() {
+    public function it_can_be_converted_to_cmyk()
+    {
         $hsb = new Hsb(55, 55, 67);
         $cmyk = $hsb->toCmyk();
 
@@ -133,7 +133,7 @@ class HsbTest extends TestCase
     /** @test */
     public function it_can_be_converted_to_rgb()
     {
-        $hsb = new Hsb(50,50,50);
+        $hsb = new Hsb(50, 50, 50);
         $rgb = $hsb->toRgb();
 
         $this->assertSame(128, $rgb->red());
@@ -144,7 +144,7 @@ class HsbTest extends TestCase
     /** @test */
     public function it_can_be_converted_to_rgba_with_a_specific_alpha_value()
     {
-        $hsb = new Hsb(50,50,50);
+        $hsb = new Hsb(50, 50, 50);
         $rgba = $hsb->toRgba(0.5);
 
         $this->assertSame(128, $rgba->red());
@@ -156,7 +156,7 @@ class HsbTest extends TestCase
     /** @test */
     public function it_can_be_converted_to_hex()
     {
-        $hsb = new Hsb(50,50,50);
+        $hsb = new Hsb(50, 50, 50);
         $hex = $hsb->toHex();
 
         $this->assertSame('80', $hex->red());

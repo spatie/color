@@ -112,7 +112,8 @@ class RgbaTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_converted_to_cmyk() {
+    public function it_can_be_converted_to_cmyk()
+    {
         $rgba = new Rgba(55, 155, 255, 0.5);
         $cmyk = $rgba->toCmyk();
 

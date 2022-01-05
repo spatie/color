@@ -125,7 +125,8 @@ class XyzTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_converted_to_cmyk() {
+    public function it_can_be_converted_to_cmyk()
+    {
         $xyz = new Xyz(31.3469, 31.4749, 99.0308);
         $cmyk = $xyz->toCmyk();
 

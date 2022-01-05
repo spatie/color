@@ -36,6 +36,7 @@ class Hex implements Color
                 $green .= $green;
                 $blue .= $blue;
                 $alpha = 'ff';
+
                 break;
 
             case 4:
@@ -44,16 +45,19 @@ class Hex implements Color
                 $green .= $green;
                 $blue .= $blue;
                 $alpha .= $alpha;
+
                 break;
 
             default:
             case 6:
                 [$red, $green, $blue] = str_split($string, 2);
                 $alpha = 'ff';
+
                 break;
 
             case 8:
                 [$red, $green, $blue, $alpha] = str_split($string, 2);
+
                 break;
         }
 

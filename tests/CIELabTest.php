@@ -126,7 +126,8 @@ class CIELabTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_converted_to_cmyk() {
+    public function it_can_be_converted_to_cmyk()
+    {
         $lab = new CIELab(62.91, 5.34, -57.73);
         $cmyk = $lab->toCmyk();
 
