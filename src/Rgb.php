@@ -53,13 +53,26 @@ class Rgb implements Color
         return $this->toXyz()->toCIELab();
     }
 
-    public function toHex(): Hex
+    public function toCmyk(): Cmyk
+    {
+        list($cyan, $magenta, $yellow, $key) = Convert::rgbValueToCmyk($this->red, $this->green, $this->blue);
+        return new Cmyk($cyan, $magenta, $yellow, $key);
+    }
+
+    public function toHex(string $alpha = 'ff'): Hex
     {
         return new Hex(
             Convert::rgbChannelToHexChannel($this->red),
             Convert::rgbChannelToHexChannel($this->green),
-            Convert::rgbChannelToHexChannel($this->blue)
+            Convert::rgbChannelToHexChannel($this->blue),
+            $alpha
         );
+    }
+
+    public function toHsb(): Hsb
+    {
+        list($hue, $saturation, $brightness) = Convert::rgbValueToHsb($this->red, $this->green, $this->blue);
+        return new Hsb($hue, $saturation, $brightness);
     }
 
     public function toHsl(): Hsl

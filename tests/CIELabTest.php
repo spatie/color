@@ -126,6 +126,16 @@ class CIELabTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_cmyk() {
+        $lab = new CIELab(62.91, 5.34, -57.73);
+        $cmyk = $lab->toCmyk();
+
+        $this->assertSame($lab->red(), $cmyk->red());
+        $this->assertSame($lab->green(), $cmyk->green());
+        $this->assertSame($lab->blue(), $cmyk->blue());
+    }
+
+    /** @test */
     public function it_can_be_converted_to_rgb()
     {
         $lab = new CIELab(62.91, 5.34, -57.73);

@@ -80,9 +80,19 @@ class Xyz implements Color
         return new CIELab($l, $a, $b);
     }
 
-    public function toHex(): Hex
+    public function toCmyk(): Cmyk
     {
-        return $this->toRgb()->toHex();
+        return $this->toRgb()->toCmyk();
+    }
+
+    public function toHex(string $alpha = 'ff'): Hex
+    {
+        return $this->toRgb()->toHex($alpha);
+    }
+
+    public function toHsb(): Hsb
+    {
+        return $this->toRgb()->toHsb();
     }
 
     public function toHsl(): Hsl

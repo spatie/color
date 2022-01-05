@@ -77,13 +77,24 @@ class Hsla implements Color
         return $this->toRgb()->toCIELab();
     }
 
-    public function toHex(): Hex
+    public function toCmyk(): Cmyk
+    {
+        return $this->toRgb()->toCmyk();
+    }
+
+    public function toHex(string $alpha = 'ff'): Hex
     {
         return new Hex(
             Convert::rgbChannelToHexChannel($this->red()),
             Convert::rgbChannelToHexChannel($this->green()),
-            Convert::rgbChannelToHexChannel($this->blue())
+            Convert::rgbChannelToHexChannel($this->blue()),
+            $alpha
         );
+    }
+
+    public function toHsb(): Hsb
+    {
+        return $this->toRgb()->toHsb();
     }
 
     public function toHsla(float $alpha = 1): self

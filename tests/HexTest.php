@@ -47,6 +47,41 @@ class HexTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_created_from_a_short_string()
+    {
+        $hex = Hex::fromString('#abc');
+
+        $this->assertInstanceOf(Hex::class, $hex);
+        $this->assertSame('aa', $hex->red());
+        $this->assertSame('bb', $hex->green());
+        $this->assertSame('cc', $hex->blue());
+    }
+
+    /** @test */
+    public function it_can_be_created_from_a_string_with_alpha()
+    {
+        $hex = Hex::fromString('#aabbccdd');
+
+        $this->assertInstanceOf(Hex::class, $hex);
+        $this->assertSame('aa', $hex->red());
+        $this->assertSame('bb', $hex->green());
+        $this->assertSame('cc', $hex->blue());
+        $this->assertSame('dd', $hex->alpha());
+    }
+
+    /** @test */
+    public function it_can_be_created_from_a_short_string_alpha()
+    {
+        $hex = Hex::fromString('#abcd');
+
+        $this->assertInstanceOf(Hex::class, $hex);
+        $this->assertSame('aa', $hex->red());
+        $this->assertSame('bb', $hex->green());
+        $this->assertSame('cc', $hex->blue());
+        $this->assertSame('dd', $hex->alpha());
+    }
+
+    /** @test */
     public function it_cant_be_created_from_a_string_without_a_hash_character()
     {
         $this->expectException(InvalidColorValue::class);
@@ -87,6 +122,14 @@ class HexTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_casted_to_a_string_with_alpha()
+    {
+        $hex = new Hex('aa', 'bb', 'cc', 'dd');
+
+        $this->assertSame('#aabbccdd', (string) $hex);
+    }
+
+    /** @test */
     public function it_can_be_converted_to_CIELab()
     {
         $hex = new Hex('aa', 'bb', 'cc');
@@ -95,6 +138,16 @@ class HexTest extends TestCase
         $this->assertSame(75.11, $lab->l());
         $this->assertSame(-2.29, $lab->a());
         $this->assertSame(-10.54, $lab->b());
+    }
+
+    /** @test */
+    public function it_can_be_converted_to_cmyk() {
+        $hex = new Hex('aa', 'bb', 'cc');
+        $cmyk = $hex->toCmyk();
+
+        $this->assertSame(170, $cmyk->red());
+        $this->assertSame(187, $cmyk->green());
+        $this->assertSame(204, $cmyk->blue());
     }
 
     /** @test */

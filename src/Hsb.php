@@ -2,29 +2,30 @@
 
 namespace Spatie\Color;
 
-class Hsl implements Color
+class Hsb implements Color
 {
     /** @var float */
     protected $hue;
     protected $saturation;
-    protected $lightness;
+    protected $brightness;
 
-    public function __construct(float $hue, float $saturation, float $lightness)
+    public function __construct(float $hue, float $saturation, float $brightness)
     {
-        Validate::hslValue($saturation, 'saturation');
-        Validate::hslValue($lightness, 'lightness');
+        Validate::hsbValue($hue, 'hue');
+        Validate::hsbValue($saturation, 'saturation');
+        Validate::hsbValue($brightness, 'brightness');
 
         $this->hue = $hue;
         $this->saturation = $saturation;
-        $this->lightness = $lightness;
+        $this->brightness = $brightness;
     }
 
     public static function fromString(string $string)
     {
-        Validate::hslColorString($string);
+        Validate::hsbColorString($string);
 
         $matches = null;
-        preg_match('/hsl\( *(-?\d{1,3}) *, *(\d{1,3})%? *, *(\d{1,3})%? *\)/i', $string, $matches);
+        preg_match('/hs[vb]\( *(-?\d{1,3}) *, *(\d{1,3})%? *, *(\d{1,3})%? *\)/i', $string, $matches);
 
         return new static($matches[1], $matches[2], $matches[3]);
     }
@@ -39,24 +40,24 @@ class Hsl implements Color
         return $this->saturation;
     }
 
-    public function lightness(): float
+    public function brightness(): float
     {
-        return $this->lightness;
+        return $this->brightness;
     }
 
     public function red(): int
     {
-        return Convert::hslValueToRgb($this->hue, $this->saturation, $this->lightness)[0];
+        return Convert::hsbValueToRgb($this->hue, $this->saturation, $this->brightness)[0];
     }
 
     public function green(): int
     {
-        return Convert::hslValueToRgb($this->hue, $this->saturation, $this->lightness)[1];
+        return Convert::hsbValueToRgb($this->hue, $this->saturation, $this->brightness)[1];
     }
 
     public function blue(): int
     {
-        return Convert::hslValueToRgb($this->hue, $this->saturation, $this->lightness)[2];
+        return Convert::hsbValueToRgb($this->hue, $this->saturation, $this->brightness)[2];
     }
 
     public function toCIELab(): CIELab
@@ -69,6 +70,11 @@ class Hsl implements Color
         return $this->toRgb()->toCmyk();
     }
 
+    public function toHsb(): Hsb
+    {
+        return new self($this->hue, $this->saturation, $this->brightness);
+    }
+
     public function toHex(string $alpha = 'ff'): Hex
     {
         return new Hex(
@@ -79,19 +85,14 @@ class Hsl implements Color
         );
     }
 
-    public function toHsb(): Hsb
+    public function toHsl(): Hsl
     {
-        return $this->toRgb()->toHsb();
-    }
-
-    public function toHsl(): self
-    {
-        return new self($this->hue(), $this->saturation(), $this->lightness());
+        return $this->toRgb()->toHsl();
     }
 
     public function toHsla(float $alpha = 1): Hsla
     {
-        return new Hsla($this->hue(), $this->saturation(), $this->lightness(), $alpha);
+        return $this->toRgb()->toHsla($alpha);
     }
 
     public function toRgb(): Rgb
@@ -113,8 +114,8 @@ class Hsl implements Color
     {
         $hue = round($this->hue);
         $saturation = round($this->saturation);
-        $lightness = round($this->lightness);
+        $brightness = round($this->brightness);
 
-        return "hsl({$hue},{$saturation}%,{$lightness}%)";
+        return "hsb({$hue},{$saturation}%,{$brightness}%)";
     }
 }

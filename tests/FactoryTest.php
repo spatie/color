@@ -76,7 +76,7 @@ class FactoryTest extends TestCase
     {
         $this->expectException(InvalidColorValue::class);
 
-        Factory::fromString('abcd');
+        Factory::fromString('abcde');
     }
 
     public function color_provider()

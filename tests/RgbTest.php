@@ -93,6 +93,16 @@ class RgbTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_converted_to_cmyk() {
+        $rgb = new Rgb(55, 155, 255);
+        $cmyk = $rgb->toCmyk();
+
+        $this->assertSame($rgb->red(), $cmyk->red());
+        $this->assertSame($rgb->green(), $cmyk->green());
+        $this->assertSame($rgb->blue(), $cmyk->blue());
+    }
+
+    /** @test */
     public function it_can_be_converted_to_rgb()
     {
         $rgb = new Rgb(55, 155, 255);
@@ -125,6 +135,17 @@ class RgbTest extends TestCase
         $this->assertSame('37', $hex->red());
         $this->assertSame('9b', $hex->green());
         $this->assertSame('ff', $hex->blue());
+    }
+
+    /** @test */
+    public function it_can_be_converted_to_hsb()
+    {
+        $rgb = new Rgb(128, 102, 102);
+        $hsb = $rgb->toHsb();
+
+        $this->assertSame(0.0, $hsb->hue());
+        $this->assertSame(20.0, $hsb->saturation());
+        $this->assertSame(50.0, $hsb->brightness());
     }
 
     /** @test */

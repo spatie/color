@@ -23,10 +23,17 @@ $rgba->alpha(); // 1
 echo $rgba; // rgba(55,155,255,1)
 
 $hex = $rgb->toHex(); // `Spatie\Color\Hex`
+$rgba->alpha(); // ff
 echo $hex; // #379bff
 
-$hsl = $rgb->toHsl();
+$cmyk = $rgb->toCmyk(); // `Spatie\Color\Cmyk`
+echo $cmyk; // cmyk(78,39,0,0)
+
+$hsl = $rgb->toHsl(); // `Spatie\Color\Hsl`
 echo $hsl; // hsl(210,100%,100%)
+
+$hsb = $rgb->toHsb(); // `Spatie\Color\Hsb`
+echo $hsb; // hsl(210,78.4%,100%)
 
 $lab = $rgb->toCIELab();
 echo $lab; // CIELab(62.91,5.34,-57.73)
@@ -76,7 +83,9 @@ The `Color` package contains a separate class per color format, which each imple
 There are seven classes which implement the `Color` interface:
 
 - `CIELab`
+- `Cmyk`
 - `Hex`
+- `Hsb`
 - `Hsl`
 - `Hsla`
 - `Rgb`
@@ -126,6 +135,15 @@ Hex::fromString('#0000ff')->blue(); // 'ff'
 Rgb::fromString('rgb(0, 0, 255)')->blue(); // 255
 ```
 
+#### `toCmyk(): Cmyk`
+
+Convert a color to a `Cmyk` color.
+
+```php
+Rgb::fromString('rgb(0, 0, 255)')->toCmyk();
+// `Cmyk` instance; 'cmyk(100,100,0,0)'
+```
+
 #### `toHex(): Hex`
 
 Convert a color to a `Hex` color.
@@ -135,7 +153,17 @@ Rgb::fromString('rgb(0, 0, 255)')->toHex();
 // `Hex` instance; '#0000ff'
 ```
 
-When coming from a color format that supports opacity, the opacity will simply be omitted.
+When coming from a color format that doesn't support opacity, it can be added by passing it to the `$alpha` parameter.
+
+
+#### `toHsb(): Hsb`
+
+Convert a color to a `Hsb` color.
+
+```php
+Rgb::fromString('rgb(0, 0, 255)')->toHsb();
+// `Hsl` instance; 'hsb(240, 100%, 100%)'
+```
 
 #### `toHsl(): Hsl`
 

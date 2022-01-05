@@ -14,7 +14,9 @@ interface Color
 
     public function toCIELab(): CIELab;
 
-    public function toHex(): Hex;
+    public function toHex(string $alpha = 'ff'): Hex;
+
+    public function toHsb(): Hsb;
 
     public function toHsl(): Hsl;
 
@@ -25,6 +27,8 @@ interface Color
     public function toRgba(float $alpha = 1): Rgba;
 
     public function toXyz(): Xyz;
+
+    public function toCmyk(): Cmyk;
 
     public function __toString(): string;
 }
