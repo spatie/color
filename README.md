@@ -51,16 +51,16 @@ echo $ratio; // 15.0
 
 $cie76_distance = Distance::CIE76($rgb, $hex2);
 $cie76_distance = Distance::CIE76('rgba(55,155,255,1)', '#2d78c8'); // Outputs the same thing, Factory is built-in to all comparison functions
-echo $cie76_distance; // 55.894680426674
+echo $cie76_distance; // 55.89468042667388
 
 $cie94_distance = Distance::CIE94($rgb, $hex2);
-echo $cie94_distance; // 13.490919427908
+echo $cie94_distance; // 13.49091942790753
 
 $cie94_textiles_distance = Distance::CIE94($rgb, $hex2, 1); // Third parameter optionally sets the application type (0 = Graphic Arts [Default], 1 = Textiles)
 echo $cie94_textiles_distance; // 7.0926538068477
 
 $ciede2000_distance = Distance::CIEDE2000($rgb, $hex2);
-echo $ciede2000_distance; // 12.711957696301
+echo $ciede2000_distance; // 12.711957696300898
 ```
 
 ## Support us

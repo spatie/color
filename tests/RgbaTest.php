@@ -65,6 +65,18 @@ class RgbaTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_created_from_a_string_with_3_decimals_in_opacity()
+    {
+        $rgba = Rgba::fromString('rgba(55,155,255,0.555)');
+
+        $this->assertInstanceOf(Rgba::class, $rgba);
+        $this->assertSame(55, $rgba->red());
+        $this->assertSame(155, $rgba->green());
+        $this->assertSame(255, $rgba->blue());
+        $this->assertSame(0.555, $rgba->alpha());
+    }
+
+    /** @test */
     public function it_can_be_created_from_a_string_with_spaces()
     {
         $rgba = Rgba::fromString('  rgba(  55  ,  155  ,  255  ,  0.5  )  ');

@@ -16,7 +16,7 @@ class DistanceTest extends TestCase
         $color2 = Hex::fromString('#2d78c8');
         $distance = Distance::CIE76($color1, $color2);
 
-        $this->assertSame(55.894680426674, $distance);
+        $this->assertSame(55.89468042667388, $distance);
     }
 
     /** @test */
@@ -24,7 +24,7 @@ class DistanceTest extends TestCase
     {
         $distance = Distance::CIE76('rgb(55,155,255)', '#2d78c8');
 
-        $this->assertSame(55.894680426674, $distance);
+        $this->assertSame(55.89468042667388, $distance);
     }
 
     /** @test */
@@ -34,7 +34,7 @@ class DistanceTest extends TestCase
         $color2 = Hex::fromString('#2d78c8');
         $distance = Distance::CIE94($color1, $color2);
 
-        $this->assertSame(13.490919427908, $distance);
+        $this->assertSame(13.49091942790753, $distance);
     }
 
     /** @test */
@@ -42,7 +42,7 @@ class DistanceTest extends TestCase
     {
         $distance = Distance::CIE94('rgb(55,155,255)', '#2d78c8');
 
-        $this->assertSame(13.490919427908, $distance);
+        $this->assertSame(13.49091942790753, $distance);
     }
 
     /** @test */
@@ -52,7 +52,7 @@ class DistanceTest extends TestCase
         $color2 = Hex::fromString('#2d78c8');
         $distance = Distance::CIEDE2000($color1, $color2);
 
-        $this->assertSame(12.711957696301, $distance);
+        $this->assertSame(12.711957696300898, $distance);
     }
 
     /** @test */
@@ -60,6 +60,6 @@ class DistanceTest extends TestCase
     {
         $distance = Distance::CIEDE2000('rgb(55,155,255)', '#2d78c8');
 
-        $this->assertSame(12.711957696301, $distance);
+        $this->assertSame(12.711957696300898, $distance);
     }
 }

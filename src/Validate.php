@@ -98,7 +98,7 @@ class Validate
 
     public static function rgbaColorString($string): void
     {
-        if (! preg_match('/^ *rgba\( *\d{1,3} *, *\d{1,3} *, *\d{1,3} *, *[0-1](\.\d{1,2})? *\) *$/i', $string)) {
+        if (! preg_match('/^ *rgba\( *\d{1,3} *, *\d{1,3} *, *\d{1,3} *, *[0-1](\.\d{1,})? *\) *$/i', $string)) {
             throw InvalidColorValue::malformedRgbaColorString($string);
         }
     }
