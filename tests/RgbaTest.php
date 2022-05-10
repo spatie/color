@@ -73,7 +73,7 @@ class RgbaTest extends TestCase
         $this->assertSame(55, $rgba->red());
         $this->assertSame(155, $rgba->green());
         $this->assertSame(255, $rgba->blue());
-        $this->assertSame(.555, $rgba->alpha());
+        $this->assertSame(0.555, $rgba->alpha());
     }
 
 
