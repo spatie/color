@@ -16,7 +16,7 @@ class DistanceTest extends TestCase
         $color2 = Hex::fromString('#2d78c8');
         $distance = Distance::CIE76($color1, $color2);
 
-        $this->assertSame(55.89468042667388, $distance);
+        $this->assertSame(16.35058714542080, $distance);
     }
 
     /** @test */
@@ -24,7 +24,7 @@ class DistanceTest extends TestCase
     {
         $distance = Distance::CIE76('rgb(55,155,255)', '#2d78c8');
 
-        $this->assertSame(55.89468042667388, $distance);
+        $this->assertSame(16.35058714542080, $distance);
     }
 
     /** @test */

@@ -23,7 +23,7 @@ class Distance
 
         $sum = 0;
         $sum += pow($lab1->l() - $lab2->l(), 2);
-        $sum += pow($lab1->a() - $lab2->b(), 2);
+        $sum += pow($lab1->a() - $lab2->a(), 2);
         $sum += pow($lab1->b() - $lab2->b(), 2);
 
         return max(min(sqrt($sum), 100), 0);
