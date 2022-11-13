@@ -1,9 +1,10 @@
 <?php
 
-use Spatie\Color\Cmyk;
-use Spatie\Color\Exceptions\InvalidColorValue;
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
+
+use Spatie\Color\Cmyk;
+use Spatie\Color\Exceptions\InvalidColorValue;
 
 it('is initializable', function () {
     $cmyk = new Cmyk(0.5, 0.3, 0.2, 0.1);

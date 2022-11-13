@@ -1,10 +1,11 @@
 <?php
 
-use Spatie\Color\Exceptions\InvalidColorValue;
-use Spatie\Color\Hsl;
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNotSame;
 use function PHPUnit\Framework\assertSame;
+
+use Spatie\Color\Exceptions\InvalidColorValue;
+use Spatie\Color\Hsl;
 
 it('is initializable', function () {
     $hsl = new Hsl(55, 55, 67);

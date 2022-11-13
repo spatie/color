@@ -1,9 +1,10 @@
 <?php
 
-use Spatie\Color\Exceptions\InvalidColorValue;
-use Spatie\Color\Hsb;
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
+
+use Spatie\Color\Exceptions\InvalidColorValue;
+use Spatie\Color\Hsb;
 
 it('is initializable', function () {
     $hsb = new Hsb(55, 55, 67);

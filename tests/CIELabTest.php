@@ -1,10 +1,11 @@
 <?php
 
-use Spatie\Color\CIELab;
-use Spatie\Color\Exceptions\InvalidColorValue;
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNotSame;
 use function PHPUnit\Framework\assertSame;
+
+use Spatie\Color\CIELab;
+use Spatie\Color\Exceptions\InvalidColorValue;
 
 it('is initializable', function () {
     $lab = new CIELab(62.91, 5.34, -57.73);

@@ -1,9 +1,10 @@
 <?php
 
+use function PHPUnit\Framework\assertSame;
+
 use Spatie\Color\Distance;
 use Spatie\Color\Hex;
 use Spatie\Color\Rgb;
-use function PHPUnit\Framework\assertSame;
 
 it('can compare distance using CIE76', function () {
     $color1 = Rgb::fromString('rgb(55,155,255)');

@@ -1,10 +1,11 @@
 <?php
 
-use Spatie\Color\Exceptions\InvalidColorValue;
-use Spatie\Color\Hsla;
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNotSame;
 use function PHPUnit\Framework\assertSame;
+
+use Spatie\Color\Exceptions\InvalidColorValue;
+use Spatie\Color\Hsla;
 
 it('is initializable', function () {
     $hsla = new Hsla(55, 55, 67, 0.5);

@@ -1,10 +1,11 @@
 <?php
 
-use Spatie\Color\Exceptions\InvalidColorValue;
-use Spatie\Color\Xyz;
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNotSame;
 use function PHPUnit\Framework\assertSame;
+
+use Spatie\Color\Exceptions\InvalidColorValue;
+use Spatie\Color\Xyz;
 
 it('is initializable', function () {
     $xyz = new Xyz(31.3469, 31.4749, 99.0308);

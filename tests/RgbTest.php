@@ -1,10 +1,11 @@
 <?php
 
-use Spatie\Color\Exceptions\InvalidColorValue;
-use Spatie\Color\Rgb;
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNotSame;
 use function PHPUnit\Framework\assertSame;
+
+use Spatie\Color\Exceptions\InvalidColorValue;
+use Spatie\Color\Rgb;
 
 it('is initializable', function () {
     $rgb = new Rgb(55, 155, 255);

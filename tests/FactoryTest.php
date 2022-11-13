@@ -1,5 +1,8 @@
 <?php
 
+use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertStringMatchesFormat;
+
 use Spatie\Color\CIELab;
 use Spatie\Color\Exceptions\InvalidColorValue;
 use Spatie\Color\Factory;
@@ -9,8 +12,6 @@ use Spatie\Color\Hsla;
 use Spatie\Color\Rgb;
 use Spatie\Color\Rgba;
 use Spatie\Color\Xyz;
-use function PHPUnit\Framework\assertInstanceOf;
-use function PHPUnit\Framework\assertStringMatchesFormat;
 
 it('can create a CIELab color from a string', function () {
     $lab = Factory::fromString('CIELab(62.91,5.34,-57.73)');
