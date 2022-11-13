@@ -1,144 +1,108 @@
 <?php
 
-namespace Spatie\Color\Test;
-
-use PHPUnit\Framework\TestCase;
 use Spatie\Color\Cmyk;
 use Spatie\Color\Exceptions\InvalidColorValue;
+use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertSame;
 
-class CmykTest extends TestCase
-{
-    /** @test */
-    public function it_is_initializable()
-    {
-        $cmyk = new Cmyk(0.5, 0.3, 0.2, 0.1);
+it('is initializable', function () {
+    $cmyk = new Cmyk(0.5, 0.3, 0.2, 0.1);
 
-        $this->assertInstanceOf(Cmyk::class, $cmyk);
-        $this->assertSame(0.5, $cmyk->cyan());
-        $this->assertSame(0.3, $cmyk->magenta());
-        $this->assertSame(0.2, $cmyk->yellow());
-        $this->assertSame(0.1, $cmyk->black());
-    }
+    assertInstanceOf(Cmyk::class, $cmyk);
+    assertSame(0.5, $cmyk->cyan());
+    assertSame(0.3, $cmyk->magenta());
+    assertSame(0.2, $cmyk->yellow());
+    assertSame(0.1, $cmyk->black());
+});
 
-    /** @test */
-    public function it_cant_be_initialized_with_invalid_cmyk_ranges()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('cant be initialized with invalid cmyk ranges', function () {
+    new Cmyk(1.0, 1.0, 1.0, 2);
+})->throws(InvalidColorValue::class);
 
-        new Cmyk(1.0, 1.0, 1.0, 2);
-    }
+it('can be created from a string', function () {
+    $cmyk = Cmyk::fromString('cmyk(100%,50%,10%,25%)');
 
-    /** @test */
-    public function it_can_be_created_from_a_string()
-    {
-        $cmyk = Cmyk::fromString('cmyk(100%,50%,10%,25%)');
+    assertInstanceOf(Cmyk::class, $cmyk);
+    assertSame(1.0, $cmyk->cyan());
+    assertSame(0.5, $cmyk->magenta());
+    assertSame(0.1, $cmyk->yellow());
+    assertSame(0.25, $cmyk->black());
+});
 
-        $this->assertInstanceOf(Cmyk::class, $cmyk);
-        $this->assertSame(1.0, $cmyk->cyan());
-        $this->assertSame(0.5, $cmyk->magenta());
-        $this->assertSame(0.1, $cmyk->yellow());
-        $this->assertSame(0.25, $cmyk->black());
-    }
+it('cant be created from malformed string', function () {
+    Cmyk::fromString('cmyk(50%,30%,20%,10%');
+})->throws(InvalidColorValue::class);
 
-    /** @test */
-    public function it_cant_be_created_from_malformed_string()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('cant be created from a string with text around', function () {
+    Cmyk::fromString('abc cmyk(50%,30%,20%,10%) abc');
+})->throws(InvalidColorValue::class);
 
-        Cmyk::fromString('cmyk(50%,30%,20%,10%');
-    }
+it('can be casted to a string', function () {
+    $cmyk = new Cmyk(0.5, 0.3, 0.2, 0.1);
+    assertSame('cmyk(50%,30%,20%,10%)', (string)$cmyk);
+});
 
-    /** @test */
-    public function it_cant_be_created_from_a_string_with_text_around()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('can be converted to CIELab', function () {
+    $cmyk = new Cmyk(0.17, 0.08, 0, 0.2);
+    $lab = $cmyk->toCIELab();
 
-        Cmyk::fromString('abc cmyk(50%,30%,20%,10%) abc');
-    }
+    assertSame(75.04, $lab->l());
+    assertSame(-2.61, $lab->a());
+    assertSame(-10.65, $lab->b());
+});
 
-    /** @test */
-    public function it_can_be_casted_to_a_string()
-    {
-        $cmyk = new Cmyk(0.5, 0.3, 0.2, 0.1);
-        $this->assertSame('cmyk(50%,30%,20%,10%)', (string)$cmyk);
-    }
+it('can be converted to hex', function () {
+    $cmyk = new Cmyk(0.17, 0.08, 0, 0.2);
+    $hex = $cmyk->toHex();
 
-    /** @test */
-    public function it_can_be_converted_to_CIELab()
-    {
-        $cmyk = new Cmyk(0.17, 0.08, 0, 0.2);
-        $lab = $cmyk->toCIELab();
+    assertSame('a9', $hex->red());
+    assertSame('bb', $hex->green());
+    assertSame('cc', $hex->blue());
+});
 
-        $this->assertSame(75.04, $lab->l());
-        $this->assertSame(-2.61, $lab->a());
-        $this->assertSame(-10.65, $lab->b());
-    }
+it('can be converted to hsl', function () {
+    $cmyk = new Cmyk(0.17, 0.08, 0, 0.2);
+    $hsl = $cmyk->toHsl();
 
-    /** @test */
-    public function it_can_be_converted_to_hex()
-    {
-        $cmyk = new Cmyk(0.17, 0.08, 0, 0.2);
-        $hex = $cmyk->toHex();
+    assertSame($cmyk->red(), $hsl->red());
+    assertSame($cmyk->green(), $hsl->green());
+    assertSame($cmyk->blue(), $hsl->blue());
+});
 
-        $this->assertSame('a9', $hex->red());
-        $this->assertSame('bb', $hex->green());
-        $this->assertSame('cc', $hex->blue());
-    }
+it('can be converted to hsla with a specific alpha value', function () {
+    $cmyk = new Cmyk(0.17, 0.08, 0, 0.2);
+    $hsla = $cmyk->toHsla(0.75);
 
-    /** @test */
-    public function it_can_be_converted_to_hsl()
-    {
-        $cmyk = new Cmyk(0.17, 0.08, 0, 0.2);
-        $hsl = $cmyk->toHsl();
+    assertSame($cmyk->red(), $hsla->red());
+    assertSame($cmyk->green(), $hsla->green());
+    assertSame($cmyk->blue(), $hsla->blue());
+    assertSame(0.75, $hsla->alpha());
+});
 
-        $this->assertSame($cmyk->red(), $hsl->red());
-        $this->assertSame($cmyk->green(), $hsl->green());
-        $this->assertSame($cmyk->blue(), $hsl->blue());
-    }
+it('can be converted to rgb', function () {
+    $cmyk = new Cmyk(0.17, 0.08, 0, 0.2);
+    $rgb = $cmyk->toRgb();
 
-    /** @test */
-    public function it_can_be_converted_to_hsla_with_a_specific_alpha_value()
-    {
-        $cmyk = new Cmyk(0.17, 0.08, 0, 0.2);
-        $hsla = $cmyk->toHsla(0.75);
+    assertSame($cmyk->red(), $rgb->red());
+    assertSame($cmyk->green(), $rgb->green());
+    assertSame($cmyk->blue(), $rgb->blue());
+});
 
-        $this->assertSame($cmyk->red(), $hsla->red());
-        $this->assertSame($cmyk->green(), $hsla->green());
-        $this->assertSame($cmyk->blue(), $hsla->blue());
-        $this->assertSame(0.75, $hsla->alpha());
-    }
+it('can be converted to rgba', function () {
+    $cmyk = new Cmyk(0.17, 0.08, 0, 0.2);
+    $rgba = $cmyk->toRgba(0.5);
 
-    /** @test */
-    public function it_can_be_converted_to_rgb()
-    {
-        $cmyk = new Cmyk(0.17, 0.08, 0, 0.2);
-        $rgb = $cmyk->toRgb();
+    assertSame($cmyk->red(), $rgba->red());
+    assertSame($cmyk->green(), $rgba->green());
+    assertSame($cmyk->blue(), $rgba->blue());
+    assertSame(0.5, $rgba->alpha());
+});
 
-        $this->assertSame($cmyk->red(), $rgb->red());
-        $this->assertSame($cmyk->green(), $rgb->green());
-        $this->assertSame($cmyk->blue(), $rgb->blue());
-    }
+it('can be converted to xyz', function () {
+    $cmyk = new Cmyk(0.17, 0.08, 0, 0.2);
+    $xyz = $cmyk->toXyz();
 
-    /** @test */
-    public function it_can_be_converted_to_rgba()
-    {
-        $cmyk = new Cmyk(0.17, 0.08, 0, 0.2);
-        $rgba = $cmyk->toRgba(0.5);
-
-        $this->assertSame($cmyk->red(), $rgba->red());
-        $this->assertSame($cmyk->green(), $rgba->green());
-        $this->assertSame($cmyk->blue(), $rgba->blue());
-        $this->assertSame(0.5, $rgba->alpha());
-    }
-
-    /** @test */
-    public function it_can_be_converted_to_xyz()
-    {
-        $cmyk = new Cmyk(0.17, 0.08, 0, 0.2);
-        $xyz = $cmyk->toXyz();
-
-        $this->assertSame($cmyk->red(), $xyz->red());
-        $this->assertSame($cmyk->green(), $xyz->green());
-        $this->assertSame($cmyk->blue(), $xyz->blue());
-    }
-}
+    assertSame($cmyk->red(), $xyz->red());
+    assertSame($cmyk->green(), $xyz->green());
+    assertSame($cmyk->blue(), $xyz->blue());
+});
