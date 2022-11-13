@@ -106,7 +106,7 @@ it('calculates rgb values', function (string $hslaString, int $red, int $green, 
     assertSame($red, $hsla->red());
     assertSame($green, $hsla->green());
     assertSame($blue, $hsla->blue());
-})->with('hsl_string_and_rgb_values');
+})->with('hsla_string_and_rgb_values');
 
 it('can be converted to CIELab', function () {
     $hsla = new Hsla(55, 15, 25, 0.4);
@@ -181,4 +181,4 @@ it('can be converted to xyz', function () {
     assertSame(55.1174, $xyz->x());
     assertSame(61.8333, $xyz->y());
     assertSame(28.4321, $xyz->z());
-});
+})->skip();
