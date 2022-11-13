@@ -55,10 +55,8 @@ it('can create a xyz color from a string', function () {
 });
 
 it('cant create a color from malformed string', function () {
-    $this->expectException(InvalidColorValue::class);
-
     Factory::fromString('abcde');
-});
+})->throws(InvalidColorValue::class);
 
 it('should convert edge case', function (string $hex, string $rgb, string $hsla) {
     $sut = Factory::fromString($hex);

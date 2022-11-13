@@ -16,28 +16,20 @@ it('is initializable', function () {
 });
 
 it('cant be initialized with a negative saturation', function () {
-    $this->expectException(InvalidColorValue::class);
-
     new Hsl(-5, -1, 67);
-});
+})->throws(InvalidColorValue::class);
 
 it('cant be initialized with a saturation higher than 100', function () {
-    $this->expectException(InvalidColorValue::class);
-
     new Hsl(-5, 105, 67);
-});
+})->throws(InvalidColorValue::class);
 
 it('cant be initialized with a negative lightness', function () {
-    $this->expectException(InvalidColorValue::class);
-
     new Hsl(-5, 55, -67);
-});
+})->throws(InvalidColorValue::class);
 
 it('cant be initialized with a lightness higher than 100', function () {
-    $this->expectException(InvalidColorValue::class);
-
     new Hsl(-5, 55, 107);
-});
+})->throws(InvalidColorValue::class);
 
 it('can be created from a string', function () {
     $hsl = Hsl::fromString('hsl(205,35%,17%)');
@@ -67,16 +59,12 @@ it('can be created from a string with spaces', function () {
 });
 
 it('cant be created from malformed string', function () {
-    $this->expectException(InvalidColorValue::class);
-
     Hsl::fromString('hsl(55,155,255');
-});
+})->throws(InvalidColorValue::class);
 
 it('cant be created from a string with text around', function () {
-    $this->expectException(InvalidColorValue::class);
-
     Hsl::fromString('abc hsl(55,155,255) abc');
-});
+})->throws(InvalidColorValue::class);
 
 it('can be casted to a string', function () {
     $hsl = new Hsl(55, 15, 25);

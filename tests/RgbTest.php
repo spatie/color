@@ -16,16 +16,12 @@ it('is initializable', function () {
 });
 
 it('cant be initialized with a negative color value', function () {
-    $this->expectException(InvalidColorValue::class);
-
     new Rgb(-5, 255, 255);
-});
+})->throws(InvalidColorValue::class);
 
 it('cant be initialized with a color value higher than 255', function () {
-    $this->expectException(InvalidColorValue::class);
-
     new Rgb(300, 255, 255);
-});
+})->throws(InvalidColorValue::class);
 
 it('can be created from a string', function () {
     $rgb = Rgb::fromString('rgb(55,155,255)');
@@ -46,16 +42,12 @@ it('can be created from a string with spaces', function () {
 });
 
 it('cant be created from malformed string', function () {
-    $this->expectException(InvalidColorValue::class);
-
     Rgb::fromString('rgb(55,155,255');
-});
+})->throws(InvalidColorValue::class);
 
 it('cant be created from a string with text around', function () {
-    $this->expectException(InvalidColorValue::class);
-
     Rgb::fromString('abc rgb(55,155,255) abc');
-});
+})->throws(InvalidColorValue::class);
 
 it('can be casted to a string', function () {
     $rgb = new Rgb(55, 155, 255);

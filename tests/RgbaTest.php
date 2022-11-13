@@ -17,28 +17,20 @@ it('is initializable', function () {
 });
 
 it('cant be initialized with a negative color value', function () {
-    $this->expectException(InvalidColorValue::class);
-
     new Rgba(-5, 255, 255, 0.5);
-});
+})->throws(InvalidColorValue::class);
 
 it('cant be initialized with a color value higher than 255', function () {
-    $this->expectException(InvalidColorValue::class);
-
     new Rgba(300, 255, 255, 0.5);
-});
+})->throws(InvalidColorValue::class);
 
 it('cant be initialized with a negative alpha value', function () {
-    $this->expectException(InvalidColorValue::class);
-
     new Rgba(255, 255, 255, -1);
-});
+})->throws(InvalidColorValue::class);
 
 it('cant be initialized with an alpha value higher than 1', function () {
-    $this->expectException(InvalidColorValue::class);
-
     new Rgba(255, 255, 255, 1.5);
-});
+})->throws(InvalidColorValue::class);
 
 it('can be created from a string', function () {
     $rgba = Rgba::fromString('rgba(55,155,255,0.5)');
@@ -81,16 +73,12 @@ it('can be created from a string with spaces', function () {
 });
 
 it('cant be created from malformed string', function () {
-    $this->expectException(InvalidColorValue::class);
-
     Rgba::fromString('rgba(55,155,255,0.5');
-});
+})->throws(InvalidColorValue::class);
 
 it('cant be created from a string with text around', function () {
-    $this->expectException(InvalidColorValue::class);
-
     Rgba::fromString('abc rgba(55,155,255,0.5) abc');
-});
+})->throws(InvalidColorValue::class);
 
 it('can be casted to a string', function () {
     $rgba = new Rgba(55, 155, 255, 0.5);

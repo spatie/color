@@ -16,40 +16,28 @@ it('is initializable', function () {
 });
 
 it('cant be initialized with a negative x value', function () {
-    $this->expectException(InvalidColorValue::class);
-
     new Xyz(-5.00, 31.4749, 99.0308);
-});
+})->throws(InvalidColorValue::class);
 
 it('cant be initialized with an x value higher than 95 047', function () {
-    $this->expectException(InvalidColorValue::class);
-
     new Xyz(100.00, 31.4749, 99.0308);
-});
+})->throws(InvalidColorValue::class);
 
 it('cant be initialized with a negative y value', function () {
-    $this->expectException(InvalidColorValue::class);
-
     new Xyz(31.3469, -5.00, 99.0308);
-});
+})->throws(InvalidColorValue::class);
 
 it('cant be initialized with a y value higher than 100', function () {
-    $this->expectException(InvalidColorValue::class);
-
     new Xyz(31.3469, 150.00, 99.0308);
-});
+})->throws(InvalidColorValue::class);
 
 it('cant be initialized with a negative z value', function () {
-    $this->expectException(InvalidColorValue::class);
-
     new Xyz(31.3469, 31.4749, -5.00);
-});
+})->throws(InvalidColorValue::class);
 
 it('cant be initialized with a z value higher than 108 883', function () {
-    $this->expectException(InvalidColorValue::class);
-
     new Xyz(31.3469, 31.4749, 150.00);
-});
+})->throws(InvalidColorValue::class);
 
 it('can be created from a string', function () {
     $xyz = Xyz::fromString('xyz(31.3469,31.4749,99.0308)');
@@ -70,16 +58,12 @@ it('can be created from a string with spaces', function () {
 });
 
 it('cant be created from malformed string', function () {
-    $this->expectException(InvalidColorValue::class);
-
     Xyz::fromString('xyz(31.3469,31.4749,99.0308');
-});
+})->throws(InvalidColorValue::class);
 
 it('cant be created from a string with text around', function () {
-    $this->expectException(InvalidColorValue::class);
-
     Xyz::fromString('abc xyz(31.3469,31.4749,99.0308) abc');
-});
+})->throws(InvalidColorValue::class);
 
 it('can be casted to a string', function () {
     $xyz = new Xyz(31.3469, 31.4749, 99.0308);
