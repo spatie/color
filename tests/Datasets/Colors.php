@@ -73,3 +73,12 @@ dataset('contrast_colors', [
     [Hex::fromString('#ff1493'), Hex::fromString('#cd5c5c'), 1.0],
     [Hex::fromString('#f0fff0'), Hex::fromString('#191970'), 15.0],
 ]);
+
+dataset('hsl_string_and_rgb_values', function () {
+    yield 'hsla(55, 15%, 25%, 0.1)' => ['hsla(55, 15%, 25%, 0.1)', 73, 72, 54];
+    yield 'hsla(95, 65%, 25%, 0.1)' => ['hsla(95, 65%, 25%, 0.1)', 57, 105, 22];
+    yield 'hsla(127, 35%, 75%, 0.1)' => ['hsla(127, 35%, 75%, 0.1)', 169, 214, 174];
+    yield 'hsla(200, 65%, 75%, 0.1)' => ['hsla(200, 65%, 75%, 0.1)', 150, 205, 233];
+    yield 'hsla(242, 35%, 25%, 0.1)' => ['hsla(242, 35%, 25%, 0.1)', 43, 41, 86];
+    yield 'hsla(319, 65%, 25%, 0.1)' => ['hsla(319, 65%, 25%, 0.1)', 105, 22, 79];
+});
