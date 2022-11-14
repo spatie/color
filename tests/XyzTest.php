@@ -1,206 +1,148 @@
 <?php
 
-namespace Spatie\Color\Test;
+use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertNotSame;
+use function PHPUnit\Framework\assertSame;
 
-use PHPUnit\Framework\TestCase;
 use Spatie\Color\Exceptions\InvalidColorValue;
 use Spatie\Color\Xyz;
 
-class XyzTest extends TestCase
-{
-    /** @test */
-    public function it_is_initializable()
-    {
-        $xyz = new Xyz(31.3469, 31.4749, 99.0308);
+it('is initializable', function () {
+    $xyz = new Xyz(31.3469, 31.4749, 99.0308);
 
-        $this->assertInstanceOf(Xyz::class, $xyz);
-        $this->assertSame(31.3469, $xyz->x());
-        $this->assertSame(31.4749, $xyz->y());
-        $this->assertSame(99.0308, $xyz->z());
-    }
+    assertInstanceOf(Xyz::class, $xyz);
+    assertSame(31.3469, $xyz->x());
+    assertSame(31.4749, $xyz->y());
+    assertSame(99.0308, $xyz->z());
+});
 
-    /** @test */
-    public function it_cant_be_initialized_with_a_negative_x_value()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('cant be initialized with a negative x value', function () {
+    new Xyz(-5.00, 31.4749, 99.0308);
+})->throws(InvalidColorValue::class);
 
-        new Xyz(-5.00, 31.4749, 99.0308);
-    }
+it('cant be initialized with an x value higher than 95 047', function () {
+    new Xyz(100.00, 31.4749, 99.0308);
+})->throws(InvalidColorValue::class);
 
-    /** @test */
-    public function it_cant_be_initialized_with_an_x_value_higher_than_95_047()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('cant be initialized with a negative y value', function () {
+    new Xyz(31.3469, -5.00, 99.0308);
+})->throws(InvalidColorValue::class);
 
-        new Xyz(100.00, 31.4749, 99.0308);
-    }
+it('cant be initialized with a y value higher than 100', function () {
+    new Xyz(31.3469, 150.00, 99.0308);
+})->throws(InvalidColorValue::class);
 
-    /** @test */
-    public function it_cant_be_initialized_with_a_negative_y_value()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('cant be initialized with a negative z value', function () {
+    new Xyz(31.3469, 31.4749, -5.00);
+})->throws(InvalidColorValue::class);
 
-        new Xyz(31.3469, -5.00, 99.0308);
-    }
+it('cant be initialized with a z value higher than 108 883', function () {
+    new Xyz(31.3469, 31.4749, 150.00);
+})->throws(InvalidColorValue::class);
 
-    /** @test */
-    public function it_cant_be_initialized_with_a_y_value_higher_than_100()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('can be created from a string', function () {
+    $xyz = Xyz::fromString('xyz(31.3469,31.4749,99.0308)');
 
-        new Xyz(31.3469, 150.00, 99.0308);
-    }
+    assertInstanceOf(Xyz::class, $xyz);
+    assertSame(31.3469, $xyz->x());
+    assertSame(31.4749, $xyz->y());
+    assertSame(99.0308, $xyz->z());
+});
 
-    /** @test */
-    public function it_cant_be_initialized_with_a_negative_z_value()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('can be created from a string with spaces', function () {
+    $xyz = Xyz::fromString('  xyz(  31.3469  ,  31.4749  ,  99.0308  )  ');
 
-        new Xyz(31.3469, 31.4749, -5.00);
-    }
+    assertInstanceOf(Xyz::class, $xyz);
+    assertSame(31.3469, $xyz->x());
+    assertSame(31.4749, $xyz->y());
+    assertSame(99.0308, $xyz->z());
+});
 
-    /** @test */
-    public function it_cant_be_initialized_with_a_z_value_higher_than_108_883()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('cant be created from malformed string', function () {
+    Xyz::fromString('xyz(31.3469,31.4749,99.0308');
+})->throws(InvalidColorValue::class);
 
-        new Xyz(31.3469, 31.4749, 150.00);
-    }
+it('cant be created from a string with text around', function () {
+    Xyz::fromString('abc xyz(31.3469,31.4749,99.0308) abc');
+})->throws(InvalidColorValue::class);
 
-    /** @test */
-    public function it_can_be_created_from_a_string()
-    {
-        $xyz = Xyz::fromString('xyz(31.3469,31.4749,99.0308)');
+it('can be casted to a string', function () {
+    $xyz = new Xyz(31.3469, 31.4749, 99.0308);
 
-        $this->assertInstanceOf(Xyz::class, $xyz);
-        $this->assertSame(31.3469, $xyz->x());
-        $this->assertSame(31.4749, $xyz->y());
-        $this->assertSame(99.0308, $xyz->z());
-    }
+    assertSame('xyz(31.3469,31.4749,99.0308)', (string) $xyz);
+});
 
-    /** @test */
-    public function it_can_be_created_from_a_string_with_spaces()
-    {
-        $xyz = Xyz::fromString('  xyz(  31.3469  ,  31.4749  ,  99.0308  )  ');
+it('can be converted to CIELab', function () {
+    $xyz = new Xyz(31.3469, 31.4749, 99.0308);
+    $lab = $xyz->toCIELab();
 
-        $this->assertInstanceOf(Xyz::class, $xyz);
-        $this->assertSame(31.3469, $xyz->x());
-        $this->assertSame(31.4749, $xyz->y());
-        $this->assertSame(99.0308, $xyz->z());
-    }
+    assertSame(62.91, $lab->l());
+    assertSame(5.34, $lab->a());
+    assertSame(-57.73, $lab->b());
+});
 
-    /** @test */
-    public function it_cant_be_created_from_malformed_string()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('can be converted to cmyk', function () {
+    $xyz = new Xyz(31.3469, 31.4749, 99.0308);
+    $cmyk = $xyz->toCmyk();
 
-        Xyz::fromString('xyz(31.3469,31.4749,99.0308');
-    }
+    assertSame($xyz->red(), $cmyk->red());
+    assertSame($xyz->green(), $cmyk->green());
+    assertSame($xyz->blue(), $cmyk->blue());
+});
 
-    /** @test */
-    public function it_cant_be_created_from_a_string_with_text_around()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('can be converted to rgb', function () {
+    $xyz = new Xyz(31.3469, 31.4749, 99.0308);
+    $rgb = $xyz->toRgb();
 
-        Xyz::fromString('abc xyz(31.3469,31.4749,99.0308) abc');
-    }
+    assertSame(55, $rgb->red());
+    assertSame(155, $rgb->green());
+    assertSame(255, $rgb->blue());
+});
 
-    /** @test */
-    public function it_can_be_casted_to_a_string()
-    {
-        $xyz = new Xyz(31.3469, 31.4749, 99.0308);
+it('can be converted to rgba with a specific alpha value', function () {
+    $xyz = new Xyz(31.3469, 31.4749, 99.0308);
+    $rgba = $xyz->toRgba(0.5);
 
-        $this->assertSame('xyz(31.3469,31.4749,99.0308)', (string) $xyz);
-    }
+    assertSame(55, $rgba->red());
+    assertSame(155, $rgba->green());
+    assertSame(255, $rgba->blue());
+    assertSame(0.5, $rgba->alpha());
+});
 
-    /** @test */
-    public function it_can_be_converted_to_CIELab()
-    {
-        $xyz = new Xyz(31.3469, 31.4749, 99.0308);
-        $lab = $xyz->toCIELab();
+it('can be converted to hex', function () {
+    $xyz = new Xyz(31.3469, 31.4749, 99.0308);
+    $hex = $xyz->toHex();
 
-        $this->assertSame(62.91, $lab->l());
-        $this->assertSame(5.34, $lab->a());
-        $this->assertSame(-57.73, $lab->b());
-    }
+    assertSame('37', $hex->red());
+    assertSame('9b', $hex->green());
+    assertSame('ff', $hex->blue());
+});
 
-    /** @test */
-    public function it_can_be_converted_to_cmyk()
-    {
-        $xyz = new Xyz(31.3469, 31.4749, 99.0308);
-        $cmyk = $xyz->toCmyk();
+it('can be converted to hsl', function () {
+    $xyz = new Xyz(31.3469, 31.4749, 99.0308);
+    $hsl = $xyz->toHsl();
 
-        $this->assertSame($xyz->red(), $cmyk->red());
-        $this->assertSame($xyz->green(), $cmyk->green());
-        $this->assertSame($xyz->blue(), $cmyk->blue());
-    }
+    assertSame(55, $hsl->red());
+    assertSame(155, $hsl->green());
+    assertSame(255, $hsl->blue());
+});
 
-    /** @test */
-    public function it_can_be_converted_to_rgb()
-    {
-        $xyz = new Xyz(31.3469, 31.4749, 99.0308);
-        $rgb = $xyz->toRgb();
+it('can be converted to hsla with a specific alpha value', function () {
+    $xyz = new Xyz(31.3469, 31.4749, 99.0308);
+    $hsla = $xyz->toHsla(0.5);
 
-        $this->assertSame(55, $rgb->red());
-        $this->assertSame(155, $rgb->green());
-        $this->assertSame(255, $rgb->blue());
-    }
+    assertSame(55, $hsla->red());
+    assertSame(155, $hsla->green());
+    assertSame(255, $hsla->blue());
+    assertSame(0.5, $hsla->alpha());
+});
 
-    /** @test */
-    public function it_can_be_converted_to_rgba_with_a_specific_alpha_value()
-    {
-        $xyz = new Xyz(31.3469, 31.4749, 99.0308);
-        $rgba = $xyz->toRgba(0.5);
+it('can be converted to xyz', function () {
+    $xyz = new Xyz(31.3469, 31.4749, 99.0308);
+    $newXyz = $xyz->toXyz();
 
-        $this->assertSame(55, $rgba->red());
-        $this->assertSame(155, $rgba->green());
-        $this->assertSame(255, $rgba->blue());
-        $this->assertSame(0.5, $rgba->alpha());
-    }
-
-    /** @test */
-    public function it_can_be_converted_to_hex()
-    {
-        $xyz = new Xyz(31.3469, 31.4749, 99.0308);
-        $hex = $xyz->toHex();
-
-        $this->assertSame('37', $hex->red());
-        $this->assertSame('9b', $hex->green());
-        $this->assertSame('ff', $hex->blue());
-    }
-
-    /** @test */
-    public function it_can_be_converted_to_hsl()
-    {
-        $xyz = new Xyz(31.3469, 31.4749, 99.0308);
-        $hsl = $xyz->toHsl();
-
-        $this->assertSame(55, $hsl->red());
-        $this->assertSame(155, $hsl->green());
-        $this->assertSame(255, $hsl->blue());
-    }
-
-    /** @test */
-    public function it_can_be_converted_to_hsla_with_a_specific_alpha_value()
-    {
-        $xyz = new Xyz(31.3469, 31.4749, 99.0308);
-        $hsla = $xyz->toHsla(0.5);
-
-        $this->assertSame(55, $hsla->red());
-        $this->assertSame(155, $hsla->green());
-        $this->assertSame(255, $hsla->blue());
-        $this->assertSame(0.5, $hsla->alpha());
-    }
-
-    /** @test */
-    public function it_can_be_converted_to_xyz()
-    {
-        $xyz = new Xyz(31.3469, 31.4749, 99.0308);
-        $newXyz = $xyz->toXyz();
-
-        $this->assertSame($xyz->x(), $newXyz->x());
-        $this->assertSame($xyz->y(), $newXyz->y());
-        $this->assertSame($xyz->z(), $newXyz->z());
-        $this->assertNotSame($xyz, $newXyz);
-    }
-}
+    assertSame($xyz->x(), $newXyz->x());
+    assertSame($xyz->y(), $newXyz->y());
+    assertSame($xyz->z(), $newXyz->z());
+    assertNotSame($xyz, $newXyz);
+});

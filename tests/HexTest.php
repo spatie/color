@@ -1,254 +1,193 @@
 <?php
 
-namespace Spatie\Color\Test;
+use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertNotSame;
+use function PHPUnit\Framework\assertSame;
 
-use PHPUnit\Framework\TestCase;
 use Spatie\Color\Exceptions\InvalidColorValue;
 use Spatie\Color\Hex;
 
-class HexTest extends TestCase
-{
-    /** @test */
-    public function it_is_initializable()
-    {
-        $hex = new Hex('aa', 'bb', 'cc');
+it('is initializable', function () {
+    $hex = new Hex('aa', 'bb', 'cc');
 
-        $this->assertInstanceOf(Hex::class, $hex);
-        $this->assertSame('aa', $hex->red());
-        $this->assertSame('bb', $hex->green());
-        $this->assertSame('cc', $hex->blue());
-    }
+    assertInstanceOf(Hex::class, $hex);
+    assertSame('aa', $hex->red());
+    assertSame('bb', $hex->green());
+    assertSame('cc', $hex->blue());
+});
 
-    /** @test */
-    public function it_cant_be_initialized_with_invalid_hex_string_lengths()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('cant be initialized with invalid hex string lengths', function () {
+    new Hex('a', 'bb', 'cc');
+})->throws(InvalidColorValue::class);
 
-        new Hex('a', 'bb', 'cc');
-    }
+it('cant be initialized with invalid hex characters', function () {
+    new Hex('gg', 'bb', 'cc');
+})->throws(InvalidColorValue::class);
 
-    /** @test */
-    public function it_cant_be_initialized_with_invalid_hex_characters()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('can be created from a string', function () {
+    $hex = Hex::fromString('#aabbcc');
 
-        new Hex('gg', 'bb', 'cc');
-    }
+    assertInstanceOf(Hex::class, $hex);
+    assertSame('aa', $hex->red());
+    assertSame('bb', $hex->green());
+    assertSame('cc', $hex->blue());
+});
 
-    /** @test */
-    public function it_can_be_created_from_a_string()
-    {
-        $hex = Hex::fromString('#aabbcc');
+it('can be created from a short string', function () {
+    $hex = Hex::fromString('#abc');
 
-        $this->assertInstanceOf(Hex::class, $hex);
-        $this->assertSame('aa', $hex->red());
-        $this->assertSame('bb', $hex->green());
-        $this->assertSame('cc', $hex->blue());
-    }
+    assertInstanceOf(Hex::class, $hex);
+    assertSame('aa', $hex->red());
+    assertSame('bb', $hex->green());
+    assertSame('cc', $hex->blue());
+});
 
-    /** @test */
-    public function it_can_be_created_from_a_short_string()
-    {
-        $hex = Hex::fromString('#abc');
+it('can be created from a string with alpha', function () {
+    $hex = Hex::fromString('#aabbccdd');
 
-        $this->assertInstanceOf(Hex::class, $hex);
-        $this->assertSame('aa', $hex->red());
-        $this->assertSame('bb', $hex->green());
-        $this->assertSame('cc', $hex->blue());
-    }
+    assertInstanceOf(Hex::class, $hex);
+    assertSame('aa', $hex->red());
+    assertSame('bb', $hex->green());
+    assertSame('cc', $hex->blue());
+    assertSame('dd', $hex->alpha());
+});
 
-    /** @test */
-    public function it_can_be_created_from_a_string_with_alpha()
-    {
-        $hex = Hex::fromString('#aabbccdd');
+it('can be created from a short string alpha', function () {
+    $hex = Hex::fromString('#abcd');
 
-        $this->assertInstanceOf(Hex::class, $hex);
-        $this->assertSame('aa', $hex->red());
-        $this->assertSame('bb', $hex->green());
-        $this->assertSame('cc', $hex->blue());
-        $this->assertSame('dd', $hex->alpha());
-    }
+    assertInstanceOf(Hex::class, $hex);
+    assertSame('aa', $hex->red());
+    assertSame('bb', $hex->green());
+    assertSame('cc', $hex->blue());
+    assertSame('dd', $hex->alpha());
+});
 
-    /** @test */
-    public function it_can_be_created_from_a_short_string_alpha()
-    {
-        $hex = Hex::fromString('#abcd');
+it('cant be created from a string without a hash character', function () {
+    Hex::fromString('aabbcc');
+})->throws(InvalidColorValue::class);
 
-        $this->assertInstanceOf(Hex::class, $hex);
-        $this->assertSame('aa', $hex->red());
-        $this->assertSame('bb', $hex->green());
-        $this->assertSame('cc', $hex->blue());
-        $this->assertSame('dd', $hex->alpha());
-    }
+it('cant be created from a string with a length too short', function () {
+    Hex::fromString('#abbcc');
+})->throws(InvalidColorValue::class);
 
-    /** @test */
-    public function it_cant_be_created_from_a_string_without_a_hash_character()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('cant be created from a string with a length too long', function () {
+    Hex::fromString('#aabbccddee');
+})->throws(InvalidColorValue::class);
 
-        Hex::fromString('aabbcc');
-    }
+it('cant be created from a string with invalid characters', function () {
+    Hex::fromString('#ggbbcc');
+})->throws(InvalidColorValue::class);
 
-    /** @test */
-    public function it_cant_be_created_from_a_string_with_a_length_too_short()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('can be casted to a string', function () {
+    $hex = new Hex('aa', 'bb', 'cc');
 
-        Hex::fromString('#abbcc');
-    }
+    assertSame('#aabbcc', (string) $hex);
+});
 
-    /** @test */
-    public function it_cant_be_created_from_a_string_with_a_length_too_long()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('can be casted to a string with alpha', function () {
+    $hex = new Hex('aa', 'bb', 'cc', 'dd');
 
-        Hex::fromString('#aabbccddee');
-    }
+    assertSame('#aabbccdd', (string) $hex);
+});
 
-    /** @test */
-    public function it_cant_be_created_from_a_string_with_invalid_characters()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('can be converted to CIELab', function () {
+    $hex = new Hex('aa', 'bb', 'cc');
+    $lab = $hex->toCIELab();
 
-        Hex::fromString('#ggbbcc');
-    }
+    assertSame(75.11, $lab->l());
+    assertSame(-2.29, $lab->a());
+    assertSame(-10.54, $lab->b());
+});
 
-    /** @test */
-    public function it_can_be_casted_to_a_string()
-    {
-        $hex = new Hex('aa', 'bb', 'cc');
+it('can be converted to cmyk', function () {
+    $hex = new Hex('aa', 'bb', 'cc');
+    $cmyk = $hex->toCmyk();
 
-        $this->assertSame('#aabbcc', (string) $hex);
-    }
+    assertSame(170, $cmyk->red());
+    assertSame(187, $cmyk->green());
+    assertSame(204, $cmyk->blue());
+});
 
-    /** @test */
-    public function it_can_be_casted_to_a_string_with_alpha()
-    {
-        $hex = new Hex('aa', 'bb', 'cc', 'dd');
+it('can be converted to hex', function () {
+    $hex = new Hex('aa', 'bb', 'cc');
+    $newHex = $hex->toHex();
 
-        $this->assertSame('#aabbccdd', (string) $hex);
-    }
+    assertSame($hex->red(), $newHex->red());
+    assertSame($hex->green(), $newHex->green());
+    assertSame($hex->blue(), $newHex->blue());
+    assertNotSame($hex, $newHex);
+});
 
-    /** @test */
-    public function it_can_be_converted_to_CIELab()
-    {
-        $hex = new Hex('aa', 'bb', 'cc');
-        $lab = $hex->toCIELab();
+it('can be converted to hsl', function () {
+    $hex = new Hex('aa', 'bb', 'cc');
+    $hsl = $hex->toHsl();
 
-        $this->assertSame(75.11, $lab->l());
-        $this->assertSame(-2.29, $lab->a());
-        $this->assertSame(-10.54, $lab->b());
-    }
+    assertSame(170, $hsl->red());
+    assertSame(187, $hsl->green());
+    assertSame(204, $hsl->blue());
+});
 
-    /** @test */
-    public function it_can_be_converted_to_cmyk()
-    {
-        $hex = new Hex('aa', 'bb', 'cc');
-        $cmyk = $hex->toCmyk();
+it('can be converted to hsl with same intensity', function () {
+    $hex = new Hex('a8', 'a8', 'a8');
+    $hsl = $hex->toHsl();
 
-        $this->assertSame(170, $cmyk->red());
-        $this->assertSame(187, $cmyk->green());
-        $this->assertSame(204, $cmyk->blue());
-    }
+    assertSame(168, $hsl->red());
+    assertSame(168, $hsl->green());
+    assertSame(168, $hsl->blue());
+});
 
-    /** @test */
-    public function it_can_be_converted_to_hex()
-    {
-        $hex = new Hex('aa', 'bb', 'cc');
-        $newHex = $hex->toHex();
+it('can be converted to hsl with a with value', function () {
+    $hex = new Hex('ff', 'ff', 'ff');
+    $hsl = $hex->toHsl();
 
-        $this->assertSame($hex->red(), $newHex->red());
-        $this->assertSame($hex->green(), $newHex->green());
-        $this->assertSame($hex->blue(), $newHex->blue());
-        $this->assertNotSame($hex, $newHex);
-    }
+    assertSame(255, $hsl->red());
+    assertSame(255, $hsl->green());
+    assertSame(255, $hsl->blue());
+});
 
-    /** @test */
-    public function it_can_be_converted_to_hsl()
-    {
-        $hex = new Hex('aa', 'bb', 'cc');
-        $hsl = $hex->toHsl();
+it('can be converted to hsl with a black value', function () {
+    $hex = new Hex('00', '00', '00');
+    $hsl = $hex->toHsl();
 
-        $this->assertSame(170, $hsl->red());
-        $this->assertSame(187, $hsl->green());
-        $this->assertSame(204, $hsl->blue());
-    }
+    assertSame(0, $hsl->red());
+    assertSame(0, $hsl->green());
+    assertSame(0, $hsl->blue());
+});
 
-    /** @test */
-    public function it_can_be_converted_to_hsl_with_same_intensity()
-    {
-        $hex = new Hex('a8', 'a8', 'a8');
-        $hsl = $hex->toHsl();
+it('can be converted to hsla with a specific alpha value', function () {
+    $hex = new Hex('aa', 'bb', 'cc');
+    $hsla = $hex->toHsla(0.75);
 
-        $this->assertSame(168, $hsl->red());
-        $this->assertSame(168, $hsl->green());
-        $this->assertSame(168, $hsl->blue());
-    }
+    assertSame(170, $hsla->red());
+    assertSame(187, $hsla->green());
+    assertSame(204, $hsla->blue());
+    assertSame(0.75, $hsla->alpha());
+});
 
-    /** @test */
-    public function it_can_be_converted_to_hsl_with_a_with_value()
-    {
-        $hex = new Hex('ff', 'ff', 'ff');
-        $hsl = $hex->toHsl();
+it('can be converted to rgb', function () {
+    $hex = new Hex('aa', 'bb', 'cc');
+    $rgb = $hex->toRgb();
 
-        $this->assertSame(255, $hsl->red());
-        $this->assertSame(255, $hsl->green());
-        $this->assertSame(255, $hsl->blue());
-    }
+    assertSame(170, $rgb->red());
+    assertSame(187, $rgb->green());
+    assertSame(204, $rgb->blue());
+});
 
-    /** @test */
-    public function it_can_be_converted_to_hsl_with_a_black_value()
-    {
-        $hex = new Hex('00', '00', '00');
-        $hsl = $hex->toHsl();
+it('can be converted to rgba', function () {
+    $hex = new Hex('aa', 'bb', 'cc');
+    $rgba = $hex->toRgba(0.5);
 
-        $this->assertSame(0, $hsl->red());
-        $this->assertSame(0, $hsl->green());
-        $this->assertSame(0, $hsl->blue());
-    }
+    assertSame(170, $rgba->red());
+    assertSame(187, $rgba->green());
+    assertSame(204, $rgba->blue());
+    assertSame(0.5, $rgba->alpha());
+});
 
-    /** @test */
-    public function it_can_be_converted_to_hsla_with_a_specific_alpha_value()
-    {
-        $hex = new Hex('aa', 'bb', 'cc');
-        $hsla = $hex->toHsla(0.75);
+it('can be converted to xyz', function () {
+    $hex = new Hex('aa', 'bb', 'cc');
+    $xyz = $hex->toXyz();
 
-        $this->assertSame(170, $hsla->red());
-        $this->assertSame(187, $hsla->green());
-        $this->assertSame(204, $hsla->blue());
-        $this->assertSame(0.75, $hsla->alpha());
-    }
-
-    /** @test */
-    public function it_can_be_converted_to_rgb()
-    {
-        $hex = new Hex('aa', 'bb', 'cc');
-        $rgb = $hex->toRgb();
-
-        $this->assertSame(170, $rgb->red());
-        $this->assertSame(187, $rgb->green());
-        $this->assertSame(204, $rgb->blue());
-    }
-
-    /** @test */
-    public function it_can_be_converted_to_rgba()
-    {
-        $hex = new Hex('aa', 'bb', 'cc');
-        $rgba = $hex->toRgba(0.5);
-
-        $this->assertSame(170, $rgba->red());
-        $this->assertSame(187, $rgba->green());
-        $this->assertSame(204, $rgba->blue());
-        $this->assertSame(0.5, $rgba->alpha());
-    }
-
-    public function it_can_be_converted_to_xyz()
-    {
-        $hex = new Hex('aa', 'bb', 'cc');
-        $xyz = $hex->toXyz();
-
-        $this->assertSame(45.2470, $xyz->x());
-        $this->assertSame(48.4463, $xyz->y());
-        $this->assertSame(64.0930, $xyz->z());
-    }
-}
+    assertSame(45.2470, $xyz->x());
+    assertSame(48.4463, $xyz->y());
+    assertSame(64.0930, $xyz->z());
+})->skip();

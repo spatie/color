@@ -1,184 +1,141 @@
 <?php
 
-namespace Spatie\Color\Test;
+use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertNotSame;
+use function PHPUnit\Framework\assertSame;
 
-use PHPUnit\Framework\TestCase;
 use Spatie\Color\Exceptions\InvalidColorValue;
 use Spatie\Color\Rgb;
 
-class RgbTest extends TestCase
-{
-    /** @test */
-    public function it_is_initializable()
-    {
-        $rgb = new Rgb(55, 155, 255);
+it('is initializable', function () {
+    $rgb = new Rgb(55, 155, 255);
 
-        $this->assertInstanceOf(Rgb::class, $rgb);
-        $this->assertSame(55, $rgb->red());
-        $this->assertSame(155, $rgb->green());
-        $this->assertSame(255, $rgb->blue());
-    }
+    assertInstanceOf(Rgb::class, $rgb);
+    assertSame(55, $rgb->red());
+    assertSame(155, $rgb->green());
+    assertSame(255, $rgb->blue());
+});
 
-    /** @test */
-    public function it_cant_be_initialized_with_a_negative_color_value()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('cant be initialized with a negative color value', function () {
+    new Rgb(-5, 255, 255);
+})->throws(InvalidColorValue::class);
 
-        new Rgb(-5, 255, 255);
-    }
+it('cant be initialized with a color value higher than 255', function () {
+    new Rgb(300, 255, 255);
+})->throws(InvalidColorValue::class);
 
-    /** @test */
-    public function it_cant_be_initialized_with_a_color_value_higher_than_255()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('can be created from a string', function () {
+    $rgb = Rgb::fromString('rgb(55,155,255)');
 
-        new Rgb(300, 255, 255);
-    }
+    assertInstanceOf(Rgb::class, $rgb);
+    assertSame(55, $rgb->red());
+    assertSame(155, $rgb->green());
+    assertSame(255, $rgb->blue());
+});
 
-    /** @test */
-    public function it_can_be_created_from_a_string()
-    {
-        $rgb = Rgb::fromString('rgb(55,155,255)');
+it('can be created from a string with spaces', function () {
+    $rgb = Rgb::fromString('  rgb(  55  ,  155  ,  255  )  ');
 
-        $this->assertInstanceOf(Rgb::class, $rgb);
-        $this->assertSame(55, $rgb->red());
-        $this->assertSame(155, $rgb->green());
-        $this->assertSame(255, $rgb->blue());
-    }
+    assertInstanceOf(Rgb::class, $rgb);
+    assertSame(55, $rgb->red());
+    assertSame(155, $rgb->green());
+    assertSame(255, $rgb->blue());
+});
 
-    /** @test */
-    public function it_can_be_created_from_a_string_with_spaces()
-    {
-        $rgb = Rgb::fromString('  rgb(  55  ,  155  ,  255  )  ');
+it('cant be created from malformed string', function () {
+    Rgb::fromString('rgb(55,155,255');
+})->throws(InvalidColorValue::class);
 
-        $this->assertInstanceOf(Rgb::class, $rgb);
-        $this->assertSame(55, $rgb->red());
-        $this->assertSame(155, $rgb->green());
-        $this->assertSame(255, $rgb->blue());
-    }
+it('cant be created from a string with text around', function () {
+    Rgb::fromString('abc rgb(55,155,255) abc');
+})->throws(InvalidColorValue::class);
 
-    /** @test */
-    public function it_cant_be_created_from_malformed_string()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('can be casted to a string', function () {
+    $rgb = new Rgb(55, 155, 255);
 
-        Rgb::fromString('rgb(55,155,255');
-    }
+    assertSame('rgb(55,155,255)', (string) $rgb);
+});
 
-    /** @test */
-    public function it_cant_be_created_from_a_string_with_text_around()
-    {
-        $this->expectException(InvalidColorValue::class);
+it('can be converted to CIELab', function () {
+    $rgb = new Rgb(55, 155, 255);
+    $lab = $rgb->toCIELab();
 
-        Rgb::fromString('abc rgb(55,155,255) abc');
-    }
+    assertSame(62.91, $lab->l());
+    assertSame(5.34, $lab->a());
+    assertSame(-57.73, $lab->b());
+});
 
-    /** @test */
-    public function it_can_be_casted_to_a_string()
-    {
-        $rgb = new Rgb(55, 155, 255);
+it('can be converted to cmyk', function () {
+    $rgb = new Rgb(55, 155, 255);
+    $cmyk = $rgb->toCmyk();
 
-        $this->assertSame('rgb(55,155,255)', (string) $rgb);
-    }
+    assertSame($rgb->red(), $cmyk->red());
+    assertSame($rgb->green(), $cmyk->green());
+    assertSame($rgb->blue(), $cmyk->blue());
+});
 
-    /** @test */
-    public function it_can_be_converted_to_CIELab()
-    {
-        $rgb = new Rgb(55, 155, 255);
-        $lab = $rgb->toCIELab();
+it('can be converted to rgb', function () {
+    $rgb = new Rgb(55, 155, 255);
+    $newRgb = $rgb->toRgb();
 
-        $this->assertSame(62.91, $lab->l());
-        $this->assertSame(5.34, $lab->a());
-        $this->assertSame(-57.73, $lab->b());
-    }
+    assertSame($rgb->red(), $newRgb->red());
+    assertSame($rgb->green(), $newRgb->green());
+    assertSame($rgb->blue(), $newRgb->blue());
+    assertNotSame($rgb, $newRgb);
+});
 
-    /** @test */
-    public function it_can_be_converted_to_cmyk()
-    {
-        $rgb = new Rgb(55, 155, 255);
-        $cmyk = $rgb->toCmyk();
+it('can be converted to rgba with a specific alpha value', function () {
+    $rgb = new Rgb(55, 155, 255);
+    $rgba = $rgb->toRgba(0.5);
 
-        $this->assertSame($rgb->red(), $cmyk->red());
-        $this->assertSame($rgb->green(), $cmyk->green());
-        $this->assertSame($rgb->blue(), $cmyk->blue());
-    }
+    assertSame(55, $rgba->red());
+    assertSame(155, $rgba->green());
+    assertSame(255, $rgba->blue());
+    assertSame(0.5, $rgba->alpha());
+});
 
-    /** @test */
-    public function it_can_be_converted_to_rgb()
-    {
-        $rgb = new Rgb(55, 155, 255);
-        $newRgb = $rgb->toRgb();
+it('can be converted to hex', function () {
+    $rgb = new Rgb(55, 155, 255);
+    $hex = $rgb->toHex();
 
-        $this->assertSame($rgb->red(), $newRgb->red());
-        $this->assertSame($rgb->green(), $newRgb->green());
-        $this->assertSame($rgb->blue(), $newRgb->blue());
-        $this->assertNotSame($rgb, $newRgb);
-    }
+    assertSame('37', $hex->red());
+    assertSame('9b', $hex->green());
+    assertSame('ff', $hex->blue());
+});
 
-    /** @test */
-    public function it_can_be_converted_to_rgba_with_a_specific_alpha_value()
-    {
-        $rgb = new Rgb(55, 155, 255);
-        $rgba = $rgb->toRgba(0.5);
+it('can be converted to hsb', function () {
+    $rgb = new Rgb(128, 102, 102);
+    $hsb = $rgb->toHsb();
 
-        $this->assertSame(55, $rgba->red());
-        $this->assertSame(155, $rgba->green());
-        $this->assertSame(255, $rgba->blue());
-        $this->assertSame(0.5, $rgba->alpha());
-    }
+    assertSame(0.0, $hsb->hue());
+    assertSame(20.0, $hsb->saturation());
+    assertSame(50.0, $hsb->brightness());
+});
 
-    /** @test */
-    public function it_can_be_converted_to_hex()
-    {
-        $rgb = new Rgb(55, 155, 255);
-        $hex = $rgb->toHex();
+it('can be converted to hsl', function () {
+    $rgb = new Rgb(55, 155, 255);
+    $hsl = $rgb->toHsl();
 
-        $this->assertSame('37', $hex->red());
-        $this->assertSame('9b', $hex->green());
-        $this->assertSame('ff', $hex->blue());
-    }
+    assertSame(55, $hsl->red());
+    assertSame(155, $hsl->green());
+    assertSame(255, $hsl->blue());
+});
 
-    /** @test */
-    public function it_can_be_converted_to_hsb()
-    {
-        $rgb = new Rgb(128, 102, 102);
-        $hsb = $rgb->toHsb();
+it('can be converted to hsla with a specific alpha value', function () {
+    $rgb = new Rgb(55, 155, 255);
+    $hsla = $rgb->toHsla(0.5);
 
-        $this->assertSame(0.0, $hsb->hue());
-        $this->assertSame(20.0, $hsb->saturation());
-        $this->assertSame(50.0, $hsb->brightness());
-    }
+    assertSame(55, $hsla->red());
+    assertSame(155, $hsla->green());
+    assertSame(255, $hsla->blue());
+    assertSame(0.5, $hsla->alpha());
+});
 
-    /** @test */
-    public function it_can_be_converted_to_hsl()
-    {
-        $rgb = new Rgb(55, 155, 255);
-        $hsl = $rgb->toHsl();
+it('can be converted to xyz', function () {
+    $rgb = new Rgb(55, 155, 255);
+    $xyz = $rgb->toXyz();
 
-        $this->assertSame(55, $hsl->red());
-        $this->assertSame(155, $hsl->green());
-        $this->assertSame(255, $hsl->blue());
-    }
-
-    /** @test */
-    public function it_can_be_converted_to_hsla_with_a_specific_alpha_value()
-    {
-        $rgb = new Rgb(55, 155, 255);
-        $hsla = $rgb->toHsla(0.5);
-
-        $this->assertSame(55, $hsla->red());
-        $this->assertSame(155, $hsla->green());
-        $this->assertSame(255, $hsla->blue());
-        $this->assertSame(0.5, $hsla->alpha());
-    }
-
-    public function it_can_be_converted_to_xyz()
-    {
-        $rgb = new Rgb(55, 155, 255);
-        $xyz = $rgb->toXyz();
-
-        $this->assertSame(31.3469, $xyz->x());
-        $this->assertSame(31.4749, $xyz->y());
-        $this->assertSame(99.0308, $xyz->z());
-    }
-}
+    assertSame(31.3469, $xyz->x());
+    assertSame(31.4749, $xyz->y());
+    assertSame(99.0308, $xyz->z());
+})->skip();
