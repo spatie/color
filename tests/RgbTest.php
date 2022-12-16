@@ -84,6 +84,15 @@ it('can be converted to rgb', function () {
     assertNotSame($rgb, $newRgb);
 });
 
+it('can be converted from rgb(0,0,0) to cmyk', function () {
+    $rgb = new Rgb(0, 0, 0);
+    $cmyk = $rgb->toCmyk();
+
+    assertSame($rgb->red(), $cmyk->red());
+    assertSame($rgb->green(), $cmyk->green());
+    assertSame($rgb->blue(), $cmyk->blue());
+});
+
 it('can be converted to rgba with a specific alpha value', function () {
     $rgb = new Rgb(55, 155, 255);
     $rgba = $rgb->toRgba(0.5);
