@@ -64,9 +64,9 @@ class Convert
         $keyNeg = (1 - $black);
 
         return [
-            ($keyNeg - $red) / $keyNeg,
-            ($keyNeg - $green) / $keyNeg,
-            ($keyNeg - $blue) / $keyNeg,
+            (1 - $red - $black) / ($keyNeg ?: 1),
+            (1 - $green - $black) / ($keyNeg ?: 1),
+            (1 - $blue - $black) / ($keyNeg ?: 1),
             $black,
         ];
     }

@@ -108,6 +108,15 @@ it('can be converted to cmyk', function () {
     assertSame(204, $cmyk->blue());
 });
 
+it('can be converted from hex("00", "00", "00") to cmyk', function () {
+    $hex = new Hex('00', '00', '00');
+    $cmyk = $hex->toCmyk();
+
+    assertSame(0, $cmyk->red());
+    assertSame(0, $cmyk->green());
+    assertSame(0, $cmyk->blue());
+});
+
 it('can be converted to hex', function () {
     $hex = new Hex('aa', 'bb', 'cc');
     $newHex = $hex->toHex();
