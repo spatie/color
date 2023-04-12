@@ -240,7 +240,7 @@ Cast the color to a string.
 (string) Rgb::fromString('rgb(0, 0, 255)'); // 'rgb(0,0,255)'
 (string) Rgba::fromString('rgb(0, 0, 255, .5)'); // 'rgb(0,0,255,0.5)'
 (string) Hex::fromString('#0000ff'); // '#0000ff'
-(string) Hsla::fromString('hsl(240, 100%, 50%)'); // 'hsl(240, 100%, 50%)'
+(string) Hsl::fromString('hsl(240, 100%, 50%)'); // 'hsl(240, 100%, 50%)'
 (string) Hsla::fromString('hsla(240, 100%, 50%, 1.0)'); // 'hsla(240, 100%, 50%, 1.0)'
 ```
 
