@@ -152,4 +152,11 @@ class Validate
             throw InvalidColorValue::malformedXyzColorString($string);
         }
     }
+
+    public static function namedColorString($string): void
+    {
+        if (! preg_match('/^[a-z]+$/i', $string)) {
+            throw InvalidColorValue::malformedNamedColorString($string);
+        }
+    }
 }

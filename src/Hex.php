@@ -12,10 +12,10 @@ class Hex implements Color
 
     public function __construct(string $red, string $green, string $blue, string $alpha = 'ff')
     {
-        Validate::hexChannelValue($red, 'red');
-        Validate::hexChannelValue($green, 'green');
-        Validate::hexChannelValue($blue, 'blue');
-        Validate::hexChannelValue($alpha, 'alpha');
+        Validate::hexChannelValue($red);
+        Validate::hexChannelValue($green);
+        Validate::hexChannelValue($blue);
+        Validate::hexChannelValue($alpha);
 
         $this->red = strtolower($red);
         $this->green = strtolower($green);

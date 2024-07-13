@@ -9,6 +9,7 @@ use Spatie\Color\Factory;
 use Spatie\Color\Hex;
 use Spatie\Color\Hsl;
 use Spatie\Color\Hsla;
+use Spatie\Color\Named;
 use Spatie\Color\Rgb;
 use Spatie\Color\Rgba;
 use Spatie\Color\Xyz;
@@ -53,6 +54,12 @@ it('can create a xyz color from a string', function () {
     $xyz = Factory::fromString('xyz(31.3469,31.4749,99.0308)');
 
     assertInstanceOf(Xyz::class, $xyz);
+});
+
+it('can create a named color from a string', function () {
+    $named = Factory::fromString('peru');
+
+    assertInstanceOf(Named::class, $named);
 });
 
 it('cant create a color from malformed string', function () {

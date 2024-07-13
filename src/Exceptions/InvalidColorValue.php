@@ -97,4 +97,9 @@ class InvalidColorValue extends Exception
     {
         return new static("Xyz value `{$name}` must be a number between $min and $max");
     }
+
+    public static function malformedNamedColorString(string $string): self
+    {
+        return new static("Color string `{$string}` doesn't match any of the available colors.");
+    }
 }
