@@ -2,11 +2,9 @@
 
 use Spatie\Color\Named;
 use function PHPUnit\Framework\assertInstanceOf;
-use function PHPUnit\Framework\assertNotSame;
 use function PHPUnit\Framework\assertSame;
 
 use Spatie\Color\Exceptions\InvalidColorValue;
-use Spatie\Color\Rgb;
 
 it('is initializable', function () {
     $named = new Named('peru');
@@ -15,6 +13,8 @@ it('is initializable', function () {
     assertSame(205, $named->red());
     assertSame(133, $named->green());
     assertSame(63, $named->blue());
+
+    assertSame('#cd853f', (string) $named->toHex());
 });
 
 it('is initializable with case-insensitive', function () {
