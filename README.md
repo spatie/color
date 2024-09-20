@@ -10,9 +10,17 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/color.svg?style=flat-square)](https://packagist.org/packages/spatie/color)
 ![Tests](https://github.com/spatie/color/workflows/Tests/badge.svg)
 
-A little library to handle color conversions and comparisons. Currently supports rgb, rgba, hex, hsl, hsla, CIELab, and xyz color formats as well as CIE76, CIE94, and CIEDE2000 color comparison algorithms.
+A little library to handle color conversions and comparisons. Currently, supports CSS names, rgb, rgba, hex, hsl, hsla, CIELab, and xyz color formats as well as CIE76, CIE94, and CIEDE2000 color comparison algorithms.
 
 ```php
+$named = Named::fromString('peru'); // case-insensitive
+
+echo $named->red(); // 205
+echo $named->green(); // 133
+echo $named->blue(); // 63
+
+echo $named->toHex(); // #cd853f
+
 $rgb = Rgb::fromString('rgb(55,155,255)');
 
 echo $rgb->red(); // 55
@@ -102,6 +110,7 @@ There are seven classes which implement the `Color` interface:
 Parses a color string and returns a `Color` implementation, depending on the format of the input string.
 
 ```php
+Named::fromString('blue');
 Hex::fromString('#000000');
 Rgba::fromString('rgba(255, 255, 255, 1)');
 Hsla::fromString('hsla(360, 100%, 100%, 1)');
@@ -250,6 +259,7 @@ With the `Factory` class, you can create a color instance from any string (it do
 
 ```php
 Factory::fromString('rgb(0, 0, 255)'); // `Rgb` instance
+Factory::fromString('blue'); // `Named` instance
 Factory::fromString('#0000ff'); // `Hex` instance
 Factory::fromString('hsl(240, 100%, 50%)'); // `Hsl` instance
 Factory::fromString('Hello world!'); // `InvalidColorValue` exception

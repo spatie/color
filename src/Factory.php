@@ -24,6 +24,7 @@ class Factory
     protected static function getColorClasses(): array
     {
         return [
+            Named::class,
             CIELab::class,
             Cmyk::class,
             Hex::class,
