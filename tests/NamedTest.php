@@ -1,10 +1,10 @@
 <?php
 
-use Spatie\Color\Named;
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 use Spatie\Color\Exceptions\InvalidColorValue;
+use Spatie\Color\Named;
 
 it('is initializable', function () {
     $named = new Named('peru');
