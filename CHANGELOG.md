@@ -2,6 +2,22 @@
 
 All notable changes to `color` will be documented in this file
 
+## 1.6.0 - 2024-09-20
+
+### What's Changed
+
+* Ignore more file when packaging releases by @andypost in https://github.com/spatie/color/pull/83
+* Fix typo in README for Hsl::fromString() in Cast the color to a string. by @agnonym in https://github.com/spatie/color/pull/84
+* Added named colors by @vanodevium in https://github.com/spatie/color/pull/87
+
+### New Contributors
+
+* @andypost made their first contribution in https://github.com/spatie/color/pull/83
+* @agnonym made their first contribution in https://github.com/spatie/color/pull/84
+* @vanodevium made their first contribution in https://github.com/spatie/color/pull/87
+
+**Full Changelog**: https://github.com/spatie/color/compare/1.5.3...1.6.0
+
 ## 1.5.3 - 2022-12-18
 
 ### What's Changed
