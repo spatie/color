@@ -70,7 +70,7 @@ class InvalidColorValue extends Exception
 
     public static function malformedHslaColorString(string $string): self
     {
-        return new static("Hsla color string `{$string}` is malformed. An hsla color contains hue, saturation, lightness and alpha values, wrapped in `hsl()`, e.g. `hsl(300,10%,50%,0.25)`.");
+        return new static("Hsla color string `{$string}` is malformed. An hsla color contains hue, saturation, lightness and alpha values, wrapped in `hsla()`, e.g. `hsla(300,10%,50%,0.25)`.");
     }
 
     public static function malformedRgbColorString(string $string): self
