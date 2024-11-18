@@ -2,6 +2,18 @@
 
 All notable changes to `color` will be documented in this file
 
+## 1.6.1 - 2024-11-18
+
+### What's Changed
+
+* Fix wrong Validation Error message for hsla strings by @Afrowson in https://github.com/spatie/color/pull/90
+
+### New Contributors
+
+* @Afrowson made their first contribution in https://github.com/spatie/color/pull/90
+
+**Full Changelog**: https://github.com/spatie/color/compare/1.6.0...1.6.1
+
 ## 1.6.0 - 2024-09-20
 
 ### What's Changed
