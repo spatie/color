@@ -25,9 +25,9 @@ class Contrast
             0.0722 * pow(hexdec($b->blue()) / 255, 2.2);
 
         if ($l1 > $l2) {
-            return (int) (($l1 + 0.05) / ($l2 + 0.05));
+            return (float) (($l1 + 0.05) / ($l2 + 0.05));
         } else {
-            return (int) (($l2 + 0.05) / ($l1 + 0.05));
+            return (float) (($l2 + 0.05) / ($l1 + 0.05));
         }
     }
 }
