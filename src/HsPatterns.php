@@ -4,9 +4,9 @@ namespace Spatie\Color;
 
 class HsPatterns
 {
-    private const HUE = '\d{1,3}';
-    private const COMPONENT = '\d{1,3}(?:\.\d+)?%?';
-    private const ALPHA = '[0-1](?:\.\d{1,2})?';
+    protected const HUE = '\d{1,3}';
+    protected const COMPONENT = '\d{1,3}(?:\.\d+)?%?';
+    protected const ALPHA = '[0-1](?:\.\d{1,2})?';
 
     private const VALIDATION_PATTERNS = [
         'hsb' => '/^ *hs[vb]\( *-?' . self::HUE . ' *, *' . self::COMPONENT . ' *, *' . self::COMPONENT . ' *\) *$/i',
