@@ -1,10 +1,10 @@
 <?php
 
-use Spatie\Color\Hex;
 use function PHPUnit\Framework\assertSame;
 
 use Spatie\Color\Color;
 use Spatie\Color\Contrast;
+use Spatie\Color\Hex;
 
 it('can calculate contrast', function (Color $a, Color $b, float $contrast) {
     assertSame($contrast, Contrast::ratio($a, $b));
