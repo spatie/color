@@ -27,9 +27,14 @@ class Hsla implements Color
         Validate::hslaColorString($string);
 
         $matches = null;
-        preg_match('/hsla\( *(\d{1,3}) *, *(\d{1,3})%? *, *(\d{1,3})%? *, *([0-1](\.\d{1,2})?) *\)/i', $string, $matches);
+        preg_match(HsPatterns::getExtractionPattern('hsla'), $string, $matches);
 
-        return new static($matches[1], $matches[2], $matches[3], $matches[4]);
+        return new static(
+            (float) $matches[1],
+            (float) $matches[2],
+            (float) $matches[3],
+            (float) $matches[4]
+        );
     }
 
     public function hue(): float
