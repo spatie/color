@@ -22,7 +22,7 @@ class HsPatterns
 
     public static function getValidationPattern(string $type): string
     {
-        if (!isset(self::VALIDATION_PATTERNS[$type])) {
+        if (! isset(self::VALIDATION_PATTERNS[$type])) {
             throw new \InvalidArgumentException('Invalid color type: ' . $type);
         }
 
@@ -31,7 +31,7 @@ class HsPatterns
 
     public static function getExtractionPattern(string $type): string
     {
-        if (!isset(self::EXTRACTION_PATTERNS[$type])) {
+        if (! isset(self::EXTRACTION_PATTERNS[$type])) {
             throw new \InvalidArgumentException('Invalid color type: ' . $type);
         }
 
