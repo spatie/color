@@ -25,9 +25,13 @@ class Hsb implements Color
         Validate::hsbColorString($string);
 
         $matches = null;
-        preg_match('/hs[vb]\( *(-?\d{1,3}) *, *(\d{1,3})%? *, *(\d{1,3})%? *\)/i', $string, $matches);
+        preg_match(HsPatterns::getExtractionPattern('hsb'), $string, $matches);
 
-        return new static($matches[1], $matches[2], $matches[3]);
+        return new static(
+            (float) $matches[1],
+            (float) $matches[2],
+            (float) $matches[3],
+        );
     }
 
     public function hue(): float
