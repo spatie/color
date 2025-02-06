@@ -14,17 +14,17 @@ interface Color
 
     public function toCIELab(): CIELab;
 
-    public function toHex(string $alpha = 'ff'): Hex;
+    public function toHex(?string $alpha = null): Hex;
 
     public function toHsb(): Hsb;
 
     public function toHsl(): Hsl;
 
-    public function toHsla(float $alpha = 1): Hsla;
+    public function toHsla(?float $alpha = null): Hsla;
 
     public function toRgb(): Rgb;
 
-    public function toRgba(float $alpha = 1): Rgba;
+    public function toRgba(?float $alpha = null): Rgba;
 
     public function toXyz(): Xyz;
 

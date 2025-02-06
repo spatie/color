@@ -118,13 +118,20 @@ it('can be converted from hex("00", "00", "00") to cmyk', function () {
 });
 
 it('can be converted to hex', function () {
-    $hex = new Hex('aa', 'bb', 'cc');
+    $hex = new Hex('aa', 'bb', 'cc', 'dd');
     $newHex = $hex->toHex();
+
+    assertSame(serialize($hex), serialize($newHex));
+});
+
+it('can be converted to hex with a specific alpha value', function () {
+    $hex = new Hex('aa', 'bb', 'cc');
+    $newHex = $hex->toHex('dd');
 
     assertSame($hex->red(), $newHex->red());
     assertSame($hex->green(), $newHex->green());
     assertSame($hex->blue(), $newHex->blue());
-    assertNotSame($hex, $newHex);
+    assertNotSame(serialize($hex), serialize($newHex));
 });
 
 it('can be converted to hsl', function () {
@@ -163,6 +170,16 @@ it('can be converted to hsl with a black value', function () {
     assertSame(0, $hsl->blue());
 });
 
+it('can be converted to hsla', function () {
+    $hex = new Hex('aa', 'bb', 'cc', 'dd');
+    $hsla = $hex->toHsla();
+
+    assertSame(170, $hsla->red());
+    assertSame(187, $hsla->green());
+    assertSame(204, $hsla->blue());
+    assertSame(0.87, $hsla->alpha());
+});
+
 it('can be converted to hsla with a specific alpha value', function () {
     $hex = new Hex('aa', 'bb', 'cc');
     $hsla = $hex->toHsla(0.75);
@@ -183,6 +200,16 @@ it('can be converted to rgb', function () {
 });
 
 it('can be converted to rgba', function () {
+    $hex = new Hex('aa', 'bb', 'cc', 'dd');
+    $rgba = $hex->toRgba();
+
+    assertSame(170, $rgba->red());
+    assertSame(187, $rgba->green());
+    assertSame(204, $rgba->blue());
+    assertSame(0.87, $rgba->alpha());
+});
+
+it('can be converted to rgba with a specific alpha value', function () {
     $hex = new Hex('aa', 'bb', 'cc');
     $rgba = $hex->toRgba(0.5);
 

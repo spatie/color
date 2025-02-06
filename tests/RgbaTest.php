@@ -105,6 +105,13 @@ it('can be converted to cmyk', function () {
     assertSame($rgba->blue(), $cmyk->blue());
 });
 
+it('can be converted to rgba', function () {
+    $rgba = new Rgba(55, 155, 255, 0.5);
+    $newRgba = $rgba->toRgba();
+
+    assertSame(serialize($rgba), serialize($newRgba));
+});
+
 it('can be converted to rgba with with a specific alpha value', function () {
     $rgba = new Rgba(55, 155, 255, 0.5);
     $newRgba = $rgba->toRgba(0.7);
@@ -113,7 +120,7 @@ it('can be converted to rgba with with a specific alpha value', function () {
     assertSame(155, $newRgba->green());
     assertSame(255, $newRgba->blue());
     assertSame(0.7, $newRgba->alpha());
-    assertNotSame($rgba, $newRgba);
+    assertNotSame(serialize($rgba), serialize($newRgba));
 });
 
 it('can be converted to rgb without an alpha value', function () {
@@ -125,13 +132,24 @@ it('can be converted to rgb without an alpha value', function () {
     assertSame(255, $rgb->blue());
 });
 
-it('can be converted to hex without an alpha value', function () {
+it('can be converted to hex', function () {
     $rgba = new Rgba(55, 155, 255, 0.5);
     $hex = $rgba->toHex();
 
     assertSame('37', $hex->red());
     assertSame('9b', $hex->green());
     assertSame('ff', $hex->blue());
+    assertSame('80', $hex->alpha());
+});
+
+it('can be converted to hex with a specific alpha value', function () {
+    $rgba = new Rgba(55, 155, 255, 0.5);
+    $hex = $rgba->toHex('dd');
+
+    assertSame('37', $hex->red());
+    assertSame('9b', $hex->green());
+    assertSame('ff', $hex->blue());
+    assertSame('dd', $hex->alpha());
 });
 
 it('can be converted to hsl without an alpha value', function () {
@@ -141,6 +159,16 @@ it('can be converted to hsl without an alpha value', function () {
     assertSame(55, $hsl->red());
     assertSame(155, $hsl->green());
     assertSame(255, $hsl->blue());
+});
+
+it('can be converted to hsla', function () {
+    $rgba = new Rgba(55, 155, 255, 0.5);
+    $hsla = $rgba->toHsla();
+
+    assertSame(55, $hsla->red());
+    assertSame(155, $hsla->green());
+    assertSame(255, $hsla->blue());
+    assertSame(0.5, $hsla->alpha());
 });
 
 it('can be converted to hsla with a specific alpha value', function () {
