@@ -83,9 +83,9 @@ class Cmyk implements Color
         return $this->toRgb()->toCIELab();
     }
 
-    public function toHex(string $alpha = 'ff'): Hex
+    public function toHex(?string $alpha = null): Hex
     {
-        return $this->toRgb()->toHex($alpha);
+        return $this->toRgb()->toHex($alpha ?? 'ff');
     }
 
     public function toHsb(): Hsb
@@ -98,9 +98,9 @@ class Cmyk implements Color
         return $this->toRgb()->toHsl();
     }
 
-    public function toHsla(float $alpha = 1): Hsla
+    public function toHsla(?float $alpha = null): Hsla
     {
-        return $this->toRgb()->toHsla($alpha);
+        return $this->toRgb()->toHsla($alpha ?? 1);
     }
 
     public function toRgb(): Rgb
@@ -110,9 +110,9 @@ class Cmyk implements Color
         return new Rgb($red, $green, $blue);
     }
 
-    public function toRgba(float $alpha = 1): Rgba
+    public function toRgba(?float $alpha = null): Rgba
     {
-        return $this->toRgb()->toRgba($alpha);
+        return $this->toRgb()->toRgba($alpha ?? 1);
     }
 
     public function toXyz(): Xyz

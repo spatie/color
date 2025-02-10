@@ -60,13 +60,13 @@ class Rgb implements Color
         return new Cmyk($cyan, $magenta, $yellow, $key);
     }
 
-    public function toHex(string $alpha = 'ff'): Hex
+    public function toHex(?string $alpha = null): Hex
     {
         return new Hex(
             Convert::rgbChannelToHexChannel($this->red),
             Convert::rgbChannelToHexChannel($this->green),
             Convert::rgbChannelToHexChannel($this->blue),
-            $alpha
+            $alpha ?? 'ff'
         );
     }
 
@@ -88,7 +88,7 @@ class Rgb implements Color
         return new Hsl($hue, $saturation, $lightness);
     }
 
-    public function toHsla(float $alpha = 1): Hsla
+    public function toHsla(?float $alpha = null): Hsla
     {
         [$hue, $saturation, $lightness] = Convert::rgbValueToHsl(
             $this->red,
@@ -96,7 +96,7 @@ class Rgb implements Color
             $this->blue
         );
 
-        return new Hsla($hue, $saturation, $lightness, $alpha);
+        return new Hsla($hue, $saturation, $lightness, $alpha ?? 1);
     }
 
     public function toRgb(): self
@@ -104,9 +104,9 @@ class Rgb implements Color
         return new self($this->red, $this->green, $this->blue);
     }
 
-    public function toRgba(float $alpha = 1): Rgba
+    public function toRgba(?float $alpha = null): Rgba
     {
-        return new Rgba($this->red, $this->green, $this->blue, $alpha);
+        return new Rgba($this->red, $this->green, $this->blue, $alpha ?? 1);
     }
 
     public function toXyz(): Xyz

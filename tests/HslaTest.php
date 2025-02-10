@@ -112,6 +112,13 @@ it('can be converted to cmyk', function () {
 });
 
 it('can be converted to hsla', function () {
+    $hsla = new Hsla(55, 55, 67, 0.5);
+    $newHsla = $hsla->toHsla();
+
+    assertSame(serialize($hsla), serialize($newHsla));
+});
+
+it('can be converted to hsla with a specific alpha value', function () {
     $hsla = new Hsla(55, 55, 67);
     $newHsla = $hsla->toHsla(0.5);
 
@@ -119,7 +126,7 @@ it('can be converted to hsla', function () {
     assertSame($hsla->saturation(), $newHsla->saturation());
     assertSame($hsla->lightness(), $newHsla->lightness());
     assertSame(0.5, $newHsla->alpha());
-    assertNotSame($hsla, $newHsla);
+    assertNotSame(serialize($hsla), serialize($newHsla));
 });
 
 it('can be converted to hsl', function () {
@@ -140,6 +147,16 @@ it('can be converted to rgb', function () {
     assertSame(125, $rgb->blue());
 });
 
+it('can be converted to rgba', function () {
+    $hsla = new Hsla(55, 55, 67, 0.6);
+    $rgba = $hsla->toRgba();
+
+    assertSame(217, $rgba->red());
+    assertSame(209, $rgba->green());
+    assertSame(125, $rgba->blue());
+    assertSame(0.6, $rgba->alpha());
+});
+
 it('can be converted to rgba with a specific alpha value', function () {
     $hsla = new Hsla(55, 55, 67);
     $rgba = $hsla->toRgba(0.5);
@@ -151,12 +168,23 @@ it('can be converted to rgba with a specific alpha value', function () {
 });
 
 it('can be converted to hex', function () {
-    $hsla = new Hsla(55, 55, 67);
+    $hsla = new Hsla(55, 55, 67, 0.5);
     $hex = $hsla->toHex();
 
     assertSame('d9', $hex->red());
     assertSame('d1', $hex->green());
     assertSame('7d', $hex->blue());
+    assertSame('80', $hex->alpha());
+});
+
+it('can be converted to hex with a specific alpha value', function () {
+    $hsla = new Hsla(55, 55, 67, 0.5);
+    $hex = $hsla->toHex('dd');
+
+    assertSame('d9', $hex->red());
+    assertSame('d1', $hex->green());
+    assertSame('7d', $hex->blue());
+    assertSame('dd', $hex->alpha());
 });
 
 it('can be converted to xyz', function () {
