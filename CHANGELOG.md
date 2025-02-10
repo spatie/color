@@ -2,6 +2,18 @@
 
 All notable changes to `color` will be documented in this file
 
+## 1.8.0 - 2025-02-10
+
+### What's Changed
+
+* Enable alpha color conversion between Hex, Hsla, and Rgba formats by @thaqebon in https://github.com/spatie/color/pull/94
+
+### New Contributors
+
+* @thaqebon made their first contribution in https://github.com/spatie/color/pull/94
+
+**Full Changelog**: https://github.com/spatie/color/compare/1.7.0...1.8.0
+
 ## 1.7.0 - 2024-12-30
 
 ### What's Changed
