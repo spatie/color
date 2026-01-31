@@ -73,6 +73,10 @@ We invest a lot of resources into creating [best in class open source packages](
 
 We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 
+## Requirements
+
+PHP 8.2 or higher is required.
+
 ## Installation
 
 You can install the package via composer:
@@ -85,7 +89,7 @@ composer require spatie/color
 
 The `Color` package contains a separate class per color format, which each implement a `Color` interface.
 
-There are seven classes which implement the `Color` interface:
+There are ten classes which implement the `Color` interface:
 
 - `CIELab`
 - `Cmyk`
@@ -93,6 +97,7 @@ There are seven classes which implement the `Color` interface:
 - `Hsb`
 - `Hsl`
 - `Hsla`
+- `Named`
 - `Rgb`
 - `Rgba`
 - `Xyz`
