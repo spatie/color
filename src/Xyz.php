@@ -4,23 +4,17 @@ namespace Spatie\Color;
 
 class Xyz implements Color
 {
-    /** @var float */
-    protected $x;
-    protected $y;
-    protected $z;
-
-    public function __construct(float $x, float $y, float $z)
-    {
+    public function __construct(
+        protected float $x,
+        protected float $y,
+        protected float $z,
+    ) {
         Validate::xyzValue($x, 'x');
         Validate::xyzValue($y, 'y');
         Validate::xyzValue($z, 'z');
-
-        $this->x = $x;
-        $this->y = $y;
-        $this->z = $z;
     }
 
-    public static function fromString(string $string)
+    public static function fromString(string $string): static
     {
         Validate::xyzColorString($string);
 
@@ -30,7 +24,7 @@ class Xyz implements Color
         $channels = explode(',', $matches[1]);
         [$x, $y, $z] = array_map('trim', $channels);
 
-        return new static($x, $y, $z);
+        return new static((float) $x, (float) $y, (float) $z);
     }
 
     public function x(): float
@@ -50,23 +44,17 @@ class Xyz implements Color
 
     public function red(): int
     {
-        $rgb = $this->toRgb();
-
-        return $rgb->red();
+        return $this->toRgb()->red();
     }
 
     public function blue(): int
     {
-        $rgb = $this->toRgb();
-
-        return $rgb->blue();
+        return $this->toRgb()->blue();
     }
 
     public function green(): int
     {
-        $rgb = $this->toRgb();
-
-        return $rgb->green();
+        return $this->toRgb()->green();
     }
 
     public function toCIELab(): CIELab
@@ -97,12 +85,12 @@ class Xyz implements Color
 
     public function toHsl(): Hsl
     {
-        return $this->toRgb()->toHSL();
+        return $this->toRgb()->toHsl();
     }
 
     public function toHsla(?float $alpha = null): Hsla
     {
-        return $this->toRgb()->toHsla($alpha ?? 1);
+        return $this->toRgb()->toHsla($alpha ?? 1.0);
     }
 
     public function toRgb(): Rgb
@@ -118,7 +106,7 @@ class Xyz implements Color
 
     public function toRgba(?float $alpha = null): Rgba
     {
-        return $this->toRgb()->toRgba($alpha ?? 1);
+        return $this->toRgb()->toRgba($alpha ?? 1.0);
     }
 
     public function toXyz(): self

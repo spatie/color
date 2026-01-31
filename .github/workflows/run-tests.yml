@@ -9,26 +9,27 @@ jobs:
             fail-fast: true
             matrix:
                 os: [ubuntu-latest, windows-latest]
-                php: [8.4, 8.3, 8.2, 8.1, 8.0, 7.4, 7.3]
+                php: [8.4, 8.3, 8.2]
                 stability: [prefer-lowest, prefer-stable]
 
         name: P${{ matrix.php }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
         steps:
             - name: Checkout code
-              uses: actions/checkout@v2
+              uses: actions/checkout@v4
 
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
               with:
                   php-version: ${{ matrix.php }}
-                  extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+                  extensions: dom, curl, libxml, mbstring, zip, pcntl, bcmath
                   coverage: none
 
             - name: Setup problem matchers
               run: |
                   echo "::add-matcher::${{ runner.tool_cache }}/php.json"
                   echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
             - name: Install dependencies
               run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 

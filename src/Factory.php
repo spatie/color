@@ -4,16 +4,16 @@ namespace Spatie\Color;
 
 use Spatie\Color\Exceptions\InvalidColorValue;
 
-class Factory
+final class Factory
 {
     public static function fromString(string $string): Color
     {
-        $colorClasses = static::getColorClasses();
+        $colorClasses = self::getColorClasses();
 
         foreach ($colorClasses as $colorClass) {
             try {
                 return $colorClass::fromString($string);
-            } catch (InvalidColorValue $e) {
+            } catch (InvalidColorValue) {
                 // Catch the exception but never throw it.
             }
         }
@@ -21,7 +21,8 @@ class Factory
         throw InvalidColorValue::malformedColorString($string);
     }
 
-    protected static function getColorClasses(): array
+    /** @return array<class-string<Color>> */
+    private static function getColorClasses(): array
     {
         return [
             Named::class,

@@ -2,23 +2,23 @@
 
 namespace Spatie\Color;
 
-class Distance
+final class Distance
 {
-    public static function CIE76($color1, $color2): float
+    public static function CIE76(Color|string $color1, Color|string $color2): float
     {
-        if (gettype($color1) === 'string') {
+        if (is_string($color1)) {
             $color1 = Factory::fromString($color1);
         }
 
-        if (gettype($color2) === 'string') {
+        if (is_string($color2)) {
             $color2 = Factory::fromString($color2);
         }
 
         $lab1 = $color1->toCIELab();
         $lab2 = $color2->toCIELab();
 
-        if (strval($lab1) === strval($lab2)) {
-            return 0;
+        if ((string) $lab1 === (string) $lab2) {
+            return 0.0;
         }
 
         $sum = 0;
@@ -29,13 +29,13 @@ class Distance
         return max(min(sqrt($sum), 100), 0);
     }
 
-    public static function CIE94($color1, $color2, $textiles = 0): float
+    public static function CIE94(Color|string $color1, Color|string $color2, int $textiles = 0): float
     {
-        if (gettype($color1) === 'string') {
+        if (is_string($color1)) {
             $color1 = Factory::fromString($color1);
         }
 
-        if (gettype($color2) === 'string') {
+        if (is_string($color2)) {
             $color2 = Factory::fromString($color2);
         }
 
@@ -79,13 +79,13 @@ class Distance
         return $i < 0 ? 0 : sqrt($i);
     }
 
-    public static function CIEDE2000($color1, $color2): float
+    public static function CIEDE2000(Color|string $color1, Color|string $color2): float
     {
-        if (gettype($color1) === 'string') {
+        if (is_string($color1)) {
             $color1 = Factory::fromString($color1);
         }
 
-        if (gettype($color2) === 'string') {
+        if (is_string($color2)) {
             $color2 = Factory::fromString($color2);
         }
 
@@ -148,8 +148,6 @@ class Distance
 
         $kl = $kc = $kh = 1;
 
-        $delta_e = sqrt(pow($delta_lp / ($s_l * $kl), 2) + pow($delta_cp / ($s_c * $kc), 2) + pow($delta_hp / ($s_h * $kh), 2) + $r_t * ($delta_cp / ($s_c * $kc)) * ($delta_hp / ($s_h * $kh)));
-
-        return $delta_e;
+        return sqrt(pow($delta_lp / ($s_l * $kl), 2) + pow($delta_cp / ($s_c * $kc), 2) + pow($delta_hp / ($s_h * $kh), 2) + $r_t * ($delta_cp / ($s_c * $kc)) * ($delta_hp / ($s_h * $kh)));
     }
 }

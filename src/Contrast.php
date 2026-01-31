@@ -2,7 +2,7 @@
 
 namespace Spatie\Color;
 
-class Contrast
+final class Contrast
 {
     public static function ratio(Color $a, Color $b): float
     {

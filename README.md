@@ -1,11 +1,8 @@
 # A little library to handle color conversions and comparisons
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/color.svg?style=flat-square)](https://packagist.org/packages/spatie/color)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/spatie/color/master.svg?style=flat-square)](https://travis-ci.org/spatie/color)
-[![Quality Score](https://img.shields.io/scrutinizer/g/spatie/color.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/color)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/color.svg?style=flat-square)](https://packagist.org/packages/spatie/color)
 ![Tests](https://github.com/spatie/color/workflows/Tests/badge.svg)
+[![Total Downloads](https://img.shields.io/packagist/dt/spatie/color.svg?style=flat-square)](https://packagist.org/packages/spatie/color)
 
 A little library to handle color conversions and comparisons. Currently, supports CSS names, rgb, rgba, hex, hsl, hsla, CIELab, and xyz color formats as well as CIE76, CIE94, and CIEDE2000 color comparison algorithms.
 

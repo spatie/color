@@ -4,23 +4,17 @@ namespace Spatie\Color;
 
 class Hsb implements Color
 {
-    /** @var float */
-    protected $hue;
-    protected $saturation;
-    protected $brightness;
-
-    public function __construct(float $hue, float $saturation, float $brightness)
-    {
+    public function __construct(
+        protected float $hue,
+        protected float $saturation,
+        protected float $brightness,
+    ) {
         Validate::hsbValue($hue, 'hue');
         Validate::hsbValue($saturation, 'saturation');
         Validate::hsbValue($brightness, 'brightness');
-
-        $this->hue = $hue;
-        $this->saturation = $saturation;
-        $this->brightness = $brightness;
     }
 
-    public static function fromString(string $string)
+    public static function fromString(string $string): static
     {
         Validate::hsbColorString($string);
 
@@ -74,7 +68,7 @@ class Hsb implements Color
         return $this->toRgb()->toCmyk();
     }
 
-    public function toHsb(): Hsb
+    public function toHsb(): self
     {
         return new self($this->hue, $this->saturation, $this->brightness);
     }
@@ -91,7 +85,7 @@ class Hsb implements Color
 
     public function toHsla(?float $alpha = null): Hsla
     {
-        return $this->toRgb()->toHsla($alpha ?? 1);
+        return $this->toRgb()->toHsla($alpha ?? 1.0);
     }
 
     public function toRgb(): Rgb
@@ -101,7 +95,7 @@ class Hsb implements Color
 
     public function toRgba(?float $alpha = null): Rgba
     {
-        return new Rgba($this->red(), $this->green(), $this->blue(), $alpha ?? 1);
+        return new Rgba($this->red(), $this->green(), $this->blue(), $alpha ?? 1.0);
     }
 
     public function toXyz(): Xyz

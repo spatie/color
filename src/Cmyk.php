@@ -4,33 +4,31 @@ namespace Spatie\Color;
 
 class Cmyk implements Color
 {
-    /** @var float */
-    protected $cyan;
-    protected $magenta;
-    protected $yellow;
-    protected $key;
-
-    public function __construct(float $cyan, float $magenta, float $yellow, float $key)
-    {
+    public function __construct(
+        protected float $cyan,
+        protected float $magenta,
+        protected float $yellow,
+        protected float $key,
+    ) {
         Validate::cmykValue($cyan, 'cyan');
         Validate::cmykValue($magenta, 'magenta');
         Validate::cmykValue($yellow, 'yellow');
         Validate::cmykValue($key, 'key (black)');
-
-        $this->cyan = $cyan;
-        $this->magenta = $magenta;
-        $this->yellow = $yellow;
-        $this->key = $key;
     }
 
-    public static function fromString(string $string)
+    public static function fromString(string $string): static
     {
         Validate::cmykColorString($string);
 
         $matches = null;
         preg_match('/cmyk\( *(\d{1,3})%? *, *(\d{1,3})%? *, *(\d{1,3})%? *, *(\d{1,3})%? *\)/i', $string, $matches);
 
-        return new static($matches[1] / 100, $matches[2] / 100, $matches[3] / 100, $matches[4] / 100);
+        return new static(
+            (float) $matches[1] / 100,
+            (float) $matches[2] / 100,
+            (float) $matches[3] / 100,
+            (float) $matches[4] / 100
+        );
     }
 
     public function red(): int
@@ -73,7 +71,7 @@ class Cmyk implements Color
         return $this->key;
     }
 
-    public function toCmyk(): Cmyk
+    public function toCmyk(): self
     {
         return new self($this->cyan, $this->magenta, $this->yellow, $this->key);
     }
@@ -100,19 +98,19 @@ class Cmyk implements Color
 
     public function toHsla(?float $alpha = null): Hsla
     {
-        return $this->toRgb()->toHsla($alpha ?? 1);
+        return $this->toRgb()->toHsla($alpha ?? 1.0);
     }
 
     public function toRgb(): Rgb
     {
-        list($red, $green, $blue) = Convert::cmykValueToRgb($this->cyan, $this->magenta, $this->yellow, $this->key);
+        [$red, $green, $blue] = Convert::cmykValueToRgb($this->cyan, $this->magenta, $this->yellow, $this->key);
 
         return new Rgb($red, $green, $blue);
     }
 
     public function toRgba(?float $alpha = null): Rgba
     {
-        return $this->toRgb()->toRgba($alpha ?? 1);
+        return $this->toRgb()->toRgba($alpha ?? 1.0);
     }
 
     public function toXyz(): Xyz

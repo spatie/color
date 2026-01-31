@@ -4,28 +4,19 @@ namespace Spatie\Color;
 
 class Rgba implements Color
 {
-    /** @var int */
-    protected $red;
-    protected $green;
-    protected $blue;
-
-    /** @var float */
-    protected $alpha;
-
-    public function __construct(int $red, int $green, int $blue, float $alpha)
-    {
+    public function __construct(
+        protected int $red,
+        protected int $green,
+        protected int $blue,
+        protected float $alpha,
+    ) {
         Validate::rgbChannelValue($red, 'red');
         Validate::rgbChannelValue($green, 'green');
         Validate::rgbChannelValue($blue, 'blue');
         Validate::alphaChannelValue($alpha);
-
-        $this->red = $red;
-        $this->green = $green;
-        $this->blue = $blue;
-        $this->alpha = $alpha;
     }
 
-    public static function fromString(string $string)
+    public static function fromString(string $string): static
     {
         Validate::rgbaColorString($string);
 
@@ -35,7 +26,7 @@ class Rgba implements Color
         $channels = explode(',', $matches[1]);
         [$red, $green, $blue, $alpha] = array_map('trim', $channels);
 
-        return new static($red, $green, $blue, $alpha);
+        return new static((int) $red, (int) $green, (int) $blue, (float) $alpha);
     }
 
     public function red(): int

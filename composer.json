@@ -18,11 +18,11 @@
         }
     ],
     "require": {
-        "php" : "^7.3|^8.0"
+        "php": "^8.2"
     },
     "require-dev": {
-        "pestphp/pest": "^1.22",
-        "phpunit/phpunit": "^6.5||^9.0"
+        "pestphp/pest": "^3.7",
+        "phpunit/phpunit": "^11.5"
     },
     "autoload": {
         "psr-4": {
@@ -42,5 +42,5 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true
         }
-  }
+    }
 }

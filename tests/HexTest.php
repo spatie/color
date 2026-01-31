@@ -1,19 +1,15 @@
 <?php
 
-use function PHPUnit\Framework\assertInstanceOf;
-use function PHPUnit\Framework\assertNotSame;
-use function PHPUnit\Framework\assertSame;
-
 use Spatie\Color\Exceptions\InvalidColorValue;
 use Spatie\Color\Hex;
 
 it('is initializable', function () {
     $hex = new Hex('aa', 'bb', 'cc');
 
-    assertInstanceOf(Hex::class, $hex);
-    assertSame('aa', $hex->red());
-    assertSame('bb', $hex->green());
-    assertSame('cc', $hex->blue());
+    expect($hex)->toBeInstanceOf(Hex::class)
+        ->and($hex->red())->toBe('aa')
+        ->and($hex->green())->toBe('bb')
+        ->and($hex->blue())->toBe('cc');
 });
 
 it('cant be initialized with invalid hex string lengths', function () {
@@ -27,39 +23,39 @@ it('cant be initialized with invalid hex characters', function () {
 it('can be created from a string', function () {
     $hex = Hex::fromString('#aabbcc');
 
-    assertInstanceOf(Hex::class, $hex);
-    assertSame('aa', $hex->red());
-    assertSame('bb', $hex->green());
-    assertSame('cc', $hex->blue());
+    expect($hex)->toBeInstanceOf(Hex::class)
+        ->and($hex->red())->toBe('aa')
+        ->and($hex->green())->toBe('bb')
+        ->and($hex->blue())->toBe('cc');
 });
 
 it('can be created from a short string', function () {
     $hex = Hex::fromString('#abc');
 
-    assertInstanceOf(Hex::class, $hex);
-    assertSame('aa', $hex->red());
-    assertSame('bb', $hex->green());
-    assertSame('cc', $hex->blue());
+    expect($hex)->toBeInstanceOf(Hex::class)
+        ->and($hex->red())->toBe('aa')
+        ->and($hex->green())->toBe('bb')
+        ->and($hex->blue())->toBe('cc');
 });
 
 it('can be created from a string with alpha', function () {
     $hex = Hex::fromString('#aabbccdd');
 
-    assertInstanceOf(Hex::class, $hex);
-    assertSame('aa', $hex->red());
-    assertSame('bb', $hex->green());
-    assertSame('cc', $hex->blue());
-    assertSame('dd', $hex->alpha());
+    expect($hex)->toBeInstanceOf(Hex::class)
+        ->and($hex->red())->toBe('aa')
+        ->and($hex->green())->toBe('bb')
+        ->and($hex->blue())->toBe('cc')
+        ->and($hex->alpha())->toBe('dd');
 });
 
 it('can be created from a short string alpha', function () {
     $hex = Hex::fromString('#abcd');
 
-    assertInstanceOf(Hex::class, $hex);
-    assertSame('aa', $hex->red());
-    assertSame('bb', $hex->green());
-    assertSame('cc', $hex->blue());
-    assertSame('dd', $hex->alpha());
+    expect($hex)->toBeInstanceOf(Hex::class)
+        ->and($hex->red())->toBe('aa')
+        ->and($hex->green())->toBe('bb')
+        ->and($hex->blue())->toBe('cc')
+        ->and($hex->alpha())->toBe('dd');
 });
 
 it('cant be created from a string without a hash character', function () {
@@ -81,149 +77,149 @@ it('cant be created from a string with invalid characters', function () {
 it('can be casted to a string', function () {
     $hex = new Hex('aa', 'bb', 'cc');
 
-    assertSame('#aabbcc', (string) $hex);
+    expect((string) $hex)->toBe('#aabbcc');
 });
 
 it('can be casted to a string with alpha', function () {
     $hex = new Hex('aa', 'bb', 'cc', 'dd');
 
-    assertSame('#aabbccdd', (string) $hex);
+    expect((string) $hex)->toBe('#aabbccdd');
 });
 
 it('can be converted to CIELab', function () {
     $hex = new Hex('aa', 'bb', 'cc');
     $lab = $hex->toCIELab();
 
-    assertSame(75.11, $lab->l());
-    assertSame(-2.29, $lab->a());
-    assertSame(-10.54, $lab->b());
+    expect($lab->l())->toBe(75.11)
+        ->and($lab->a())->toBe(-2.29)
+        ->and($lab->b())->toBe(-10.54);
 });
 
 it('can be converted to cmyk', function () {
     $hex = new Hex('aa', 'bb', 'cc');
     $cmyk = $hex->toCmyk();
 
-    assertSame(170, $cmyk->red());
-    assertSame(187, $cmyk->green());
-    assertSame(204, $cmyk->blue());
+    expect($cmyk->red())->toBe(170)
+        ->and($cmyk->green())->toBe(187)
+        ->and($cmyk->blue())->toBe(204);
 });
 
 it('can be converted from hex("00", "00", "00") to cmyk', function () {
     $hex = new Hex('00', '00', '00');
     $cmyk = $hex->toCmyk();
 
-    assertSame(0, $cmyk->red());
-    assertSame(0, $cmyk->green());
-    assertSame(0, $cmyk->blue());
+    expect($cmyk->red())->toBe(0)
+        ->and($cmyk->green())->toBe(0)
+        ->and($cmyk->blue())->toBe(0);
 });
 
 it('can be converted to hex', function () {
     $hex = new Hex('aa', 'bb', 'cc', 'dd');
     $newHex = $hex->toHex();
 
-    assertSame(serialize($hex), serialize($newHex));
+    expect(serialize($hex))->toBe(serialize($newHex));
 });
 
 it('can be converted to hex with a specific alpha value', function () {
     $hex = new Hex('aa', 'bb', 'cc');
     $newHex = $hex->toHex('dd');
 
-    assertSame($hex->red(), $newHex->red());
-    assertSame($hex->green(), $newHex->green());
-    assertSame($hex->blue(), $newHex->blue());
-    assertNotSame(serialize($hex), serialize($newHex));
+    expect($newHex->red())->toBe($hex->red())
+        ->and($newHex->green())->toBe($hex->green())
+        ->and($newHex->blue())->toBe($hex->blue())
+        ->and(serialize($hex))->not->toBe(serialize($newHex));
 });
 
 it('can be converted to hsl', function () {
     $hex = new Hex('aa', 'bb', 'cc');
     $hsl = $hex->toHsl();
 
-    assertSame(170, $hsl->red());
-    assertSame(187, $hsl->green());
-    assertSame(204, $hsl->blue());
+    expect($hsl->red())->toBe(170)
+        ->and($hsl->green())->toBe(187)
+        ->and($hsl->blue())->toBe(204);
 });
 
 it('can be converted to hsl with same intensity', function () {
     $hex = new Hex('a8', 'a8', 'a8');
     $hsl = $hex->toHsl();
 
-    assertSame(168, $hsl->red());
-    assertSame(168, $hsl->green());
-    assertSame(168, $hsl->blue());
+    expect($hsl->red())->toBe(168)
+        ->and($hsl->green())->toBe(168)
+        ->and($hsl->blue())->toBe(168);
 });
 
 it('can be converted to hsl with a with value', function () {
     $hex = new Hex('ff', 'ff', 'ff');
     $hsl = $hex->toHsl();
 
-    assertSame(255, $hsl->red());
-    assertSame(255, $hsl->green());
-    assertSame(255, $hsl->blue());
+    expect($hsl->red())->toBe(255)
+        ->and($hsl->green())->toBe(255)
+        ->and($hsl->blue())->toBe(255);
 });
 
 it('can be converted to hsl with a black value', function () {
     $hex = new Hex('00', '00', '00');
     $hsl = $hex->toHsl();
 
-    assertSame(0, $hsl->red());
-    assertSame(0, $hsl->green());
-    assertSame(0, $hsl->blue());
+    expect($hsl->red())->toBe(0)
+        ->and($hsl->green())->toBe(0)
+        ->and($hsl->blue())->toBe(0);
 });
 
 it('can be converted to hsla', function () {
     $hex = new Hex('aa', 'bb', 'cc', 'dd');
     $hsla = $hex->toHsla();
 
-    assertSame(170, $hsla->red());
-    assertSame(187, $hsla->green());
-    assertSame(204, $hsla->blue());
-    assertSame(0.87, $hsla->alpha());
+    expect($hsla->red())->toBe(170)
+        ->and($hsla->green())->toBe(187)
+        ->and($hsla->blue())->toBe(204)
+        ->and($hsla->alpha())->toBe(0.87);
 });
 
 it('can be converted to hsla with a specific alpha value', function () {
     $hex = new Hex('aa', 'bb', 'cc');
     $hsla = $hex->toHsla(0.75);
 
-    assertSame(170, $hsla->red());
-    assertSame(187, $hsla->green());
-    assertSame(204, $hsla->blue());
-    assertSame(0.75, $hsla->alpha());
+    expect($hsla->red())->toBe(170)
+        ->and($hsla->green())->toBe(187)
+        ->and($hsla->blue())->toBe(204)
+        ->and($hsla->alpha())->toBe(0.75);
 });
 
 it('can be converted to rgb', function () {
     $hex = new Hex('aa', 'bb', 'cc');
     $rgb = $hex->toRgb();
 
-    assertSame(170, $rgb->red());
-    assertSame(187, $rgb->green());
-    assertSame(204, $rgb->blue());
+    expect($rgb->red())->toBe(170)
+        ->and($rgb->green())->toBe(187)
+        ->and($rgb->blue())->toBe(204);
 });
 
 it('can be converted to rgba', function () {
     $hex = new Hex('aa', 'bb', 'cc', 'dd');
     $rgba = $hex->toRgba();
 
-    assertSame(170, $rgba->red());
-    assertSame(187, $rgba->green());
-    assertSame(204, $rgba->blue());
-    assertSame(0.87, $rgba->alpha());
+    expect($rgba->red())->toBe(170)
+        ->and($rgba->green())->toBe(187)
+        ->and($rgba->blue())->toBe(204)
+        ->and($rgba->alpha())->toBe(0.87);
 });
 
 it('can be converted to rgba with a specific alpha value', function () {
     $hex = new Hex('aa', 'bb', 'cc');
     $rgba = $hex->toRgba(0.5);
 
-    assertSame(170, $rgba->red());
-    assertSame(187, $rgba->green());
-    assertSame(204, $rgba->blue());
-    assertSame(0.5, $rgba->alpha());
+    expect($rgba->red())->toBe(170)
+        ->and($rgba->green())->toBe(187)
+        ->and($rgba->blue())->toBe(204)
+        ->and($rgba->alpha())->toBe(0.5);
 });
 
 it('can be converted to xyz', function () {
     $hex = new Hex('aa', 'bb', 'cc');
     $xyz = $hex->toXyz();
 
-    assertSame(45.2470, $xyz->x());
-    assertSame(48.4463, $xyz->y());
-    assertSame(64.0930, $xyz->z());
+    expect($xyz->x())->toBe(45.2470)
+        ->and($xyz->y())->toBe(48.4463)
+        ->and($xyz->z())->toBe(64.0930);
 })->skip();

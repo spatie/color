@@ -4,23 +4,17 @@ namespace Spatie\Color;
 
 class Rgb implements Color
 {
-    /** @var int */
-    protected $red;
-    protected $green;
-    protected $blue;
-
-    public function __construct(int $red, int $green, int $blue)
-    {
+    public function __construct(
+        protected int $red,
+        protected int $green,
+        protected int $blue,
+    ) {
         Validate::rgbChannelValue($red, 'red');
         Validate::rgbChannelValue($green, 'green');
         Validate::rgbChannelValue($blue, 'blue');
-
-        $this->red = $red;
-        $this->green = $green;
-        $this->blue = $blue;
     }
 
-    public static function fromString(string $string)
+    public static function fromString(string $string): static
     {
         Validate::rgbColorString($string);
 
@@ -30,7 +24,7 @@ class Rgb implements Color
         $channels = explode(',', $matches[1]);
         [$red, $green, $blue] = array_map('trim', $channels);
 
-        return new static($red, $green, $blue);
+        return new static((int) $red, (int) $green, (int) $blue);
     }
 
     public function red(): int
@@ -55,7 +49,7 @@ class Rgb implements Color
 
     public function toCmyk(): Cmyk
     {
-        list($cyan, $magenta, $yellow, $key) = Convert::rgbValueToCmyk($this->red, $this->green, $this->blue);
+        [$cyan, $magenta, $yellow, $key] = Convert::rgbValueToCmyk($this->red, $this->green, $this->blue);
 
         return new Cmyk($cyan, $magenta, $yellow, $key);
     }
@@ -72,7 +66,7 @@ class Rgb implements Color
 
     public function toHsb(): Hsb
     {
-        list($hue, $saturation, $brightness) = Convert::rgbValueToHsb($this->red, $this->green, $this->blue);
+        [$hue, $saturation, $brightness] = Convert::rgbValueToHsb($this->red, $this->green, $this->blue);
 
         return new Hsb($hue, $saturation, $brightness);
     }
@@ -96,7 +90,7 @@ class Rgb implements Color
             $this->blue
         );
 
-        return new Hsla($hue, $saturation, $lightness, $alpha ?? 1);
+        return new Hsla($hue, $saturation, $lightness, $alpha ?? 1.0);
     }
 
     public function toRgb(): self
@@ -106,7 +100,7 @@ class Rgb implements Color
 
     public function toRgba(?float $alpha = null): Rgba
     {
-        return new Rgba($this->red, $this->green, $this->blue, $alpha ?? 1);
+        return new Rgba($this->red, $this->green, $this->blue, $alpha ?? 1.0);
     }
 
     public function toXyz(): Xyz
