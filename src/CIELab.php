@@ -4,23 +4,17 @@ namespace Spatie\Color;
 
 class CIELab implements Color
 {
-    /** @var float */
-    protected $l;
-    protected $a;
-    protected $b;
-
-    public function __construct(float $l, float $a, float $b)
-    {
+    public function __construct(
+        protected float $l,
+        protected float $a,
+        protected float $b,
+    ) {
         Validate::CIELabValue($l, 'l');
         Validate::CIELabValue($a, 'a');
         Validate::CIELabValue($b, 'b');
-
-        $this->l = $l;
-        $this->a = $a;
-        $this->b = $b;
     }
 
-    public static function fromString(string $string)
+    public static function fromString(string $string): static
     {
         Validate::CIELabColorString($string);
 
@@ -30,7 +24,7 @@ class CIELab implements Color
         $channels = explode(',', $matches[1]);
         [$l, $a, $b] = array_map('trim', $channels);
 
-        return new static($l, $a, $b);
+        return new static((float) $l, (float) $a, (float) $b);
     }
 
     public function l(): float
@@ -50,23 +44,17 @@ class CIELab implements Color
 
     public function red(): int
     {
-        $rgb = $this->toRgb();
-
-        return $rgb->red();
+        return $this->toRgb()->red();
     }
 
     public function blue(): int
     {
-        $rgb = $this->toRgb();
-
-        return $rgb->blue();
+        return $this->toRgb()->blue();
     }
 
     public function green(): int
     {
-        $rgb = $this->toRgb();
-
-        return $rgb->green();
+        return $this->toRgb()->green();
     }
 
     public function toCIELab(): self
@@ -91,12 +79,12 @@ class CIELab implements Color
 
     public function toHsl(): Hsl
     {
-        return $this->toRgb()->toHSL();
+        return $this->toRgb()->toHsl();
     }
 
     public function toHsla(?float $alpha = null): Hsla
     {
-        return $this->toRgb()->toHsla($alpha ?? 1);
+        return $this->toRgb()->toHsla($alpha ?? 1.0);
     }
 
     public function toRgb(): Rgb
@@ -106,7 +94,7 @@ class CIELab implements Color
 
     public function toRgba(?float $alpha = null): Rgba
     {
-        return $this->toRgb()->toRgba($alpha ?? 1);
+        return $this->toRgb()->toRgba($alpha ?? 1.0);
     }
 
     public function toXyz(): Xyz

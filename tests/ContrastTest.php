@@ -1,17 +1,15 @@
 <?php
 
-use function PHPUnit\Framework\assertSame;
-
 use Spatie\Color\Color;
 use Spatie\Color\Contrast;
 use Spatie\Color\Hex;
 
 it('can calculate contrast', function (Color $a, Color $b, float $contrast) {
-    assertSame($contrast, Contrast::ratio($a, $b));
+    expect(Contrast::ratio($a, $b))->toBe($contrast);
 })->with('contrast_colors');
 
 it('can calculate contrast from another format', function (Color $a, Color $b, float $contrast) {
-    assertSame($contrast, Contrast::ratio($a->toRgba(), $b->toHsl()));
+    expect(Contrast::ratio($a->toRgba(), $b->toHsl()))->toBe($contrast);
 })->with('contrast_colors');
 
 it('calculates the luminance correctly for a white color', function () {

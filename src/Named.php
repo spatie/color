@@ -6,25 +6,22 @@ use Spatie\Color\Exceptions\InvalidColorValue;
 
 class Named extends Rgb
 {
-    use Names;
-
-    protected $name;
+    protected string $name;
 
     public function __construct(string $name)
     {
-
         $this->name = strtolower($name);
 
-        if (! array_key_exists($this->name, $this->names)) {
+        if (! array_key_exists($this->name, Names::ALL)) {
             throw InvalidColorValue::malformedNamedColorString($name);
         }
 
-        $color = $this->names[$this->name];
+        $color = Names::ALL[$this->name];
 
         parent::__construct($color[0], $color[1], $color[2]);
     }
 
-    public static function fromString(string $string)
+    public static function fromString(string $string): static
     {
         Validate::namedColorString($string);
 

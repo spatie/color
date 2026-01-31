@@ -1,29 +1,25 @@
 <?php
 
-use function PHPUnit\Framework\assertInstanceOf;
-use function PHPUnit\Framework\assertSame;
-
 use Spatie\Color\Exceptions\InvalidColorValue;
 use Spatie\Color\Named;
 
 it('is initializable', function () {
     $named = new Named('peru');
 
-    assertInstanceOf(Named::class, $named);
-    assertSame(205, $named->red());
-    assertSame(133, $named->green());
-    assertSame(63, $named->blue());
-
-    assertSame('#cd853f', (string) $named->toHex());
+    expect($named)->toBeInstanceOf(Named::class)
+        ->and($named->red())->toBe(205)
+        ->and($named->green())->toBe(133)
+        ->and($named->blue())->toBe(63)
+        ->and((string) $named->toHex())->toBe('#cd853f');
 });
 
 it('is initializable with case-insensitive', function () {
     $named = new Named('PeRu');
 
-    assertInstanceOf(Named::class, $named);
-    assertSame(205, $named->red());
-    assertSame(133, $named->green());
-    assertSame(63, $named->blue());
+    expect($named)->toBeInstanceOf(Named::class)
+        ->and($named->red())->toBe(205)
+        ->and($named->green())->toBe(133)
+        ->and($named->blue())->toBe(63);
 });
 
 it('cant be initialized with unrecognized name', function () {
@@ -37,5 +33,5 @@ it('cant be created from malformed string', function () {
 it('can be casted to a string', function () {
     $named = new Named('peru');
 
-    assertSame('peru', (string) $named);
+    expect((string) $named)->toBe('peru');
 });

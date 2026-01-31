@@ -4,11 +4,10 @@ namespace Spatie\Color;
 
 class Hex implements Color
 {
-    /** @var string */
-    protected $red;
-    protected $green;
-    protected $blue;
-    protected $alpha = 'ff';
+    protected string $red;
+    protected string $green;
+    protected string $blue;
+    protected string $alpha;
 
     public function __construct(string $red, string $green, string $blue, string $alpha = 'ff')
     {
@@ -23,7 +22,7 @@ class Hex implements Color
         $this->alpha = strtolower($alpha);
     }
 
-    public static function fromString(string $string)
+    public static function fromString(string $string): static
     {
         Validate::hexColorString($string);
 

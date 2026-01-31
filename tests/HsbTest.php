@@ -1,18 +1,15 @@
 <?php
 
-use function PHPUnit\Framework\assertInstanceOf;
-use function PHPUnit\Framework\assertSame;
-
 use Spatie\Color\Exceptions\InvalidColorValue;
 use Spatie\Color\Hsb;
 
 it('is initializable', function () {
     $hsb = new Hsb(55, 55, 67);
 
-    assertInstanceOf(Hsb::class, $hsb);
-    assertSame(55.0, $hsb->hue());
-    assertSame(55.0, $hsb->saturation());
-    assertSame(67.0, $hsb->brightness());
+    expect($hsb)->toBeInstanceOf(Hsb::class)
+        ->and($hsb->hue())->toBe(55.0)
+        ->and($hsb->saturation())->toBe(55.0)
+        ->and($hsb->brightness())->toBe(67.0);
 });
 
 it('cant be initialized with a negative saturation', function () {
@@ -34,28 +31,28 @@ it('cant be initialized with a brightness higher than 100', function () {
 it('can be created from a string', function () {
     $hsb = Hsb::fromString('hsb(205,35%,17%)');
 
-    assertInstanceOf(Hsb::class, $hsb);
-    assertSame(205.0, $hsb->hue());
-    assertSame(35.0, $hsb->saturation());
-    assertSame(17.0, $hsb->brightness());
+    expect($hsb)->toBeInstanceOf(Hsb::class)
+        ->and($hsb->hue())->toBe(205.0)
+        ->and($hsb->saturation())->toBe(35.0)
+        ->and($hsb->brightness())->toBe(17.0);
 });
 
 it('can be created from a string without percentages', function () {
     $hsb = Hsb::fromString('hsb(205,35,17)');
 
-    assertInstanceOf(Hsb::class, $hsb);
-    assertSame(205.0, $hsb->hue());
-    assertSame(35.0, $hsb->saturation());
-    assertSame(17.0, $hsb->brightness());
+    expect($hsb)->toBeInstanceOf(Hsb::class)
+        ->and($hsb->hue())->toBe(205.0)
+        ->and($hsb->saturation())->toBe(35.0)
+        ->and($hsb->brightness())->toBe(17.0);
 });
 
 it('can be created from a string with spaces', function () {
     $hsb = Hsb::fromString('  hsb(  205  ,  35%  ,  17%  )  ');
 
-    assertInstanceOf(Hsb::class, $hsb);
-    assertSame(205.0, $hsb->hue());
-    assertSame(35.0, $hsb->saturation());
-    assertSame(17.0, $hsb->brightness());
+    expect($hsb)->toBeInstanceOf(Hsb::class)
+        ->and($hsb->hue())->toBe(205.0)
+        ->and($hsb->saturation())->toBe(35.0)
+        ->and($hsb->brightness())->toBe(17.0);
 });
 
 it('cant be created from malformed string', function () {
@@ -69,60 +66,60 @@ it('cant be created from a string with text around', function () {
 it('can be casted to a string', function () {
     $hsb = new Hsb(55, 15, 25);
 
-    assertSame('hsb(55,15%,25%)', (string) $hsb);
+    expect((string) $hsb)->toBe('hsb(55,15%,25%)');
 });
 
 it('can be converted to CIELab', function () {
     $hsb = new Hsb(50, 50, 50);
     $lab = $hsb->toCIELab();
 
-    assertSame(49.11, $lab->l());
-    assertSame(-3.48, $lab->a());
-    assertSame(30.6, $lab->b());
+    expect($lab->l())->toBe(49.11)
+        ->and($lab->a())->toBe(-3.48)
+        ->and($lab->b())->toBe(30.6);
 });
 
 it('can be converted to cmyk', function () {
     $hsb = new Hsb(55, 55, 67);
     $cmyk = $hsb->toCmyk();
 
-    assertSame($hsb->red(), $cmyk->red());
-    assertSame($hsb->green(), $cmyk->green());
-    assertSame($hsb->blue(), $cmyk->blue());
+    expect($cmyk->red())->toBe($hsb->red())
+        ->and($cmyk->green())->toBe($hsb->green())
+        ->and($cmyk->blue())->toBe($hsb->blue());
 });
 
 it('can be converted to rgb', function () {
     $hsb = new Hsb(50, 50, 50);
     $rgb = $hsb->toRgb();
 
-    assertSame(128, $rgb->red());
-    assertSame(117, $rgb->green());
-    assertSame(64, $rgb->blue());
+    expect($rgb->red())->toBe(128)
+        ->and($rgb->green())->toBe(117)
+        ->and($rgb->blue())->toBe(64);
 });
 
 it('can be converted to rgba with a specific alpha value', function () {
     $hsb = new Hsb(50, 50, 50);
     $rgba = $hsb->toRgba(0.5);
 
-    assertSame(128, $rgba->red());
-    assertSame(117, $rgba->green());
-    assertSame(64, $rgba->blue());
-    assertSame(0.5, $rgba->alpha());
+    expect($rgba->red())->toBe(128)
+        ->and($rgba->green())->toBe(117)
+        ->and($rgba->blue())->toBe(64)
+        ->and($rgba->alpha())->toBe(0.5);
 });
 
 it('can be converted to hex', function () {
     $hsb = new Hsb(50, 50, 50);
     $hex = $hsb->toHex();
 
-    assertSame('80', $hex->red());
-    assertSame('75', $hex->green());
-    assertSame('40', $hex->blue());
+    expect($hex->red())->toBe('80')
+        ->and($hex->green())->toBe('75')
+        ->and($hex->blue())->toBe('40');
 });
 
 it('can be converted to xyz', function () {
     $hsb = new Hsb(55, 55, 67);
     $xyz = $hsb->toXyz();
 
-    assertSame(55.1174, $xyz->x());
-    assertSame(61.8333, $xyz->y());
-    assertSame(28.4321, $xyz->z());
+    expect($xyz->x())->toBe(55.1174)
+        ->and($xyz->y())->toBe(61.8333)
+        ->and($xyz->z())->toBe(28.4321);
 })->skip();
