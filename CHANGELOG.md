@@ -2,6 +2,30 @@
 
 All notable changes to `color` will be documented in this file
 
+## v2.0.0 - 2026-01-31
+
+### What's Changed
+
+#### Breaking Changes
+
+- Require PHP 8.2 or higher (dropped support for PHP 7.x, 8.0, 8.1)
+- Removed `Hsla::contrast()` method (was broken)
+- Added return type hints to `Color` interface - custom implementations must add:
+  - `fromString(): static`
+  - `red(): int|string`
+  - `green(): int|string`
+  - `blue(): int|string`
+  
+
+#### Improvements
+
+- Modernized codebase with constructor property promotion
+- Upgraded to Pest 4 and PHPUnit 11
+- Tests now run on PHP 8.2, 8.3, 8.4, and 8.5
+- Cleaned up README badges
+
+**Full Changelog**: https://github.com/spatie/color/compare/1.5.3...v2.0.0
+
 ## 1.8.0 - 2025-02-10
 
 ### What's Changed
