@@ -26,6 +26,8 @@ interface Color
 
     public function toRgba(?float $alpha = null): Rgba;
 
+    public function toArgb(?float $alpha = null): Argb;
+
     public function toXyz(): Xyz;
 
     public function toCmyk(): Cmyk;

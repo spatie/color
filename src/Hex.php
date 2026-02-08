@@ -128,6 +128,11 @@ class Hex implements Color
         );
     }
 
+    public function toArgb(?float $alpha = null): Argb
+    {
+        return $this->toRgb()->toArgb($alpha ?? Convert::hexAlphaToFloat($this->alpha));
+    }
+
     public function toRgba(?float $alpha = null): Rgba
     {
         return $this->toRgb()->toRgba($alpha ?? Convert::hexAlphaToFloat($this->alpha));

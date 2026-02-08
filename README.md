@@ -4,7 +4,7 @@
 ![Tests](https://github.com/spatie/color/workflows/Tests/badge.svg)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/color.svg?style=flat-square)](https://packagist.org/packages/spatie/color)
 
-A little library to handle color conversions and comparisons. Currently, supports CSS names, rgb, rgba, hex, hsl, hsla, CIELab, and xyz color formats as well as CIE76, CIE94, and CIEDE2000 color comparison algorithms.
+A little library to handle color conversions and comparisons. Currently, supports CSS names, rgb, rgba, argb, hex, hsl, hsla, CIELab, and xyz color formats as well as CIE76, CIE94, and CIEDE2000 color comparison algorithms.
 
 ```php
 $named = Named::fromString('peru'); // case-insensitive
@@ -45,6 +45,9 @@ echo $lab; // CIELab(62.91,5.34,-57.73)
 
 $xyz = $rgb->toXyz();
 echo $xyz; // xyz(31.3469,31.4749,99.0308)
+
+$argb = $rgb->toArgb(0.5); // `Spatie\Color\Argb`
+echo $argb; // argb(0.50,55,155,255)
 
 $hex2 = Hex::fromString('#2d78c8');
 
@@ -89,8 +92,9 @@ composer require spatie/color
 
 The `Color` package contains a separate class per color format, which each implement a `Color` interface.
 
-There are ten classes which implement the `Color` interface:
+There are eleven classes which implement the `Color` interface:
 
+- `Argb`
 - `CIELab`
 - `Cmyk`
 - `Hex`
@@ -112,6 +116,7 @@ Parses a color string and returns a `Color` implementation, depending on the for
 Named::fromString('blue');
 Hex::fromString('#000000');
 Rgba::fromString('rgba(255, 255, 255, 1)');
+Argb::fromString('argb(1, 255, 255, 255)');
 Hsla::fromString('hsla(360, 100%, 100%, 1)');
 ```
 
@@ -206,6 +211,22 @@ When coming from a color format that doesn't support opacity, it can be added by
 ```php
 Rgb::fromString('rgb(0, 0, 255)')->toHsla(.5);
 // `Hsla` instance; 'hsla(240, 100%, 50%, 0.5)'
+```
+
+#### `toArgb(float $alpha = 1): Argb`
+
+Convert a color to an `Argb` color. ARGB places the alpha channel first, commonly used in Android development and Windows APIs.
+
+```php
+Rgb::fromString('rgb(0, 0, 255)')->toArgb();
+// `Argb` instance; 'argb(1.00,0,0,255)'
+```
+
+When coming from a color format that doesn't support opacity, it can be added by passing it to the `$alpha` parameter.
+
+```php
+Rgb::fromString('rgb(0, 0, 255)')->toArgb(.5);
+// `Argb` instance; 'argb(0.50,0,0,255)'
 ```
 
 #### `toRgb(): Rgb`

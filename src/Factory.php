@@ -26,6 +26,7 @@ final class Factory
     {
         return [
             Named::class,
+            Argb::class,
             CIELab::class,
             Cmyk::class,
             Hex::class,
