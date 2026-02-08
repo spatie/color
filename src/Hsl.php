@@ -92,6 +92,11 @@ class Hsl implements Color
         return new Rgb($this->red(), $this->green(), $this->blue());
     }
 
+    public function toArgb(?float $alpha = null): Argb
+    {
+        return $this->toRgb()->toArgb($alpha ?? 1.0);
+    }
+
     public function toRgba(?float $alpha = null): Rgba
     {
         return new Rgba($this->red(), $this->green(), $this->blue(), $alpha ?? 1.0);

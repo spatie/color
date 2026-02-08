@@ -83,6 +83,11 @@ class InvalidColorValue extends Exception
         return new self("Rgba color string `{$string}` is malformed. An rgba color contains 3 comma separated values between 0 and 255 with an alpha value between 0 and 1, wrapped in `rgba()`, e.g. `rgb(0,0,255,0.5)`.");
     }
 
+    public static function malformedArgbColorString(string $string): self
+    {
+        return new self("Argb color string `{$string}` is malformed. An argb color contains an alpha value between 0 and 1 followed by 3 comma separated values between 0 and 255, wrapped in `argb()`, e.g. `argb(0.5,0,0,255)`.");
+    }
+
     public static function malformedColorString(string $string): self
     {
         return new self("Color string `{$string}` doesn't match any of the available colors.");

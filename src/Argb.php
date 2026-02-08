@@ -2,31 +2,36 @@
 
 namespace Spatie\Color;
 
-class Rgba implements Color
+class Argb implements Color
 {
     public function __construct(
+        protected float $alpha,
         protected int $red,
         protected int $green,
         protected int $blue,
-        protected float $alpha,
     ) {
+        Validate::alphaChannelValue($alpha);
         Validate::rgbChannelValue($red, 'red');
         Validate::rgbChannelValue($green, 'green');
         Validate::rgbChannelValue($blue, 'blue');
-        Validate::alphaChannelValue($alpha);
     }
 
     public static function fromString(string $string): static
     {
-        Validate::rgbaColorString($string);
+        Validate::argbColorString($string);
 
         $matches = null;
-        preg_match('/rgba\( *(\d{1,3} *, *\d{1,3} *, *\d{1,3} *, *[0-1]*(\.\d{1,})?) *\)/i', $string, $matches);
+        preg_match('/argb\( *([0-1]*(\.\d{1,})? *, *\d{1,3} *, *\d{1,3} *, *\d{1,3}) *\)/i', $string, $matches);
 
         $channels = explode(',', $matches[1]);
-        [$red, $green, $blue, $alpha] = array_map('trim', $channels);
+        [$alpha, $red, $green, $blue] = array_map('trim', $channels);
 
-        return new static((int) $red, (int) $green, (int) $blue, (float) $alpha);
+        return new static((float) $alpha, (int) $red, (int) $green, (int) $blue);
+    }
+
+    public function alpha(): float
+    {
+        return $this->alpha;
     }
 
     public function red(): int
@@ -42,11 +47,6 @@ class Rgba implements Color
     public function blue(): int
     {
         return $this->blue;
-    }
-
-    public function alpha(): float
-    {
-        return $this->alpha;
     }
 
     public function toCIELab(): CIELab
@@ -90,14 +90,14 @@ class Rgba implements Color
         return new Rgb($this->red, $this->green, $this->blue);
     }
 
-    public function toArgb(?float $alpha = null): Argb
+    public function toRgba(?float $alpha = null): Rgba
     {
-        return new Argb($alpha ?? $this->alpha, $this->red, $this->green, $this->blue);
+        return new Rgba($this->red, $this->green, $this->blue, $alpha ?? $this->alpha);
     }
 
-    public function toRgba(?float $alpha = null): self
+    public function toArgb(?float $alpha = null): self
     {
-        return new self($this->red, $this->green, $this->blue, $alpha ?? $this->alpha);
+        return new self($alpha ?? $this->alpha, $this->red, $this->green, $this->blue);
     }
 
     public function toXyz(): Xyz
@@ -109,6 +109,6 @@ class Rgba implements Color
     {
         $alpha = number_format($this->alpha, 2);
 
-        return "rgba({$this->red},{$this->green},{$this->blue},{$alpha})";
+        return "argb({$alpha},{$this->red},{$this->green},{$this->blue})";
     }
 }

@@ -92,6 +92,11 @@ class CIELab implements Color
         return $this->toXyz()->toRgb();
     }
 
+    public function toArgb(?float $alpha = null): Argb
+    {
+        return $this->toRgb()->toArgb($alpha ?? 1.0);
+    }
+
     public function toRgba(?float $alpha = null): Rgba
     {
         return $this->toRgb()->toRgba($alpha ?? 1.0);

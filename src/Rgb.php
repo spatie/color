@@ -98,6 +98,11 @@ class Rgb implements Color
         return new self($this->red, $this->green, $this->blue);
     }
 
+    public function toArgb(?float $alpha = null): Argb
+    {
+        return new Argb($alpha ?? 1.0, $this->red, $this->green, $this->blue);
+    }
+
     public function toRgba(?float $alpha = null): Rgba
     {
         return new Rgba($this->red, $this->green, $this->blue, $alpha ?? 1.0);

@@ -92,6 +92,13 @@ final class Validate
         }
     }
 
+    public static function argbColorString(string $string): void
+    {
+        if (! preg_match('/^ *argb\( *[0-1]*(\.\d{1,})? *, *\d{1,3} *, *\d{1,3} *, *\d{1,3} *\) *$/i', $string)) {
+            throw InvalidColorValue::malformedArgbColorString($string);
+        }
+    }
+
     public static function hexColorString(string $string): void
     {
         if (! preg_match('/^#(?:[a-f0-9]{3}|[a-f0-9]{4}|[a-f0-9]{6}|[a-f0-9]{8})$/i', $string)) {
