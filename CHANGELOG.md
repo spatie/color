@@ -2,6 +2,18 @@
 
 All notable changes to `color` will be documented in this file
 
+## 2.1.0 - 2026-02-08
+
+### What's Changed
+
+* ADD argb support by @enricodelazzari in https://github.com/spatie/color/pull/100
+
+### New Contributors
+
+* @enricodelazzari made their first contribution in https://github.com/spatie/color/pull/100
+
+**Full Changelog**: https://github.com/spatie/color/compare/v2.0.0...2.1.0
+
 ## v2.0.0 - 2026-01-31
 
 ### What's Changed
