@@ -26,9 +26,9 @@ final class Convert
     public static function cmykValueToRgb(float $cyan, float $magenta, float $yellow, float $key): array
     {
         return [
-            (int) (255 * (1 - $cyan) * (1 - $key)),
-            (int) (255 * (1 - $magenta) * (1 - $key)),
-            (int) (255 * (1 - $yellow) * (1 - $key)),
+            (int) round(255 * (1 - $cyan) * (1 - $key)),
+            (int) round(255 * (1 - $magenta) * (1 - $key)),
+            (int) round(255 * (1 - $yellow) * (1 - $key)),
         ];
     }
 
@@ -73,11 +73,9 @@ final class Convert
     /** @return array{int, int, int} */
     public static function hsbValueToRgb(float $hue, float $saturation, float $brightness): array
     {
-        while ($hue > 360) {
-            $hue -= 360.0;
-        }
-        while ($hue < 0) {
-            $hue += 360.0;
+        $hue = fmod($hue, 360);
+        if ($hue < 0) {
+            $hue += 360;
         }
 
         $hue /= 360;
@@ -113,7 +111,10 @@ final class Convert
     /** @return array{int, int, int} */
     public static function hslValueToRgb(float $hue, float $saturation, float $lightness): array
     {
-        $h = (int) ((360 + ((int) $hue % 360)) % 360);
+        $h = fmod($hue, 360);
+        if ($h < 0) {
+            $h += 360;
+        }
 
         $c = (1 - abs(2 * ($lightness / 100) - 1)) * ($saturation / 100);
         $x = $c * (1 - abs(fmod($h / 60, 2) - 1));
