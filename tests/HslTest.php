@@ -2,6 +2,7 @@
 
 use Spatie\Color\Exceptions\InvalidColorValue;
 use Spatie\Color\Hsl;
+use Spatie\Color\Rgb;
 
 it('is initializable', function () {
     $hsl = new Hsl(55, 55, 67);
@@ -151,3 +152,20 @@ it('can be converted to xyz', function () {
         ->and($xyz->y())->toBe(61.8333)
         ->and($xyz->z())->toBe(28.4321);
 })->skip();
+
+it('keeps the fraction of the hue when calculating rgb values', function () {
+    $hsl = new Hsl(59.9, 100, 50);
+
+    expect($hsl->red())->toBe(255)
+        ->and($hsl->green())->toBe(255)
+        ->and($hsl->blue())->toBe(0);
+});
+
+it('round trips rgb values through hsl', function () {
+    $rgb = new Rgb(0, 5, 55);
+    $hsl = $rgb->toHsl();
+
+    expect($hsl->red())->toBe(0)
+        ->and($hsl->green())->toBe(5)
+        ->and($hsl->blue())->toBe(55);
+});
