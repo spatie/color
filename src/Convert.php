@@ -26,9 +26,9 @@ final class Convert
     public static function cmykValueToRgb(float $cyan, float $magenta, float $yellow, float $key): array
     {
         return [
-            (int) round(255 * (1 - $cyan) * (1 - $key)),
-            (int) round(255 * (1 - $magenta) * (1 - $key)),
-            (int) round(255 * (1 - $yellow) * (1 - $key)),
+            (int) (255 * (1 - $cyan) * (1 - $key)),
+            (int) (255 * (1 - $magenta) * (1 - $key)),
+            (int) (255 * (1 - $yellow) * (1 - $key)),
         ];
     }
 

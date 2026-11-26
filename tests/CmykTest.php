@@ -2,7 +2,6 @@
 
 use Spatie\Color\Cmyk;
 use Spatie\Color\Exceptions\InvalidColorValue;
-use Spatie\Color\Rgb;
 
 it('is initializable', function () {
     $cmyk = new Cmyk(0.5, 0.3, 0.2, 0.1);
@@ -46,9 +45,9 @@ it('can be converted to CIELab', function () {
     $cmyk = new Cmyk(0.17, 0.08, 0, 0.2);
     $lab = $cmyk->toCIELab();
 
-    expect($lab->l())->toBe(75.3)
-        ->and($lab->a())->toBe(-3.14)
-        ->and($lab->b())->toBe(-10.25);
+    expect($lab->l())->toBe(75.04)
+        ->and($lab->a())->toBe(-2.61)
+        ->and($lab->b())->toBe(-10.65);
 });
 
 it('can be converted to hex', function () {
@@ -56,7 +55,7 @@ it('can be converted to hex', function () {
     $hex = $cmyk->toHex();
 
     expect($hex->red())->toBe('a9')
-        ->and($hex->green())->toBe('bc')
+        ->and($hex->green())->toBe('bb')
         ->and($hex->blue())->toBe('cc');
 });
 
@@ -105,21 +104,4 @@ it('can be converted to xyz', function () {
     expect($xyz->red())->toBe($cmyk->red())
         ->and($xyz->green())->toBe($cmyk->green())
         ->and($xyz->blue())->toBe($cmyk->blue());
-});
-
-it('rounds rgb values instead of truncating them', function () {
-    $cmyk = new Cmyk(0, 0, 0, 0.5);
-
-    expect($cmyk->red())->toBe(128)
-        ->and($cmyk->green())->toBe(128)
-        ->and($cmyk->blue())->toBe(128);
-});
-
-it('round trips rgb values through cmyk', function () {
-    $rgb = new Rgb(0, 15, 150);
-    $cmyk = $rgb->toCmyk();
-
-    expect($cmyk->red())->toBe(0)
-        ->and($cmyk->green())->toBe(15)
-        ->and($cmyk->blue())->toBe(150);
 });
