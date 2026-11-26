@@ -123,3 +123,11 @@ it('can be converted to xyz', function () {
         ->and($xyz->y())->toBe(61.8333)
         ->and($xyz->z())->toBe(28.4321);
 })->skip();
+
+it('treats a hue of 360 as red', function () {
+    $hsb = new Hsb(360, 100, 100);
+
+    expect($hsb->red())->toBe(255)
+        ->and($hsb->green())->toBe(0)
+        ->and($hsb->blue())->toBe(0);
+});
