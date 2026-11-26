@@ -2,6 +2,19 @@
 
 All notable changes to `color` will be documented in this file
 
+## 2.1.1 - 2026-11-26
+
+### Fixed
+
+- Treat HSB hue 360 as red, matching hue 0.
+- Preserve fractional HSL hue values when converting to RGB.
+
+CMYK rounding and its existing output remain unchanged.
+
+Thanks @bardrop for the fixes and regression tests in https://github.com/spatie/color/pull/103.
+
+**Full Changelog**: https://github.com/spatie/color/compare/2.1.0...2.1.1
+
 ## 2.1.0 - 2026-02-08
 
 ### What's Changed
